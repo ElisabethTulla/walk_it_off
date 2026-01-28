@@ -38,8 +38,8 @@ Before setting up the project, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/chris-cgsit/train_2025_java_aufbau_example_project.git
-cd train_2025_java_aufbau_example_project
+git clone https://github.com/chris-cgsit/walk_it_off.git
+cd walk_it_off
 ```
 
 ### 2. Install Dependencies
@@ -255,7 +255,7 @@ mvn exec:java
 mvn package
 
 # Run packaged JAR
-java -jar target/train_2025_java_aufbau_example_project-1.0-SNAPSHOT.jar
+java -jar target/walk_it_off-1.0-SNAPSHOT.jar
 ```
 
 ### Using IDE
@@ -330,7 +330,7 @@ mvn clean install
 
 If you encounter issues not covered here:
 
-1. Review project [Issues](https://github.com/chris-cgsit/train_2025_java_aufbau_example_project/issues)
+1. Review project [Issues](https://github.com/chris-cgsit/walk_it_off/issues)
 2. Consult [Contributing Guide](../CONTRIBUTING.md)
 3. Contact project maintainers
 

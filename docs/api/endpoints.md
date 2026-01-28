@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides comprehensive documentation for the API endpoints of the train_2025_java_aufbau_example_project.
+This document provides comprehensive documentation for the API endpoints of the walk_it_off.
 
 ## Table of Contents
 
