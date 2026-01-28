@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document provides a comprehensive overview of the system architecture for the train_2025_java_aufbau_example_project. It describes the high-level structure, components, and design decisions that shape the application.
+This document provides a comprehensive overview of the system architecture for the walk_it_off. It describes the high-level structure, components, and design decisions that shape the application.
 
 ## Table of Contents
 
