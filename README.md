@@ -1,5 +1,8 @@
 # walk_it_off
 
+- list 1
+- list 2
+
 ## Overview
 
 This is a Java training project demonstrating software development best practices, including proper project structure, documentation, and development workflows.
