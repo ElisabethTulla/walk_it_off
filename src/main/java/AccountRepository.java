@@ -24,6 +24,22 @@ public class AccountRepository {
         }
     }
 
+    public boolean changeFirstname(User user1){
+
+        String sql = "UPDATE user_walkitoff SET first_name = ? WHERE id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+
+            ps.setString(1, user1.getFirstName());
+            ps.setInt(2, user1.getId());
+
+            return ps.executeUpdate() > 0;
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean changeEmail(User user1){
 
         String sql = "UPDATE user_walkitoff SET email = ? WHERE id = ?";
@@ -56,17 +72,18 @@ public class AccountRepository {
         }
     }
 
-    public boolean deleteUserAccount(User user1){
+    public boolean deleteUserAccount(String email) {
 
-        String sql = "DELETE FROM user_walkitoff WHERE id = ?";
+        String sql = "DELETE FROM user_walkitoff WHERE email = ?";
 
-        try (PreparedStatement ps = conn.prepareStatement(sql)){
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, user1.getId());
+            //ps.setInt(1, user1.getId());
+            ps.setString(1, email);
 
             return ps.executeUpdate() > 0;
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

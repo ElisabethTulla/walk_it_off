@@ -1,46 +1,32 @@
 import java.sql.*;
-import java.time.Instant;
-import java.util.Objects;
-import java.util.Optional;
+
 
 public class UserRepository {
 
     public Connection conn = DatabaseConfig.configure();
 
-     public UserRepository(){}
-
-    public boolean checkEmail(String providedEmail){
-
-        String sql = "SELECT * FROM user_walkitoff WHERE email = ?";
-
-        try (PreparedStatement ps = conn.prepareStatement(sql)){
-
-            ps.setString(1, providedEmail);
-
-            try (ResultSet rs = ps.executeQuery()){
-                return rs.next();
-
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public UserRepository() {
     }
 
-    public void registerNewUser(User newUser){
+    public void registerNewUser(User newUser) {
 
-        String sql = "INSERT INTO user_walkitoff (first_name, last_name, email, password, age, gender) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user_walkitoff (first_name, last_name, email, password, age, gender, " +
+                "birth_year, birth_month, birth_day) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             conn.setAutoCommit(false);
 
             ps.setString(1, newUser.getFirstName());
             ps.setString(2, newUser.getLastName());
             ps.setString(3, newUser.getEmail());
-            ps.setString(4, newUser.getEmail());
+            ps.setString(4, newUser.getPassword());
             ps.setInt(5, newUser.getAge());
             ps.setString(6, newUser.getGender());
+            ps.setInt(7, newUser.getBirthYear());
+            ps.setInt(8, newUser.getBirthMonth());
+            ps.setInt(9, newUser.getBirthDay());
 
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 if (keys.next()) {
@@ -61,25 +47,25 @@ public class UserRepository {
         }
     }
 
-    public User getUser(String email){
+    public User getUser(String email) {
 
-         String sql = "SELECT * FROM user_walkitoff WHERE email = ?";
+        String sql = "SELECT * FROM user_walkitoff WHERE email = ?";
 
-         try (PreparedStatement ps = conn.prepareStatement(sql)){
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-             ps.setString(1, email);
+            ps.setString(1, email);
 
-             try (ResultSet rs = ps.executeQuery()) {
-                 if (rs.next()) {
-                     User u = mapRow(rs);
-                     return u;
-                 }
-                 return null;
-             }
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    User u = mapRow(rs);
+                    return u;
+                }
+                return null;
+            }
 
-         }catch (SQLException e) {
-             throw new RuntimeException(e);
-         }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private User mapRow(ResultSet rs) throws SQLException {
@@ -102,24 +88,29 @@ public class UserRepository {
                 birthYear, birthMonth, birthDay, age, gender);
     }
 
-    public boolean validatePassword(User user1, String password){
-        //todo get user password from DB
+    public boolean checkPassword(User user1, String password) {
 
         String sql = "SELECT password FROM user_walkitoff WHERE id = ?";
 
-        try (PreparedStatement ps = conn.prepareStatement(sql)){
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, user1.getId());
 
-            try (ResultSet rs = ps.executeQuery()){
-
-                return password.equals(rs.getString("password"));
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return password.equals(rs.getString("password"));
+                } else {
+                    System.out.println("no password found in db..");
+                    return false;
+                }
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
+
 
 
 

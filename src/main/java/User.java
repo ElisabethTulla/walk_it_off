@@ -12,7 +12,7 @@ public class User {
     private Integer birthYear;
     private Integer birthMonth;
     private Integer birthDay;
-    private Integer age;
+    private Integer age = 0;
     private String gender;
 
     public User (String firstName, String lastName, String email, String password,
@@ -145,7 +145,7 @@ public class User {
 
     @Override
     public String toString(){
-        return "ID: " + id + " | name: " + firstName + lastName + " | e-mail: " + email
+        return "ID: " + id + " | name: " + firstName + " " + lastName + " | e-mail: " + email
                  + "| member since: " + created_at + " | \nage: " + age + " | birthday: " + birthDay
                 + "." + birthMonth + "." + birthYear + " | gender: " + gender;
     }
