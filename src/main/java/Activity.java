@@ -10,6 +10,7 @@ public class Activity {
     private double distanceInKm = 0;
     private Timestamp loggedAt;
     private Integer stepsAll = null;
+    private double distanceInKmAll = 0;
 
     //constructor walking + running:
     public Activity(Integer id, String activity, Integer steps) {
@@ -76,8 +77,18 @@ public class Activity {
         this.loggedAt = loggedAt;
     }
 
+    public double getDistanceInKmAll() {
+        return distanceInKmAll;
+    }
+
+    public void setDistanceInKmAll(double distanceInKmAll) {
+        this.distanceInKmAll = distanceInKmAll;
+    }
+
 
     //todo add steps to stepsAll --> in DB ?!?!
+
+    //todo add distanceInKm to distanceInKmAll --> in DB ?!?!
 
 
 
