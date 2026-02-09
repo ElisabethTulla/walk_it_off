@@ -1,4 +1,6 @@
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class User {
 
@@ -12,11 +14,11 @@ public class User {
     private Integer birthYear;
     private Integer birthMonth;
     private Integer birthDay;
-    private Integer age = 0;
+    private Integer age;
     private String gender;
 
     public User (String firstName, String lastName, String email, String password,
-                 Integer birthYear, Integer birthMonth, Integer birthDay, String gender){
+                 Integer birthYear, Integer birthMonth, Integer birthDay, Integer age, String gender){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -24,6 +26,7 @@ public class User {
         this.birthYear = birthYear;
         this.birthMonth = birthMonth;
         this.birthDay = birthDay;
+        this.age = age;
         this.gender = gender;
     }
 
@@ -39,6 +42,7 @@ public class User {
         this.birthYear = birthYear;
         this.birthMonth = birthMonth;
         this.birthDay = birthDay;
+        this.age = age;
         this.gender = gender;}
 
     public String getFirstName() {
@@ -66,6 +70,11 @@ public class User {
     }
 
     public Integer getAge() {
+        if (age == 0){
+            LocalDate birthDate = LocalDate.of(birthYear, birthMonth, birthDay);
+            Period period = Period.between(birthDate, LocalDate.now());
+           return age = period.getYears();
+        }
         return age;
     }
 
@@ -136,10 +145,6 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    //todo format the birthday correctly
-
-    //todo calculate age
 
     //todo age-up on every birthday
 

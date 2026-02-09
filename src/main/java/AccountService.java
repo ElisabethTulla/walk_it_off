@@ -54,7 +54,7 @@ public class AccountService {
             System.out.println("The password must be between 8 - 20 characters long, \n" +
                     "must contain at least one digit, one lower case, \n" +
                     "one upper case character and one special character. \n" +
-                    "No space between characters.");
+                    "No spaces between characters.");
             return;}
 
         //change User-Object:

@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.Period;
+
 public class UserService {
 
     UserRepository userRepo = new UserRepository();
@@ -28,17 +31,25 @@ public class UserService {
             return;
         }
 
-        //todo name profanity-check (Method in ValidatoinManager)
+        //todo name profanity-check (Method in ValidationManager)
+
+            Integer age = calculateAge(birthYear, birthMonth, birthDay);
 
             //create User:
             User newUser = new User(firstName, lastName, email, password,
-                    birthYear, birthMonth, birthDay, gender);
+                    birthYear, birthMonth, birthDay, age, gender);
 
             //register User in DB:
             userRepo.registerNewUser(newUser);
             //todo show message in GUI
             System.out.println("Welcome " + newUser.getFirstName() + "!");
 
+    }
+
+    public Integer calculateAge(Integer birthYear, Integer birthMonth, Integer birthDay){
+        LocalDate birthDate = LocalDate.of(birthYear, birthMonth, birthDay);
+        Period period = Period.between(birthDate, LocalDate.now());
+        return period.getYears();
     }
 
     public User login(String email, String password/*todo get user Data input from GUI*/){
@@ -60,14 +71,11 @@ public class UserService {
             System.out.println("Invalid password!");
             return null;
         } else {
-            //todo grant session token !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //todo grant session token ??????????????????????????????????????
             System.out.println("Hello, " + user1.getFirstName() + "!");
             return user1;
         }
 
     }
-
-
-
 
 }
