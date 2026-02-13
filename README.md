@@ -19,8 +19,8 @@ This is a Java training project demonstrating software development best practice
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/chris-cgsit/train_2025_java_aufbau_example_project.git
-cd train_2025_java_aufbau_example_project
+git clone https://github.com/chris-cgsit/walk_it_off.git
+cd walk_it_off
 ```
 
 2. Build the project:

@@ -15,7 +15,7 @@
 
 ## Introduction
 
-Welcome to the train_2025_java_aufbau_example_project! This guide will help you understand how to use the software effectively.
+Welcome to the walk_it_off! This guide will help you understand how to use the software effectively.
 
 ### What is this software?
 
@@ -56,7 +56,7 @@ Before you begin, ensure you have:
 
 2. **Navigate to Application Directory:**
    ```bash
-   cd /path/to/train_2025_java_aufbau_example_project
+   cd /path/to/walk_it_off
    ```
 
 3. **Run the Application:**
@@ -66,7 +66,7 @@ Before you begin, ensure you have:
    mvn exec:java
    
    # Or if JAR file is available
-   java -jar target/train_2025_java_aufbau_example_project-1.0-SNAPSHOT.jar
+   java -jar target/walk_it_off-1.0-SNAPSHOT.jar
    ```
 
 ## System Requirements
@@ -105,7 +105,7 @@ After installation, verify that everything works correctly:
 
 ```bash
 # Check if the application starts
-java -jar train_2025_java_aufbau_example_project-1.0-SNAPSHOT.jar --version
+java -jar walk_it_off-1.0-SNAPSHOT.jar --version
 
 # Expected output
 Version: 1.0-SNAPSHOT
