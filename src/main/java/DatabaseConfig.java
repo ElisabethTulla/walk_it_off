@@ -14,6 +14,8 @@ public class DatabaseConfig {
 
     public static Connection configure() {
 
+        //todo eventuell könnte man nur das passwort aus einer file holen, den Rest nicht
+
         try {
 
             Properties config = new Properties();

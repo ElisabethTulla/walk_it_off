@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.time.LocalDateTime;
 
 
 public class ComparingRepository {
@@ -8,25 +9,44 @@ public class ComparingRepository {
     public ComparingRepository() {
     }
 
-    public Integer getSteps(User user, Date startDate, Date endDate) {
+    public Integer getStepsSumDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
 
-        String sql = "SELECT COUNT(*) FROM steps WHERE user_id = ? AND logged_at >= ? AND logged_at <= ?";
-                                                                        //BUT ??  BETWEEN ??
+        String sql = "SELECT SUM(steps_logged) FROM activity WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)){
 
             ps.setInt(1, user.getId());
-            ps.setDate(2, startDate);
-            ps.setDate(3, endDate);
+            ps.setTimestamp(2, Timestamp.valueOf(startDate));
+            ps.setTimestamp(3, Timestamp.valueOf(endDate));
 
-            ResultSet rs = ps.executeQuery();
-
-
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+                return 0;
+            }
 
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        Integer steps = 0;
-        return steps;
+    }
+
+    public Integer getStepsSumAll(User user) {
+
+        String sql = "SELECT SUM(steps_logged) FROM activity WHERE user_id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+
+            ps.setInt(1, user.getId());
+            try (ResultSet rs = ps.executeQuery()){
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+                return 0;
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

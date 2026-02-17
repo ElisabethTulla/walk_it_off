@@ -6,7 +6,7 @@ public class Activity {
 
     private Integer id;
     private String activityName;
-    private Integer steps = null;
+    private Integer steps = 0;
     private double distanceInKm = 0;
     private Timestamp loggedAt;
     private Integer stepsAll = null;
