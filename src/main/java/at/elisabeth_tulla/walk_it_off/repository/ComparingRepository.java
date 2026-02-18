@@ -121,6 +121,68 @@ public class ComparingRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public HashMap<LocalDateTime, Double> getRunsDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
+
+        String sql = "SELECT distance_logged_km, logged_at FROM activity WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+
+            ps.setInt(1, user.getId());
+            ps.setTimestamp(2, Timestamp.valueOf(startDate));
+            ps.setTimestamp(3, Timestamp.valueOf(endDate));
+
+            try (ResultSet rs = ps.executeQuery()) {
+                HashMap<LocalDateTime, Double> runsMap = new HashMap<>();
+
+                while (rs.next()) {
+                    if (rs.getDouble("distance_logged_km") > 0) {
+                        runsMap.put(rs.getTimestamp("logged_at").toLocalDateTime(),
+                                rs.getDouble("distance_logged_km"));
+                    }
+                }
+                return runsMap;
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Integer getActivityCount(User user, String activity, LocalDateTime startDate, LocalDateTime endDate) {
+
+        String sql = "SELECT COUNT(*) FROM activity WHERE user_id =? AND activity_name =? AND logged_at BETWEEN ? AND ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+
+            ps.setInt(1, user.getId());
+            ps.setString(2, activity);
+            ps.setTimestamp(3, Timestamp.valueOf(startDate));
+            ps.setTimestamp(4, Timestamp.valueOf(endDate));
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+                return 0;
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 

@@ -2,11 +2,11 @@ package at.elisabeth_tulla.walk_it_off.service;
 
 import at.elisabeth_tulla.walk_it_off.model.Activity;
 import at.elisabeth_tulla.walk_it_off.model.User;
-import at.elisabeth_tulla.walk_it_off.repository.ActivityRepository;
+import at.elisabeth_tulla.walk_it_off.repository.LoggingRepository;
 
-public class ActivityService {
+public class LoggingService {
 
-    ActivityRepository activityRepo = new ActivityRepository();
+    LoggingRepository loggingRepo = new LoggingRepository();
 
     public String checkActivity(String activityName) {
 
@@ -23,14 +23,14 @@ public class ActivityService {
         //create at.elisabeth_tulla.walk_it_off.model.Activity:
         Activity activity1 = new Activity(user.getId(), activity, steps);
 
-        activityRepo.loggActivity(user, activity1);
+        loggingRepo.loggActivity(user, activity1);
     }
 
     public void loggRunning(User user, String activity, double distanceInKm){
         //create at.elisabeth_tulla.walk_it_off.model.Activity:
         Activity activity1 = new Activity(user.getId(), activity, distanceInKm);
 
-        activityRepo.loggActivity(user, activity1);
+        loggingRepo.loggActivity(user, activity1);
     }
 
 }

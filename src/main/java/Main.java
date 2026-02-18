@@ -1,6 +1,6 @@
 import at.elisabeth_tulla.walk_it_off.model.User;
 import at.elisabeth_tulla.walk_it_off.service.AccountService;
-import at.elisabeth_tulla.walk_it_off.service.ActivityService;
+import at.elisabeth_tulla.walk_it_off.service.LoggingService;
 import at.elisabeth_tulla.walk_it_off.service.ComparingService;
 import at.elisabeth_tulla.walk_it_off.service.UserService;
 
@@ -10,7 +10,7 @@ public class Main {
 
     UserService userService = new UserService();
     AccountService accountService = new AccountService();
-    ActivityService activityService = new ActivityService();
+    LoggingService loggingService = new LoggingService();
     ComparingService comparingService = new ComparingService();
 
         /***
@@ -42,15 +42,15 @@ public class Main {
          * LOG ACTIVITY
          */
         //System.out.println(activityService.checkActivity("walking"));
-        //activityService.loggWalking(currentUser, "walking", 4000);
-        //activityService.loggRunning(currentUser, "running", 0.5);
+        //loggingService.loggWalking(currentUser, "walking", 4000);
+        //loggingService.loggRunning(currentUser, "running", 0.5);
 
         /***
          * SHOW STEPS
          */
-        //todo:GUI input als jahr, monat, tag (ev mit Kalender zum auswählen...)
-        //comparingService.sumUpStepsTimeframe(currentUser, 2026, 1, 1,
-         //       2026, 2, 17);
+        //todo:GUI input als jahr, monat, tag (ev mit Kalender zum auswählen...) 'y' or 'n' for activityCounter
+        comparingService.sumUpStepsTimeframe(currentUser, 'y', 2026, 1, 1,
+               2026, 2, 18);
 
         //comparingService.mapStepsTimeframe(currentUser, 2026, 1, 1, 2026, 2, 18);
 
@@ -64,12 +64,16 @@ public class Main {
          * SHOW KM (RUNS)
          */
         //sum up runs in Timeframe:
-        comparingService.sumUpKmTimeframe(currentUser, 2026, 1, 1,
-                2026, 2, 18);
+        comparingService.sumUpKmTimeframe(currentUser, 'y', 2026, 1, 1, 2026, 2, 18);
+
+        //comparingService.mapRunsTimeframe(currentUser, 2026, 1, 1, 2026, 2, 18);
 
         //sum up runs Overall:
-        comparingService.sumUpAllKm(currentUser);
+        //comparingService.sumUpAllKm(currentUser);
 
+        comparingService.compareRunsSumTimeframes(currentUser, 2026, 1, 1,
+                2026, 1, 31, 2026, 2, 1,
+                2026, 2, 18);
 
 
         /***

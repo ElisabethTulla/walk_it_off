@@ -6,10 +6,10 @@ import at.elisabeth_tulla.walk_it_off.model.User;
 
 import java.sql.*;
 
-public class ActivityRepository {
+public class LoggingRepository {
     public Connection conn = DatabaseConfig.configure();
 
-    public ActivityRepository() {
+    public LoggingRepository() {
     }
 
     public void loggActivity(User user, Activity activity) {
