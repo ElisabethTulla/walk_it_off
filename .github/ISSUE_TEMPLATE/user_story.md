@@ -1,12 +1,12 @@
 ---
-name: User Story
+name: at.elisabeth_tulla.walk_it_off.model.User Story
 about: Beschreibe eine konkrete Anforderung aus Nutzersicht.
 title: "[STORY] "
 labels: [story]
 assignees: ''
 ---
 
-### User Story
+### at.elisabeth_tulla.walk_it_off.model.User Story
 **Als** [Rolle]
 **möchte ich** [Ziel/Funktion],
 **um** [Nutzen/Mehrwert].

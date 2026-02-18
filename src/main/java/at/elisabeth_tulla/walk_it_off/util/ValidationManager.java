@@ -1,3 +1,7 @@
+package at.elisabeth_tulla.walk_it_off.util;
+
+import at.elisabeth_tulla.walk_it_off.config.DatabaseConfig;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

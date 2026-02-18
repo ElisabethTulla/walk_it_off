@@ -1,3 +1,8 @@
+package at.elisabeth_tulla.walk_it_off.repository;
+
+import at.elisabeth_tulla.walk_it_off.config.DatabaseConfig;
+import at.elisabeth_tulla.walk_it_off.model.User;
+
 import java.sql.*;
 
 

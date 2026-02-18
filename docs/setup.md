@@ -340,7 +340,7 @@ After successful setup:
 
 1. Read the [Architecture Overview](architecture/overview.md)
 2. Review the [API Documentation](api/endpoints.md)
-3. Follow the [User Guide](user-guide.md)
+3. Follow the [at.elisabeth_tulla.walk_it_off.model.User Guide](user-guide.md)
 4. Check out [Contributing Guidelines](../CONTRIBUTING.md) to start developing
 
 ---

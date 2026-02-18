@@ -1,4 +1,4 @@
-# User Guide
+# at.elisabeth_tulla.walk_it_off.model.User Guide
 
 ## Table of Contents
 
@@ -182,12 +182,12 @@ When you first run the application:
 
 ## Features and Usage
 
-### Feature 1: [User Management]
+### Feature 1: [at.elisabeth_tulla.walk_it_off.model.User Management]
 
-#### Creating a User
+#### Creating a at.elisabeth_tulla.walk_it_off.model.User
 
 1. Navigate to the user management section
-2. Click "Create New User"
+2. Click "Create New at.elisabeth_tulla.walk_it_off.model.User"
 3. Fill in the required information:
    - Username
    - Email
@@ -206,7 +206,7 @@ When you first run the application:
    - Filter by role
    - Sort by creation date
 
-#### Updating User Information
+#### Updating at.elisabeth_tulla.walk_it_off.model.User Information
 
 1. Find the user in the list
 2. Click "Edit" button
@@ -214,12 +214,12 @@ When you first run the application:
 4. Click "Save Changes"
 5. Changes will be applied immediately
 
-#### Deleting a User
+#### Deleting a at.elisabeth_tulla.walk_it_off.model.User
 
 1. Find the user in the list
 2. Click "Delete" button
 3. Confirm the deletion
-4. User will be removed from the system
+4. at.elisabeth_tulla.walk_it_off.model.User will be removed from the system
 
 ### Feature 2: [Data Management]
 
@@ -256,7 +256,7 @@ When you first run the application:
 5. View or download the report
 
 **Available Reports:**
-- User Activity Report
+- at.elisabeth_tulla.walk_it_off.model.User at.elisabeth_tulla.walk_it_off.model.Activity Report
 - Data Summary Report
 - System Statistics
 - Custom Reports
@@ -385,7 +385,7 @@ When you first run the application:
 
 **Solutions:**
 
-1. **Check User Permissions:**
+1. **Check at.elisabeth_tulla.walk_it_off.model.User Permissions:**
    Ensure your user account has necessary permissions.
 
 2. **Verify File Permissions:**

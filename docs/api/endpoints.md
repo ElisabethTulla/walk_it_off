@@ -137,7 +137,7 @@ GET /api/health
 
 ---
 
-### User Management
+### at.elisabeth_tulla.walk_it_off.model.User Management
 
 #### Get All Users
 
@@ -175,14 +175,14 @@ GET /api/users
 }
 ```
 
-#### Get User by ID
+#### Get at.elisabeth_tulla.walk_it_off.model.User by ID
 
 ```http
 GET /api/users/{id}
 ```
 
 **Path Parameters:**
-- `id` (required) - User ID
+- `id` (required) - at.elisabeth_tulla.walk_it_off.model.User ID
 
 **Response:**
 ```json
@@ -206,12 +206,12 @@ GET /api/users/{id}
   "status": "error",
   "error": {
     "code": "RESOURCE_NOT_FOUND",
-    "message": "User with ID 1 not found"
+    "message": "at.elisabeth_tulla.walk_it_off.model.User with ID 1 not found"
   }
 }
 ```
 
-#### Create New User
+#### Create New at.elisabeth_tulla.walk_it_off.model.User
 
 ```http
 POST /api/users
@@ -241,7 +241,7 @@ Content-Type: application/json
     "lastName": "Doe",
     "createdAt": "2026-01-20T18:45:00Z"
   },
-  "message": "User created successfully"
+  "message": "at.elisabeth_tulla.walk_it_off.model.User created successfully"
 }
 ```
 
@@ -266,7 +266,7 @@ Content-Type: application/json
 }
 ```
 
-#### Update User
+#### Update at.elisabeth_tulla.walk_it_off.model.User
 
 ```http
 PUT /api/users/{id}
@@ -274,7 +274,7 @@ Content-Type: application/json
 ```
 
 **Path Parameters:**
-- `id` (required) - User ID
+- `id` (required) - at.elisabeth_tulla.walk_it_off.model.User ID
 
 **Request Body:**
 ```json
@@ -297,18 +297,18 @@ Content-Type: application/json
     "lastName": "Doe",
     "updatedAt": "2026-01-20T18:50:00Z"
   },
-  "message": "User updated successfully"
+  "message": "at.elisabeth_tulla.walk_it_off.model.User updated successfully"
 }
 ```
 
-#### Delete User
+#### Delete at.elisabeth_tulla.walk_it_off.model.User
 
 ```http
 DELETE /api/users/{id}
 ```
 
 **Path Parameters:**
-- `id` (required) - User ID
+- `id` (required) - at.elisabeth_tulla.walk_it_off.model.User ID
 
 **Response (204):**
 ```
@@ -353,7 +353,7 @@ curl -X GET http://localhost:8080/api/users \
   -H "Content-Type: application/json"
 ```
 
-#### Create User
+#### Create at.elisabeth_tulla.walk_it_off.model.User
 
 ```bash
 curl -X POST http://localhost:8080/api/users \
@@ -364,11 +364,11 @@ curl -X POST http://localhost:8080/api/users \
     "email": "user@example.com",
     "password": "SecurePass123!",
     "firstName": "New",
-    "lastName": "User"
+    "lastName": "at.elisabeth_tulla.walk_it_off.model.User"
   }'
 ```
 
-#### Update User
+#### Update at.elisabeth_tulla.walk_it_off.model.User
 
 ```bash
 curl -X PUT http://localhost:8080/api/users/1 \
@@ -381,7 +381,7 @@ curl -X PUT http://localhost:8080/api/users/1 \
   }'
 ```
 
-#### Delete User
+#### Delete at.elisabeth_tulla.walk_it_off.model.User
 
 ```bash
 curl -X DELETE http://localhost:8080/api/users/1 \
@@ -405,7 +405,7 @@ fetch('http://localhost:8080/api/users', {
 .catch(error => console.error('Error:', error));
 ```
 
-#### Create User
+#### Create at.elisabeth_tulla.walk_it_off.model.User
 
 ```javascript
 fetch('http://localhost:8080/api/users', {
@@ -419,7 +419,7 @@ fetch('http://localhost:8080/api/users', {
     email: 'user@example.com',
     password: 'SecurePass123!',
     firstName: 'New',
-    lastName: 'User'
+    lastName: 'at.elisabeth_tulla.walk_it_off.model.User'
   })
 })
 .then(response => response.json())
@@ -474,7 +474,7 @@ When breaking changes are introduced, a new version will be created (e.g., `v2`)
 
 For API support and questions:
 
-- Review the [User Guide](../user-guide.md)
+- Review the [at.elisabeth_tulla.walk_it_off.model.User Guide](../user-guide.md)
 - Check the [Setup Guide](../setup.md)
 - Consult the [Architecture Documentation](../architecture/overview.md)
 - Submit an issue on the project repository
@@ -483,7 +483,7 @@ For API support and questions:
 
 ### Version 1.0.0 (January 2026)
 - Initial API release
-- User management endpoints
+- at.elisabeth_tulla.walk_it_off.model.User management endpoints
 - Authentication support
 
 ---

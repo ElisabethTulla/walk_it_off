@@ -1,3 +1,9 @@
+package at.elisabeth_tulla.walk_it_off.service;
+
+import at.elisabeth_tulla.walk_it_off.model.User;
+import at.elisabeth_tulla.walk_it_off.repository.AccountRepository;
+import at.elisabeth_tulla.walk_it_off.util.ValidationManager;
+
 public class AccountService {
 
     AccountRepository accountRepo = new AccountRepository();
@@ -6,9 +12,9 @@ public class AccountService {
 
     public void changeLastName(User user1, String newName /*todo get input from GUI*/){
 
-        // todo profanity-check (Method in ValidationManager)
+        // todo profanity-check (Method in at.elisabeth_tulla.walk_it_off.util.ValidationManager)
 
-        //change User-Object:
+        //change at.elisabeth_tulla.walk_it_off.model.User-Object:
         user1.setLastName(newName);
         //change Name in DB:
         accountRepo.changeLastname(user1);
@@ -17,9 +23,9 @@ public class AccountService {
 
     public void changeFirstName(User user1, String newName /*todo get input from GUI*/){
 
-        // todo profanity-check (Method in ValidationManager)
+        // todo profanity-check (Method in at.elisabeth_tulla.walk_it_off.util.ValidationManager)
 
-        //change User-Object:
+        //change at.elisabeth_tulla.walk_it_off.model.User-Object:
         user1.setFirstName(newName);
         //change Name in DB:
         accountRepo.changeFirstname(user1);
@@ -35,7 +41,7 @@ public class AccountService {
             //todo show message in GUI
             System.out.println("This e-mail is already registered.");
         } else {
-            //change User-Object:
+            //change at.elisabeth_tulla.walk_it_off.model.User-Object:
             user1.setEmail(newEmail);
             //change Name in DB:
             accountRepo.changeEmail(user1);
@@ -57,7 +63,7 @@ public class AccountService {
                     "No spaces between characters.");
             return;}
 
-        //change User-Object:
+        //change at.elisabeth_tulla.walk_it_off.model.User-Object:
         user1.setPassword(newPassword);
         //change Password in DB:
         accountRepo.changePassword(user1);

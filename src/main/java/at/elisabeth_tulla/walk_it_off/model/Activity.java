@@ -1,3 +1,5 @@
+package at.elisabeth_tulla.walk_it_off.model;
+
 import java.sql.Timestamp;
 
 public class Activity {

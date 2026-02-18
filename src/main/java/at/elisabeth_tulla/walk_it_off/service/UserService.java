@@ -1,3 +1,9 @@
+package at.elisabeth_tulla.walk_it_off.service;
+
+import at.elisabeth_tulla.walk_it_off.model.User;
+import at.elisabeth_tulla.walk_it_off.repository.UserRepository;
+import at.elisabeth_tulla.walk_it_off.util.ValidationManager;
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -31,15 +37,15 @@ public class UserService {
             return;
         }
 
-        //todo name profanity-check (Method in ValidationManager)
+        //todo name profanity-check (Method in at.elisabeth_tulla.walk_it_off.util.ValidationManager)
 
             Integer age = calculateAge(birthYear, birthMonth, birthDay);
 
-            //create User:
+            //create at.elisabeth_tulla.walk_it_off.model.User:
             User newUser = new User(firstName, lastName, email, password,
                     birthYear, birthMonth, birthDay, age, gender);
 
-            //register User in DB:
+            //register at.elisabeth_tulla.walk_it_off.model.User in DB:
             userRepo.registerNewUser(newUser);
             //todo show message in GUI
             System.out.println("Welcome " + newUser.getFirstName() + "!");
@@ -56,7 +62,6 @@ public class UserService {
 
         //fetch user from DB:
         User user1 = userRepo.getUser(email);
-        //TODO QUESTION: beim login muss ich anhand der email in der DB nach dem user suchen -> index auf email für schnelle Suche)?
 
         if (user1 == null){
             System.out.println("No user with this e-mail address was found.");
@@ -71,7 +76,7 @@ public class UserService {
             System.out.println("Invalid password!");
             return null;
         } else {
-            //todo grant session token ??????????????????????????????????????
+            //todo IF API: grant session token ?
             System.out.println("Hello, " + user1.getFirstName() + "!");
             return user1;
         }

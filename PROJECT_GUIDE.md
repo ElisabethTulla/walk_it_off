@@ -27,8 +27,8 @@ Wir arbeiten mit einer klaren Hierarchie aus **Features** (Ziele) und **Stories*
 * Gehe im Repo auf `Issues` -> `New Issue` -> `Feature Request`.
 * Ein Feature beschreibt eine große funktionale Einheit (z.B. "REST-API für Benutzer").
 
-### B. User Stories erstellen (Das "Wie")
-* Erstelle für jedes Feature mehrere `User Stories`.
+### B. at.elisabeth_tulla.walk_it_off.model.User Stories erstellen (Das "Wie")
+* Erstelle für jedes Feature mehrere `at.elisabeth_tulla.walk_it_off.model.User Stories`.
 * **Verknüpfung:** Kopiere die Issue-Nummer der Story (z. B. `#10`) in die Checkliste deines Feature-Issues. So siehst du dort den Fortschrittsbalken.
 
 ---

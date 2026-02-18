@@ -42,7 +42,7 @@
 - [Point 1]
 - [Point 2]
 
-**User Story/Requirement:** [Reference]
+**at.elisabeth_tulla.walk_it_off.model.User Story/Requirement:** [Reference]
 
 #### Feature 2: [Feature Name]
 **Time Allocated:** [Minutes]
@@ -54,7 +54,7 @@
 **Key Points to Highlight:**
 - [Point 1]
 
-**User Story/Requirement:** [Reference]
+**at.elisabeth_tulla.walk_it_off.model.User Story/Requirement:** [Reference]
 
 ### 3. Q&A Session (15 minutes)
 [Time for questions and answers]

@@ -1,3 +1,9 @@
+package at.elisabeth_tulla.walk_it_off.service;
+
+import at.elisabeth_tulla.walk_it_off.model.Activity;
+import at.elisabeth_tulla.walk_it_off.model.User;
+import at.elisabeth_tulla.walk_it_off.repository.ActivityRepository;
+
 public class ActivityService {
 
     ActivityRepository activityRepo = new ActivityRepository();
@@ -14,14 +20,14 @@ public class ActivityService {
     }
 
     public void loggWalking(User user, String activity, Integer steps){
-        //create Activity:
+        //create at.elisabeth_tulla.walk_it_off.model.Activity:
         Activity activity1 = new Activity(user.getId(), activity, steps);
 
         activityRepo.loggActivity(user, activity1);
     }
 
     public void loggRunning(User user, String activity, double distanceInKm){
-        //create Activity:
+        //create at.elisabeth_tulla.walk_it_off.model.Activity:
         Activity activity1 = new Activity(user.getId(), activity, distanceInKm);
 
         activityRepo.loggActivity(user, activity1);

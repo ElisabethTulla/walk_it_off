@@ -1,3 +1,5 @@
+package at.elisabeth_tulla.walk_it_off.model;
+
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
@@ -151,7 +153,7 @@ public class User {
     @Override
     public String toString(){
         return "ID: " + id + " | name: " + firstName + " " + lastName + " | e-mail: " + email
-                 + "| member since: " + created_at + " | \nage: " + age + " | birthday: " + birthDay
+                 + "| member since: " + created_at + " | \nage: " + getAge() + " | birthday: " + birthDay
                 + "." + birthMonth + "." + birthYear + " | gender: " + gender;
     }
 }

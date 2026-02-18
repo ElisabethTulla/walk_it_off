@@ -1,5 +1,12 @@
+package at.elisabeth_tulla.walk_it_off.service;
+
+import at.elisabeth_tulla.walk_it_off.model.User;
+import at.elisabeth_tulla.walk_it_off.repository.ComparingRepository;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ComparingService {
 
@@ -10,7 +17,7 @@ public class ComparingService {
      */
 
     //showStepsSummarized in specific timeframe (GUI input!):
-    public Integer showStepsSumDateToDate(User user, Integer startYear, Integer startMonth, Integer startDay,
+    public Integer sumUpStepsTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
                                        Integer endYear, Integer endMonth, Integer endDay) {
 
         LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
@@ -24,18 +31,50 @@ public class ComparingService {
     }
 
     //all Steps Sum overall:
-    public void showStepsSumAll(User user){
+    public void sumUpAllSteps(User user){
         System.out.println("Overall walked Steps: " + compRepo.getStepsSumAll(user));
     }
 
-    //todo show all Steps (NOT added!) in grafic/table from specific timeframe (GUI input) (Repo: hashmap, hashset?)
+    public void mapStepsTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
+                                   Integer endYear, Integer endMonth, Integer endDay){
 
+        LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
+        LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
+
+        HashMap<LocalDateTime, Integer> stepsMap = compRepo.getStepsDateToDate(user, startDate, endDate);
+
+        if (!stepsMap.isEmpty()){
+            for (Map.Entry<LocalDateTime, Integer> entry : stepsMap.entrySet()) {
+                System.out.println(entry.getKey() +  ": " + entry.getValue() + " steps");
+            }
+        } else
+            System.out.println("No steps found");
+        //todo show Steps in grafic/table in GUI
+
+    }
 
     /***
      *  RUNS:
      */
 
-    //todo show ran km in timeframe (GUI input)
+    // ran km in timeframe (GUI input):
+    public double sumUpKmTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
+                                       Integer endYear, Integer endMonth, Integer endDay) {
+
+        LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
+        LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
+
+        //todo Show in GUI:
+        System.out.println("Kilometers ran between " + startDate + " and " + endDate + ": "
+                + compRepo.getKmSumDateToDate(user, startDate, endDate));
+
+        return compRepo.getKmSumDateToDate(user, startDate, endDate);
+    }
+
+    //all Km Sum overall:
+    public void sumUpAllKm(User user){
+        System.out.println("Overall ran kilometers: " + compRepo.getKmSumAll(user));
+    }
 
     //todo show ran km overall!
 
@@ -70,12 +109,12 @@ public class ComparingService {
                                           Integer endYear1, Integer endMonth1, Integer endDay1, Integer startYear2, Integer startMonth2, Integer startDay2,
                                           Integer endYear2, Integer endMonth2, Integer endDay2){
 
-        //todo GUI User input choice: compare day to day / week to week / month to month / year to year
-        // -> CHANGE PARAMETERS from User input ... is there a simpler way?
-        // -> calculate the wright start- and endDates for the selected timeframes (to give to showStepsSumDateToDate)
+        //todo GUI at.elisabeth_tulla.walk_it_off.model.User input choice: compare day to day / week to week / month to month / year to year
+        // -> CHANGE PARAMETERS from at.elisabeth_tulla.walk_it_off.model.User input ... is there a simpler way?
+        // -> calculate the wright start- and endDates for the selected timeframes (to give to sumUpStepsTimeframe)
 
-        Integer Timeframe1 = showStepsSumDateToDate(user, startYear1, startMonth1, startDay1, endYear1, endMonth1, endDay1);
-        Integer Timeframe2 = showStepsSumDateToDate(user, startYear2, startMonth2, startDay2, endYear2, endMonth2, endDay2);
+        Integer Timeframe1 = sumUpStepsTimeframe(user, startYear1, startMonth1, startDay1, endYear1, endMonth1, endDay1);
+        Integer Timeframe2 = sumUpStepsTimeframe(user, startYear2, startMonth2, startDay2, endYear2, endMonth2, endDay2);
 
         if (Timeframe1.equals(Timeframe2)){
             System.out.println("You have matched your previous results! Keep it up!");

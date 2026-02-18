@@ -1,3 +1,9 @@
+import at.elisabeth_tulla.walk_it_off.model.User;
+import at.elisabeth_tulla.walk_it_off.service.AccountService;
+import at.elisabeth_tulla.walk_it_off.service.ActivityService;
+import at.elisabeth_tulla.walk_it_off.service.ComparingService;
+import at.elisabeth_tulla.walk_it_off.service.UserService;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -7,43 +13,73 @@ public class Main {
     ActivityService activityService = new ActivityService();
     ComparingService comparingService = new ComparingService();
 
-    //userService.registerUser("Felix", "Tulla", "felix@tulla.at",
-     //       "Postgres1!", 2015, 1, 6, "male");
+        /***
+         * REGISTER USER
+         */
+   // userService.registerUser("Elvis", "Tulla", "elvis@tulla.at", "Postgres1!", 2018, 1, 18, "male");
 
-    //userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
-
-    //accountService.deleteUser("ofaderbauer@gmail.com");
-
-
+        /***
+         * LOGIN
+         */
+        //userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
+        //User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
         User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
-      //  accountService.changePassword(currentUser, "Postgres1!");
+
+        System.out.println(currentUser.toString());
+
+        /***
+         * ACCOUNT MANAGEMENT
+         */
+        //  accountService.changePassword(currentUser, "Postgres1!");
        // accountService.changeLastName(currentUser, "Tulla");
         //accountService.changeFirstName(currentUser, "Nachi");
         //accountService.changeEmail(currentUser, "nachi@tulla.at");
-        System.out.println(currentUser.toString());
+        //accountService.deleteUser("ofaderbauer@gmail.com");
+
         //System.out.println(currentUser.getAge());
 
-        System.out.println(activityService.checkActivity("running"));
+        /***
+         * LOG ACTIVITY
+         */
+        //System.out.println(activityService.checkActivity("walking"));
         //activityService.loggWalking(currentUser, "walking", 4000);
         //activityService.loggRunning(currentUser, "running", 0.5);
 
+        /***
+         * SHOW STEPS
+         */
         //todo:GUI input als jahr, monat, tag (ev mit Kalender zum auswählen...)
-        //comparingService.showStepsSumDateToDate(currentUser, 2026, 1, 1,
+        //comparingService.sumUpStepsTimeframe(currentUser, 2026, 1, 1,
          //       2026, 2, 17);
-        //comparingService.showStepsSumAll(currentUser);
+
+        //comparingService.mapStepsTimeframe(currentUser, 2026, 1, 1, 2026, 2, 18);
+
+        //comparingService.sumUpAllSteps(currentUser);
 
         comparingService.compareStepsSumTimeframes(currentUser, 2026, 1, 1,
                 2026, 1, 31, 2026, 2, 1,
-                2026, 2, 17);
+                2026, 2, 18);
+
+        /***
+         * SHOW KM (RUNS)
+         */
+        //sum up runs in Timeframe:
+        comparingService.sumUpKmTimeframe(currentUser, 2026, 1, 1,
+                2026, 2, 18);
+
+        //sum up runs Overall:
+        comparingService.sumUpAllKm(currentUser);
+
+
 
         /***
          * todo type [ENUMS: WALKING,...]  // könnte auch gender als ENUMS anlegen (ev stattdessen)
          *
          * todo FEAT show and compare stats #21
-         * create ComparingService
+         * create at.elisabeth_tulla.walk_it_off.service.ComparingService
          * (Methods: showData, compareToDate, compareToUser, compareToGroup)
          *
-         * create ComparingRepository
+         * create at.elisabeth_tulla.walk_it_off.repository.ComparingRepository
          * (Methods: readDataFromDB)
          *
          * todo Create Challenges and Achievements
@@ -71,7 +107,7 @@ public class Main {
      * <?xml version="1.0" encoding="UTF-8"?>
      * <TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
      * <Activities>
-     * <Activity Sport="Running">
+     * <at.elisabeth_tulla.walk_it_off.model.Activity Sport="Running">
      * <Id>2023-10-25T10:00:00Z</Id>
      * <Lap StartTime="2023-10-25T10:00:00Z">
      * <TotalTimeSeconds>1800</TotalTimeSeconds>
@@ -92,7 +128,7 @@ public class Main {
      * <!-- Weitere Trackpoints -->
      * </Track>
      * </Lap>
-     * </Activity>
+     * </at.elisabeth_tulla.walk_it_off.model.Activity>
      * </Activities>
      * </TrainingCenterDatabase>
      *
@@ -111,9 +147,9 @@ public class Main {
      * │   ├── WalkService.java
      * │   └── WalkResource.java    # REST-Endpoint
      * ├── user/
-     * │   ├── User.java
-     * │   ├── UserRepository.java
-     * │   ├── UserService.java
+     * │   ├── at.elisabeth_tulla.walk_it_off.model.User.java
+     * │   ├── at.elisabeth_tulla.walk_it_off.repository.UserRepository.java
+     * │   ├── at.elisabeth_tulla.walk_it_off.service.UserService.java
      * │   └── UserResource.java
      * ├── route/
      * │   ├── Route.java

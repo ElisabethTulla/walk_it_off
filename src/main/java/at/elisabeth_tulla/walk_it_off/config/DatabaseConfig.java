@@ -1,3 +1,5 @@
+package at.elisabeth_tulla.walk_it_off.config;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
