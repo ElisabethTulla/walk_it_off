@@ -1,3 +1,5 @@
+package at.elisabeth_tulla.walk_it_off.config;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,6 +15,8 @@ public class DatabaseConfig {
     static String db_password = null;
 
     public static Connection configure() {
+
+        //todo eventuell könnte man nur das passwort aus einer file holen, den Rest nicht
 
         try {
 

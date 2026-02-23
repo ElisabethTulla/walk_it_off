@@ -1,3 +1,12 @@
+package at.elisabeth_tulla.walk_it_off.service;
+
+import at.elisabeth_tulla.walk_it_off.model.User;
+import at.elisabeth_tulla.walk_it_off.repository.UserRepository;
+import at.elisabeth_tulla.walk_it_off.util.ValidationManager;
+
+import java.time.LocalDate;
+import java.time.Period;
+
 public class UserService {
 
     UserRepository userRepo = new UserRepository();
@@ -28,24 +37,31 @@ public class UserService {
             return;
         }
 
-        //todo name profanity-check (Method in ValidatoinManager)
+        //todo name profanity-check (Method in at.elisabeth_tulla.walk_it_off.util.ValidationManager)
 
-            //create User:
+            Integer age = calculateAge(birthYear, birthMonth, birthDay);
+
+            //create at.elisabeth_tulla.walk_it_off.model.User:
             User newUser = new User(firstName, lastName, email, password,
-                    birthYear, birthMonth, birthDay, gender);
+                    birthYear, birthMonth, birthDay, age, gender);
 
-            //register User in DB:
+            //register at.elisabeth_tulla.walk_it_off.model.User in DB:
             userRepo.registerNewUser(newUser);
             //todo show message in GUI
             System.out.println("Welcome " + newUser.getFirstName() + "!");
 
     }
 
+    public Integer calculateAge(Integer birthYear, Integer birthMonth, Integer birthDay){
+        LocalDate birthDate = LocalDate.of(birthYear, birthMonth, birthDay);
+        Period period = Period.between(birthDate, LocalDate.now());
+        return period.getYears();
+    }
+
     public User login(String email, String password/*todo get user Data input from GUI*/){
 
         //fetch user from DB:
         User user1 = userRepo.getUser(email);
-        //TODO QUESTION: beim login muss ich anhand der email in der DB nach dem user suchen -> index auf email für schnelle Suche)?
 
         if (user1 == null){
             System.out.println("No user with this e-mail address was found.");
@@ -60,14 +76,11 @@ public class UserService {
             System.out.println("Invalid password!");
             return null;
         } else {
-            //todo grant session token !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            //todo IF API: grant session token ?
             System.out.println("Hello, " + user1.getFirstName() + "!");
             return user1;
         }
 
     }
-
-
-
 
 }

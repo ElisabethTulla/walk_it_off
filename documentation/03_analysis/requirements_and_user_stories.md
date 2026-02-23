@@ -1,4 +1,4 @@
-# Requirements and User Stories
+# Requirements and at.elisabeth_tulla.walk_it_off.model.User Stories
 
 ## Overview
 This document captures the functional and non-functional requirements as well as user stories for the project.
@@ -17,7 +17,7 @@ This document captures the functional and non-functional requirements as well as
 **Priority:** [High/Medium/Low]
 **Status:** [Draft/Approved/Implemented]
 
-## User Stories
+## at.elisabeth_tulla.walk_it_off.model.User Stories
 
 ### US-001: [Story Title]
 **As a** [user role]

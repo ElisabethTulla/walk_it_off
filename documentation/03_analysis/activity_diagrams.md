@@ -1,9 +1,9 @@
-# Activity Diagrams
+# at.elisabeth_tulla.walk_it_off.model.Activity Diagrams
 
 ## Overview
 This document contains activity diagrams that model the business processes and workflows.
 
-## Activity Diagram 1: [Process Name]
+## at.elisabeth_tulla.walk_it_off.model.Activity Diagram 1: [Process Name]
 
 ### Description
 [Description of the process or workflow]
@@ -16,15 +16,15 @@ This document contains activity diagrams that model the business processes and w
 - [Actor 2]
 
 ### Activities
-1. [Activity 1]
-2. [Activity 2]
-3. [Activity 3]
+1. [at.elisabeth_tulla.walk_it_off.model.Activity 1]
+2. [at.elisabeth_tulla.walk_it_off.model.Activity 2]
+3. [at.elisabeth_tulla.walk_it_off.model.Activity 3]
 
 ### Decision Points
 - [Decision point 1]: [Conditions]
 - [Decision point 2]: [Conditions]
 
-## Activity Diagram 2: [Process Name]
+## at.elisabeth_tulla.walk_it_off.model.Activity Diagram 2: [Process Name]
 
 ### Description
 [Description of the process or workflow]
@@ -37,9 +37,9 @@ This document contains activity diagrams that model the business processes and w
 - [Actor 2]
 
 ### Activities
-1. [Activity 1]
-2. [Activity 2]
-3. [Activity 3]
+1. [at.elisabeth_tulla.walk_it_off.model.Activity 1]
+2. [at.elisabeth_tulla.walk_it_off.model.Activity 2]
+3. [at.elisabeth_tulla.walk_it_off.model.Activity 3]
 
 ### Decision Points
 - [Decision point 1]: [Conditions]

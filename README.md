@@ -46,7 +46,7 @@ For detailed documentation, please refer to:
 - [Setup Guide](docs/setup.md) - Detailed setup instructions
 - [Architecture Overview](docs/architecture/overview.md) - System architecture
 - [API Documentation](docs/api/endpoints.md) - API endpoints
-- [User Guide](docs/user-guide.md) - How to use the software
+- [at.elisabeth_tulla.walk_it_off.model.User Guide](docs/user-guide.md) - How to use the software
 - [Contributing Guide](CONTRIBUTING.md) - Development guidelines
 
 ## Project Structure

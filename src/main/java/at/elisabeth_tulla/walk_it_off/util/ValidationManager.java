@@ -1,3 +1,7 @@
+package at.elisabeth_tulla.walk_it_off.util;
+
+import at.elisabeth_tulla.walk_it_off.config.DatabaseConfig;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,18 +37,13 @@ public class ValidationManager {
         // Regex to check valid password.
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*['*°?/!@#$%^&-+=()])(?=\\S+$).{8,20}$";
 
-                        /*&quot;^(?=.*[0-9])&quot;
-                       + &quot;(?=.*[a-z])(?=.*[A-Z])&quot;
-                       + &quot;(?=.*[@#$%^&amp;+=])&quot;
-                       + &quot;(?=\\S+$).{8,20}$&quot;; */
-
         // Compile Regex:
         Pattern p = Pattern.compile(regex);
 
         // Matcher finds matching Regex - password:
         Matcher m = p.matcher(password);
 
-        // Return if the password matched the Regex:
+        // Return true if the password matched the Regex:
         return m.matches();
     }
 

@@ -30,7 +30,7 @@ The architecture is designed to achieve the following goals:
 
 This project follows a **Layered Architecture** pattern with clear separation between:
 
-- **Presentation Layer:** User interface and API endpoints
+- **Presentation Layer:** at.elisabeth_tulla.walk_it_off.model.User interface and API endpoints
 - **Business Logic Layer:** Core application logic and rules
 - **Data Access Layer:** Database interactions and persistence
 - **Cross-Cutting Concerns:** Logging, security, configuration
@@ -108,7 +108,7 @@ This project follows a **Layered Architecture** pattern with clear separation be
 │  │         Repository Interfaces                │  │
 │  │                                              │  │
 │  │  ┌────────────────┐  ┌────────────────┐    │  │
-│  │  │  User Repo     │  │  Entity Repo   │    │  │
+│  │  │  at.elisabeth_tulla.walk_it_off.model.User Repo     │  │  Entity Repo   │    │  │
 │  │  └────────────────┘  └────────────────┘    │  │
 │  └───────────────────────┬──────────────────────┘  │
 │                          │                          │
@@ -204,7 +204,7 @@ Cross-Cutting Concerns:
 
 **Error Handling:**
 - Global exception handling
-- User-friendly error messages
+- at.elisabeth_tulla.walk_it_off.model.User-friendly error messages
 - Error logging and monitoring
 
 ## Technology Stack
@@ -369,7 +369,7 @@ These records document:
 
 - [Setup Guide](../setup.md) - Development environment setup
 - [API Documentation](../api/endpoints.md) - API endpoints reference
-- [User Guide](../user-guide.md) - End-user documentation
+- [at.elisabeth_tulla.walk_it_off.model.User Guide](../user-guide.md) - End-user documentation
 - [Contributing Guide](../../CONTRIBUTING.md) - Development guidelines
 - [ADR Documentation](../../documentation/07_decisions/) - Architecture decisions
 
