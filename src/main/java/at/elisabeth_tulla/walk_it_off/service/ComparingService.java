@@ -125,15 +125,6 @@ public class ComparingService {
     //todo compare number of runs/walks from timeframe to runs/walks from different timeframe
     //          (this month you went for a run 10 times!, that's 3 more runs than in ...)
 
-    /***
-     * CHALLANGES + ACHIEVEMENTS:
-     */
-
-    //todo show Achievements
-
-    //todo show current Challenges progress
-
-    //todo show all Challenges + attached Achievements
 
     /***
      * COMPARISONS:

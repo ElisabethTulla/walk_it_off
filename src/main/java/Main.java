@@ -1,8 +1,5 @@
 import at.elisabeth_tulla.walk_it_off.model.User;
-import at.elisabeth_tulla.walk_it_off.service.AccountService;
-import at.elisabeth_tulla.walk_it_off.service.LoggingService;
-import at.elisabeth_tulla.walk_it_off.service.ComparingService;
-import at.elisabeth_tulla.walk_it_off.service.UserService;
+import at.elisabeth_tulla.walk_it_off.service.*;
 
 public class Main {
 
@@ -12,6 +9,7 @@ public class Main {
     AccountService accountService = new AccountService();
     LoggingService loggingService = new LoggingService();
     ComparingService comparingService = new ComparingService();
+    AchievementService achievementService = new AchievementService();
 
         /***
          * REGISTER USER
@@ -22,8 +20,9 @@ public class Main {
          * LOGIN
          */
         //userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
-        //User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
-        User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
+        User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
+        //User currentUser = userService.login("felix@tulla.at", "Postgres1!");
+        //User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
 
         System.out.println(currentUser.toString());
 
@@ -42,39 +41,48 @@ public class Main {
          * LOG ACTIVITY
          */
         //System.out.println(activityService.checkActivity("walking"));
-        //loggingService.loggWalking(currentUser, "walking", 4000);
+        //loggingService.loggWalking(currentUser, "walking", 10000);
         //loggingService.loggRunning(currentUser, "running", 0.5);
 
         /***
          * SHOW STEPS
          */
         //todo:GUI input als jahr, monat, tag (ev mit Kalender zum auswählen...) 'y' or 'n' for activityCounter
-        comparingService.sumUpStepsTimeframe(currentUser, 'y', 2026, 1, 1,
-               2026, 2, 18);
+        //comparingService.sumUpStepsTimeframe(currentUser, 'y', 2026, 1, 1,
+          //     2026, 2, 18);
 
         //comparingService.mapStepsTimeframe(currentUser, 2026, 1, 1, 2026, 2, 18);
 
         //comparingService.sumUpAllSteps(currentUser);
 
-        comparingService.compareStepsSumTimeframes(currentUser, 2026, 1, 1,
-                2026, 1, 31, 2026, 2, 1,
-                2026, 2, 18);
+        //comparingService.compareStepsSumTimeframes(currentUser, 2026, 1, 1,
+          //      2026, 1, 31, 2026, 2, 1,
+           //     2026, 2, 18);
 
         /***
          * SHOW KM (RUNS)
          */
         //sum up runs in Timeframe:
-        comparingService.sumUpKmTimeframe(currentUser, 'y', 2026, 1, 1, 2026, 2, 18);
+        //comparingService.sumUpKmTimeframe(currentUser, 'y', 2026, 1, 1, 2026, 2, 18);
 
         //comparingService.mapRunsTimeframe(currentUser, 2026, 1, 1, 2026, 2, 18);
 
         //sum up runs Overall:
         //comparingService.sumUpAllKm(currentUser);
 
-        comparingService.compareRunsSumTimeframes(currentUser, 2026, 1, 1,
-                2026, 1, 31, 2026, 2, 1,
-                2026, 2, 18);
+        //comparingService.compareRunsSumTimeframes(currentUser, 2026, 1, 1,
+          //      2026, 1, 31, 2026, 2, 1,
+            //    2026, 2, 18);
 
+        /***
+         * ACHIEVEMENTS
+         */
+
+        //create Achievement:
+        //achievementService.createAchievement
+         //       ("10 000 STEPS", 10000, 0, 0, "user");
+
+        achievementService.showAchievements(currentUser);
 
         /***
          * todo type [ENUMS: WALKING,...]  // könnte auch gender als ENUMS anlegen (ev stattdessen)
@@ -87,6 +95,8 @@ public class Main {
          * (Methods: readDataFromDB)
          *
          * todo Create Challenges and Achievements
+         *
+         * todo log time with runs (also in db) and compare times per km improvements (add maxTime to createChallenge)
          */
 
 

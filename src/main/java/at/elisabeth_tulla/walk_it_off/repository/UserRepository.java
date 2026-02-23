@@ -33,12 +33,14 @@ public class UserRepository {
             ps.setInt(8, newUser.getBirthMonth());
             ps.setInt(9, newUser.getBirthDay());
 
+            ps.executeUpdate();
+
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 if (keys.next()) {
                     newUser.setId(keys.getInt(1));
                 }
             }
-            ps.executeUpdate();
+
             conn.commit();
 
         } catch (SQLException e) {

@@ -12,6 +12,8 @@ public class UserService {
     UserRepository userRepo = new UserRepository();
     ValidationManager valid = new ValidationManager();
 
+    //todo enterChallenge(User user, Challenge challenge
+
     public void registerUser(String firstName, String lastName, String email, String password,
                              Integer birthYear, Integer birthMonth, Integer birthDay, String gender
                             /*todo get user Data input from GUI*/){
@@ -41,11 +43,11 @@ public class UserService {
 
             Integer age = calculateAge(birthYear, birthMonth, birthDay);
 
-            //create at.elisabeth_tulla.walk_it_off.model.User:
+            //create user:
             User newUser = new User(firstName, lastName, email, password,
                     birthYear, birthMonth, birthDay, age, gender);
 
-            //register at.elisabeth_tulla.walk_it_off.model.User in DB:
+            //register user in DB:
             userRepo.registerNewUser(newUser);
             //todo show message in GUI
             System.out.println("Welcome " + newUser.getFirstName() + "!");
