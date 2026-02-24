@@ -5,9 +5,7 @@ import at.elisabeth_tulla.walk_it_off.model.Achievement;
 import at.elisabeth_tulla.walk_it_off.model.User;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class AchievementRepository {
@@ -77,7 +75,7 @@ public class AchievementRepository {
         }
     }
 
-    public List<Achievement> getAchievements(User user) {
+    public List<Achievement> getUserAchievements(User user) {
 
         String sql = "SELECT * FROM user_achievement JOIN achievement " +
                 "ON achievement.id = user_achievement.achievement_id " +
@@ -91,7 +89,7 @@ public class AchievementRepository {
                 List<Achievement> unlockedAchievements = new ArrayList<>();
 
                 while (rs.next()) {
-                    Achievement a = mapRows(rs);
+                    Achievement a = extendedMapRows(rs);
                     unlockedAchievements.add(a);
                 }
                 return unlockedAchievements;
@@ -104,7 +102,7 @@ public class AchievementRepository {
         }
     }
 
-    public Achievement mapRows(ResultSet rs) throws SQLException {
+    public Achievement extendedMapRows(ResultSet rs) throws SQLException {
 
         Integer id = rs.getInt("achievement_id");
         String name = rs.getString("name");
@@ -116,5 +114,40 @@ public class AchievementRepository {
         Timestamp unlockedAt = rs.getTimestamp("unlocked_at");
 
         return new Achievement(id, name, requiredSteps, requiredKm, requiredDaysActive, type, unlocked, unlockedAt);
+    }
+
+    public List<Achievement> getAllAchievements() {
+
+        String sql = "SELECT * FROM achievement";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+
+            try (ResultSet rs = ps.executeQuery()) {
+                List<Achievement> allAchievements = new ArrayList<>();
+
+                while (rs.next()) {
+                    Achievement a = mapRows(rs);
+                    allAchievements.add(a);
+                }
+                return allAchievements;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Achievement mapRows(ResultSet rs) throws SQLException {
+
+        Integer id = rs.getInt("id");
+        String name = rs.getString("name");
+        Integer requiredSteps = rs.getInt("required_steps");
+        double requiredKm = rs.getDouble("required_km");
+        Integer requiredDaysActive = rs.getInt("required_days_active");
+        String type = rs.getString("achievement_type");
+
+        return new Achievement(id, name, requiredSteps, requiredKm, requiredDaysActive, type);
     }
 }

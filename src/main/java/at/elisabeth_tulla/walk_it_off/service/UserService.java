@@ -78,8 +78,11 @@ public class UserService {
             System.out.println("Invalid password!");
             return null;
         } else {
-            //todo IF API: grant session token ?
             System.out.println("Hello, " + user1.getFirstName() + "!");
+
+            //todo check, if there are entered Challenges, that have hit their goal_end
+            // and check, if the goal was hit in a timely manner)
+
             return user1;
         }
 

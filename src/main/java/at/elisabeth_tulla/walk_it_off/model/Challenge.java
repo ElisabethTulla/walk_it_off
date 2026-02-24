@@ -8,32 +8,47 @@ public class Challenge {
     private String name;
     private Integer requiredSteps = 0;
     private double requiredKm = 0.0;
-    private Achievement requiredAchievement = null;
+    private Integer requiredAchievementID = 0;
     private Integer minNumberParticipants = 1;
     private Integer maxNumberParticipants = 9999999;
     private Integer goalSteps = 0;
     private double goalDistanceKm = 0.0;
     private Timestamp startedAt;
     private Timestamp endsAt;
-    private Achievement rewardAchievement = null;
+    private Integer rewardAchievementID = 0;
 
-    public Challenge(String name, Integer reqSteps, double reqKm, Achievement reqAchievement, Integer minParticipants,
+    public Challenge(String name, Integer reqSteps, double reqKm, Integer achievementID, Integer minParticipants,
                      Integer maxParticipants, Integer goalSteps, double goalKm, Timestamp startDate,
-                     Timestamp endDate, Achievement rewardAchievement) {
+                     Timestamp endDate, Integer rewardAchievementID) {
         this.name = name;
         this.requiredSteps = reqSteps;
         this.requiredKm = reqKm;
-        this.requiredAchievement = reqAchievement;
+        this.requiredAchievementID = achievementID;
         this.minNumberParticipants = minParticipants;
         this.maxNumberParticipants = maxParticipants;
         this.goalSteps = goalSteps;
         this.goalDistanceKm = goalKm;
         this.startedAt = startDate;
         this.endsAt = endDate;
-        this.rewardAchievement = rewardAchievement;
+        this.rewardAchievementID = rewardAchievementID;
     }
 
-    //todo constructor
+    public Challenge(Integer id, String name, Integer reqSteps, Integer requiredAchievementID, Integer minParticipants,
+                     Integer maxParticipants, Integer goalSteps, Integer goalKm, Timestamp startedAt, Timestamp endsAt,
+                     Integer rewardAchievementID, Integer reqKm) {
+        this.id = id;
+        this.name = name;
+        this.requiredSteps = reqSteps;
+        this.requiredKm = reqKm;
+        this.requiredAchievementID = requiredAchievementID;
+        this.minNumberParticipants = minParticipants;
+        this.maxNumberParticipants = maxParticipants;
+        this.goalSteps = goalSteps;
+        this.goalDistanceKm = goalKm;
+        this.startedAt = startedAt;
+        this.endsAt = endsAt;
+        this.rewardAchievementID = rewardAchievementID;
+    }
 
     public Integer getId() {
         return id;
@@ -67,12 +82,12 @@ public class Challenge {
         this.requiredKm = requiredKm;
     }
 
-    public Achievement getRequiredAchievement() {
-        return requiredAchievement;
+    public Integer getRequiredAchievementID() {
+        return requiredAchievementID;
     }
 
-    public void setRequiredAchievement(Achievement requiredAchievement) {
-        this.requiredAchievement = requiredAchievement;
+    public void setRequiredAchievementID(Integer requiredAchievementID) {
+        this.requiredAchievementID = requiredAchievementID;
     }
 
     public Integer getMinNumberParticipants() {
@@ -123,11 +138,30 @@ public class Challenge {
         this.endsAt = endsAt;
     }
 
-    public Achievement getRewardAchievement() {
-        return rewardAchievement;
+    public Integer getRewardAchievementID() {
+        return rewardAchievementID;
     }
 
-    public void setRewardAchievement(Achievement rewardAchievement) {
-        this.rewardAchievement = rewardAchievement;
+    public void setRewardAchievementID(Integer rewardAchievementID) {
+        this.rewardAchievementID = rewardAchievementID;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Challenge{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", requiredSteps=" + requiredSteps +
+                ", requiredKm=" + requiredKm +
+                ", requiredAchievementID=" + requiredAchievementID +
+                ", minNumberParticipants=" + minNumberParticipants +
+                ", maxNumberParticipants=" + maxNumberParticipants +
+                ", goalSteps=" + goalSteps +
+                ", goalDistanceKm=" + goalDistanceKm +
+                ", startedAt=" + startedAt +
+                ", endsAt=" + endsAt +
+                ", rewardAchievementID=" + rewardAchievementID +
+                '}';
     }
 }

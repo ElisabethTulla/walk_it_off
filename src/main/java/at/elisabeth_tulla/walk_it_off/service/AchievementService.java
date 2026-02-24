@@ -1,7 +1,6 @@
 package at.elisabeth_tulla.walk_it_off.service;
 
 import at.elisabeth_tulla.walk_it_off.model.Achievement;
-import at.elisabeth_tulla.walk_it_off.model.Challenge;
 import at.elisabeth_tulla.walk_it_off.model.User;
 import at.elisabeth_tulla.walk_it_off.repository.AchievementRepository;
 
@@ -25,10 +24,20 @@ public class AchievementService {
         System.out.println(newAchievement);
     }
 
-    //todo showAchievements(User user)
-    public void showAchievements(User user) {
-        List<Achievement> unlockedAchievements = achievementRepository.getAchievements(user);
+    //show Achievements from user
+    public void showUserAchievements(User user) {
+        List<Achievement> unlockedAchievements = achievementRepository.getUserAchievements(user);
+        System.out.println("Your achievements: \n");
         for (Achievement a : unlockedAchievements) {
+            System.out.println(a);
+        }
+    }
+
+    //show all possible achievements:
+    public void showAllAchievements() {
+        List<Achievement> allAchievements = achievementRepository.getAllAchievements();
+        System.out.println("List of all achievements: \n");
+        for (Achievement a : allAchievements) {
             System.out.println(a);
         }
     }

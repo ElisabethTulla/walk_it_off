@@ -10,6 +10,7 @@ public class Main {
     LoggingService loggingService = new LoggingService();
     ComparingService comparingService = new ComparingService();
     AchievementService achievementService = new AchievementService();
+    ChallengeService challengeService = new ChallengeService();
 
         /***
          * REGISTER USER
@@ -19,10 +20,10 @@ public class Main {
         /***
          * LOGIN
          */
-        //userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
-        User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
+        //User currentUser = userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
+        //User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
         //User currentUser = userService.login("felix@tulla.at", "Postgres1!");
-        //User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
+        User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
 
         System.out.println(currentUser.toString());
 
@@ -82,9 +83,34 @@ public class Main {
         //achievementService.createAchievement
          //       ("10 000 STEPS", 10000, 0, 0, "user");
 
-        achievementService.showAchievements(currentUser);
+        //show user achievements:
+        achievementService.showUserAchievements(currentUser);
+
+        //show all achievements:
+        //achievementService.showAllAchievements();
 
         /***
+         * CHALLENGES
+         */
+
+        //enter Challenge:
+        challengeService.enterChallenge(currentUser, 21);
+
+        //create Challenge:
+        //challengeService.createChallenge("5K", 0, 0.0, 12,
+          //      1, 9999999, 0, 5.0,
+          //     2026, 2, 24, 1, 11);
+
+        //show all challenges:
+        //challengeService.showAllChallenges();
+
+        /***
+         *
+         * todo enter Challenge and log to Challenge
+         *
+         * todo file io reader for steps input
+         *
+         *
          * todo type [ENUMS: WALKING,...]  // könnte auch gender als ENUMS anlegen (ev stattdessen)
          *
          * todo FEAT show and compare stats #21
@@ -94,7 +120,7 @@ public class Main {
          * create at.elisabeth_tulla.walk_it_off.repository.ComparingRepository
          * (Methods: readDataFromDB)
          *
-         * todo Create Challenges and Achievements
+         * todo Create Challenges
          *
          * todo log time with runs (also in db) and compare times per km improvements (add maxTime to createChallenge)
          */

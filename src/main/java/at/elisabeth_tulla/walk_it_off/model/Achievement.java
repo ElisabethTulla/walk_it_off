@@ -10,8 +10,8 @@ public class Achievement {
     private double requiredKm;
     private Integer requiredDaysActive;
     private String type; //todo challenge OR user      //todo ENUMS:  CHALLENGE, USER
-    private Boolean unlocked;
-    private Timestamp unlockedAt;
+    private Boolean unlocked = false;
+    private Timestamp unlockedAt = null;
 
     public Achievement(String name, Integer requiredSteps, double requiredKm, Integer requiredDays, String type) {
         this.name = name;
@@ -31,6 +31,16 @@ public class Achievement {
         this.type = type;
         this.unlocked = unlocked;
         this.unlockedAt = unlockedAt;
+    }
+
+    public Achievement(Integer id, String name, Integer requiredSteps, double requiredKm,
+                       Integer requiredDaysActive, String type) {
+        this.id = id;
+        this.name = name;
+        this.requiredSteps = requiredSteps;
+        this.requiredKm = requiredKm;
+        this.requiredDaysActive = requiredDaysActive;
+        this.type = type;
     }
 
     public Integer getId() {
@@ -100,4 +110,8 @@ public class Achievement {
                 ", type='" + type + '\'' + ", unlocked=" + unlocked + ", unlocked at=" + unlockedAt +
                 '}';
     }
+
+    //todo FRAGE: Wenn ich die Liste aller möglichen Achievements anzeigen lassen will,
+    // möchte ich die letzten beiden Werte (unlocked + unlocked at) nicht mitanzeigen.
+    // Soll ich dafür ein zweites .toString() machen, oder so wie jetzt lassen und als false und null anzeigen?
 }

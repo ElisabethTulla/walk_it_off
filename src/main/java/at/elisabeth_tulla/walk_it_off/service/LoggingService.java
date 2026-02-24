@@ -33,6 +33,7 @@ public class LoggingService {
 
         if (steps >= 10000){
             achievementRepo.unlockAchievement(user, 12);
+
             System.out.println("Congratulations! You unlocked 10.000 steps today!");
         }
 
@@ -56,7 +57,9 @@ public class LoggingService {
         //todo check for active Challenges
         List<Challenge> activeChallenges = challengeRepo.getActiveChallenges(user);
 
-        //todo for each Challenge in List of Challenges: log km to active Challenges
+        //todo for each Challenge in List of Challenges:
+        // ---> log km to active Challenges
+        // ---> check if completed (if yes -> log to unser_achievement)
         for (Challenge challenge : activeChallenges) {
             loggingRepo.loggKmToChallenge(user, challenge, distanceInKm);
         }
