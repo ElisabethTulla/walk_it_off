@@ -140,6 +140,7 @@ public class ChallengeRepository {
             ps.setInt(1, user.getId());
             ps.setInt(2, currentChallenge.getId());
 
+
             ps.executeUpdate();
             conn.commit();
 
@@ -153,4 +154,44 @@ public class ChallengeRepository {
             }
         }
     }
+
+    public Integer getParticipantsCount(Challenge currentChallenge) {
+
+        String sql = "SELECT count(*) FROM user_challenge WHERE challenge_id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+
+            ps.setInt(1, currentChallenge.getId());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+                return 0;
+            }
+
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

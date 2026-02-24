@@ -150,4 +150,25 @@ public class AchievementRepository {
 
         return new Achievement(id, name, requiredSteps, requiredKm, requiredDaysActive, type);
     }
+
+    public Achievement getAchievement(Integer requiredAchievementID) {
+
+        String sql = "SELECT * FROM achievement WHERE id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, requiredAchievementID);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    Achievement a = mapRows(rs);
+                    return a;
+                }
+                return null;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

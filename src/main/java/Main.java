@@ -23,7 +23,8 @@ public class Main {
         //User currentUser = userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
         //User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
         //User currentUser = userService.login("felix@tulla.at", "Postgres1!");
-        User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
+        //User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
+        User currentUser = userService.login("elvis@tulla.at", "Postgres1!");
 
         System.out.println(currentUser.toString());
 

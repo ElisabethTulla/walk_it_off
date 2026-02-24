@@ -41,7 +41,9 @@ public class LoggingService {
         //List<Challenge> activeChallenges = challengeRepo.getActiveChallenges(user);
 
         //todo for each Challenge in List of Challenges:
-        //   ---> log steps to active Challenge
+
+        // todo ----> ob die Challenge geschafft wurde (und das Achievement geearned wurde),
+        //  wird anhand der logged activity aus tabelle activity und dem dazugehörigen Zeitraum berechnet
         //   ---> check if completed (if yes -> log to unser_achievement)
         //for (Challenge challenge : activeChallenges) {
         //    loggingRepo.loggStepsToChallenge(user, challenge, steps);

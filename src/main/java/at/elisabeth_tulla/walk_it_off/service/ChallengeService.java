@@ -17,46 +17,45 @@ import java.util.List;
 
 public class ChallengeService {
 
-    public ChallengeService (){}
+    public ChallengeService() {
+    }
 
     ChallengeRepository challengeRepo = new ChallengeRepository();
     AchievementRepository achievementRepo = new AchievementRepository();
 
-    //todo enterChallenge:
+    //enter Challenge:
     public void enterChallenge(User user, Integer challengeID) {
 
         Challenge currentChallenge = challengeRepo.getChallenge(challengeID);
 
-        //todo check, if user fulfills challenge requirements
+        //check, if user fulfills challenge requirements:
         List<Achievement> userAchievements = achievementRepo.getUserAchievements(user);
         boolean userHasAchievement = false;
-        String requiredAchievementName = null;
 
         for (Achievement achievement : userAchievements) {
             if (achievement.getId().equals(currentChallenge.getRequiredAchievementID())) {
                 userHasAchievement = true;
-                requiredAchievementName = achievement.getName();
             }
         }
 
         if (!userHasAchievement) {
-            /*Integer requiredAchievementID = currentChallenge.getRequiredAchievementID();
-            for (Achievement achievement : userAchievements) {
-                if (achievement.getId().equals(requiredAchievementID)) {
-                    requiredAchievementName = achievement.getName();
-                }
-            }
-             */
+            Achievement requiredAchievement = achievementRepo.getAchievement(currentChallenge.getRequiredAchievementID());
+
             System.out.println("If you want to participate in this challenge, " +
-                    "you have to earn the following achievement: " + requiredAchievementName);
+                    "you first have to earn the following achievement: " + requiredAchievement.getName());
             return;
         }
-        //else if ( //todo check, if Challenge would exceed its maxParticipants) {}
-            // count different users in user_challenge tabelle, die diese challenge_id ge-entered sind
-        else  {
-            challengeRepo.enterChallenge(user, currentChallenge);
+        //check, if Challenge would exceed its maxParticipants:
+        Integer numberParticipants = challengeRepo.getParticipantsCount(currentChallenge);
+
+        if (numberParticipants == currentChallenge.getMaxNumberParticipants()) {
+            System.out.println("This Challenge has already reached the maximum amount of participants.");
+            return;
         }
 
+        challengeRepo.enterChallenge(user, currentChallenge);
+        System.out.println("Challenge accepted! You are now participating in the "
+                + currentChallenge.getName() + " challenge.");
 
     }
 
@@ -66,9 +65,9 @@ public class ChallengeService {
     //todo checkProgress(User user, Challenge challenge)
 
     //show all Challenges
-    public void showAllChallenges(){
+    public void showAllChallenges() {
         List<Challenge> allChallenges = challengeRepo.getAllChallenges();
-        for (Challenge challenge : allChallenges){
+        for (Challenge challenge : allChallenges) {
             System.out.println(challenge);
         }
     }
@@ -81,6 +80,10 @@ public class ChallengeService {
 
         //todo check, if Challenge with that name already exists
 
+        //todo FRAGE: ist unix time besser? bei meiner Lösung hier wird viel herum formatiert...
+        //todo FRAGE: WRITE EXTERNAL METHOD for DATE FORMATING .... (also for use in ComparingService)????????
+
+
         LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
 
         //convert LocalDateTime to date:
@@ -89,12 +92,12 @@ public class ChallengeService {
 
         LocalDateTime endDate;
 
-        if (lastsForDays <= 1){
+        if (lastsForDays <= 1) {
             endDate = LocalDate.of(startYear, startMonth, startDay).atTime(23, 59);
         } else {
             Calendar c = Calendar.getInstance();
             c.setTime(date);
-            c.add(Calendar.DATE, lastsForDays-1);
+            c.add(Calendar.DATE, lastsForDays - 1);
             date = c.getTime();
 
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -110,7 +113,6 @@ public class ChallengeService {
         System.out.println("Challenge created\n");
         System.out.println(newChallenge);
 
-        //----->> todo WRITE EXTERNAL METHOD for DATE FORMATING .... (also for use in ComparingService)????????
     }
 
 
@@ -121,7 +123,6 @@ public class ChallengeService {
         System.out.println("Challenge deleted\n");
     }
      */
-
 
 
 }
