@@ -2,6 +2,7 @@ package at.elisabeth_tulla.walk_it_off.service;
 
 import at.elisabeth_tulla.walk_it_off.model.User;
 import at.elisabeth_tulla.walk_it_off.repository.ComparingRepository;
+import at.elisabeth_tulla.walk_it_off.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,13 +12,14 @@ import java.util.Map;
 public class ComparingService {
 
     ComparingRepository compRepo =  new ComparingRepository();
+    UserRepository userRepo = new UserRepository();
 
     public void getActivityCount(User user, String activity, LocalDateTime startDate, LocalDateTime endDate) {
 
         Integer count = compRepo.getActivityCount(user, activity, startDate, endDate);
 
         if (count == null) {
-            System.out.println("You didn't log any " + activity);
+            System.out.println("You didn't log any " + activity );
         } else if (count == 1) {
             System.out.println("You went " + activity + " once.");
         } else
@@ -170,11 +172,51 @@ public class ComparingService {
         }
     }
 
+    public void compareSumUpStepsTimeframeUsers(User currentUser, String email, char activityCounter, Integer startYear, Integer startMonth, Integer startDay,
+                                                Integer endYear, Integer endMonth, Integer endDay) {
 
+        //fetch other user from DB:
+        User otherUser = userRepo.getUser(email);
 
-    //todo compare allSteps "currentUser" to allSteps "differentUser" in timeframe (GUI input)
+        System.out.println("Steps walked by " + currentUser.getFirstName() + ":");
+        Integer currentUserSteps = sumUpStepsTimeframe(currentUser, activityCounter, startYear, startMonth, startDay, endYear, endMonth, endDay);
+        System.out.println("Steps walked by " + otherUser.getFirstName() + ":");
+        Integer otherUserSteps = sumUpStepsTimeframe(otherUser, activityCounter, startYear, startMonth, startDay, endYear, endMonth, endDay);
 
-    //todo compare allWalked/run distance "currentUser" to allWwalked/run distance "differentUser" in timeframe (GUI input)
+        Integer diffSteps = currentUserSteps - otherUserSteps;
+
+        if (currentUserSteps > otherUserSteps){
+            System.out.println("You walked " + diffSteps + " more steps than " + otherUser.getFirstName());
+        } else if (currentUserSteps == otherUserSteps){
+            System.out.println("You have matched your results perfectly!");
+        } else {
+            Integer diffStepsPositive = diffSteps * (-1);
+            System.out.println(otherUser.getFirstName() + " walked " + diffStepsPositive + " steps more than you.");
+        }
+    }
+
+    public void compareSumUpKmTimeframeUsers(User currentUser, String email, char activityCounter, Integer startYear, Integer startMonth, Integer startDay,
+                                             Integer endYear, Integer endMonth, Integer endDay) {
+
+        //fetch other user from DB:
+        User otherUser = userRepo.getUser(email);
+
+        System.out.println("Kilometers ran by " + currentUser.getFirstName() + ":");
+        double currentUserKms = sumUpKmTimeframe(currentUser, activityCounter, startYear, startMonth, startDay, endYear, endMonth, endDay);
+        System.out.println("Kilometers ran by " + otherUser.getFirstName() + ":");
+        double otherUserKms = sumUpKmTimeframe(otherUser, activityCounter, startYear, startMonth, startDay, endYear, endMonth, endDay);
+
+        double diffKms = currentUserKms - otherUserKms;
+
+        if (currentUserKms > otherUserKms){
+            System.out.println("You ran " + diffKms + " more kilometers than " + otherUser.getFirstName());
+        } else if (currentUserKms == otherUserKms){
+            System.out.println("You have matched your results perfectly!");
+        } else {
+            double diffKmsPositive = diffKms * (-1);
+            System.out.println(otherUser.getFirstName() + " ran " + diffKmsPositive + " kilometers more than you.");
+        }
+    }
 
 
 

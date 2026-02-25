@@ -18,7 +18,7 @@ public class Main {
         /***
          * REGISTER USER
          */
-   // userService.registerUser("Elvis", "Tulla", "elvis@tulla.at", "Postgres1!", 2018, 1, 18, "male");
+        // userService.registerUser("Elvis", "Tulla", "elvis@tulla.at", "Postgres1!", 2018, 1, 18, "male");
 
         /***
          * LOGIN
@@ -64,6 +64,9 @@ public class Main {
           //      2026, 1, 31, 2026, 2, 1,
            //     2026, 2, 18);
 
+        //comparingService.compareSumUpStepsTimeframeUsers(currentUser, "felix@tulla.at", 'y',
+         //       2026, 1, 1, 2026, 2, 25);
+
         /***
          * SHOW KM (RUNS)
          */
@@ -79,6 +82,9 @@ public class Main {
           //      2026, 1, 31, 2026, 2, 1,
             //    2026, 2, 18);
 
+        //comparingService.compareSumUpKmTimeframeUsers(currentUser, "felix@tulla.at", 'y',
+         //       2026, 1, 1, 2026, 2, 25);
+
         /***
          * ACHIEVEMENTS
          */
@@ -91,7 +97,7 @@ public class Main {
         //achievementService.showUserAchievements(currentUser);
 
         //show all achievements:
-        achievementService.showAllAchievements();
+        //achievementService.showAllAchievements();
 
         /***
          * CHALLENGES
@@ -117,24 +123,19 @@ public class Main {
 
         /***
          *
-         * todo compare stats to other user
+         *todo NICE TO HAVE:
+         *   FEAT show and compare stats #21:
+         * - todo compare achievements to other user
+         * - todo compare stats to user-group (eg others in your age group, ...)
          *
-         * todo compare stats to user-group (eg others in your age group, ...)
+         * ---------
          *
          * todo file io reader for steps input
          *
          * todo type [ENUMS: WALKING,...]  // könnte auch gender als ENUMS anlegen (ev stattdessen)
          *
-         * todo FEAT show and compare stats #21
-         * create at.elisabeth_tulla.walk_it_off.service.ComparingService
-         * (Methods: showData, compareToDate, compareToUser, compareToGroup)
-         *
-         * create at.elisabeth_tulla.walk_it_off.repository.ComparingRepository
-         * (Methods: readDataFromDB)
-         *
          * todo log time with runs (also in db) and compare times per km improvements (add maxTime to createChallenge)
          */
-
 
     }
 
