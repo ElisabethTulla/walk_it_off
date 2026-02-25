@@ -6,7 +6,9 @@ import at.elisabeth_tulla.walk_it_off.model.Challenge;
 import at.elisabeth_tulla.walk_it_off.model.User;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ChallengeRepository {
@@ -58,14 +60,27 @@ public class ChallengeRepository {
         }
     }
 
-    public List<Challenge> getActiveChallenges(User user) {
-        //todo
+    public HashMap<LocalDateTime, Integer> getActiveChallenges(User user) {
 
-        List<Challenge> activeChallenges = new ArrayList<>();
+            String sql = "SELECT * FROM user_challenge WHERE user_id = ? AND active = true";
 
-        return activeChallenges;
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+
+            ps.setInt(1, user.getId());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                HashMap<LocalDateTime, Integer> activeChallenges = new HashMap<>();
+
+                while (rs.next()) {
+                        activeChallenges.put(rs.getTimestamp("entered_at").toLocalDateTime(),
+                                rs.getInt("challenge_id"));
+                }
+                return activeChallenges;
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
-
 
     public List<Challenge> getAllChallenges() {
 
@@ -175,23 +190,29 @@ public class ChallengeRepository {
 
     }
 
+    public void deactivateChallenge(User user, Challenge challenge) {
 
+        String sql = "UPDATE user_challenge SET active = false WHERE user_id = ? AND challenge_id = ?";
 
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
+            conn.setAutoCommit(false);
 
+            ps.setInt(1, user.getId());
+            ps.setInt(2, challenge.getId());
 
+            ps.executeUpdate();
+            conn.commit();
 
+        } catch (SQLException e) {
+            System.err.println("Fehler beim Updaten der Datenbank :" + e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+                System.err.println("Fehler beim rollback:" + ex.getMessage());
+                throw new RuntimeException(ex);
+            }
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 }

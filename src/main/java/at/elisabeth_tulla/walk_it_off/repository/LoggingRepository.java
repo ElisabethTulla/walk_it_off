@@ -49,13 +49,4 @@ public class LoggingRepository {
     }
 
 
-    public void loggStepsToChallenge(User user, Challenge challenge, Integer steps) {
-
-        //todo  INSERT INTO user_challenge
-    }
-
-    public void loggKmToChallenge(User user, Challenge challenge, double distanceInKm) {
-
-        //todo
-    }
 }

@@ -1,5 +1,8 @@
+import at.elisabeth_tulla.walk_it_off.model.Challenge;
 import at.elisabeth_tulla.walk_it_off.model.User;
 import at.elisabeth_tulla.walk_it_off.service.*;
+
+import java.util.List;
 
 public class Main {
 
@@ -23,8 +26,8 @@ public class Main {
         //User currentUser = userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
         //User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
         //User currentUser = userService.login("felix@tulla.at", "Postgres1!");
-        //User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
-        User currentUser = userService.login("elvis@tulla.at", "Postgres1!");
+        User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
+        //User currentUser = userService.login("elvis@tulla.at", "Postgres1!");
 
         System.out.println(currentUser.toString());
 
@@ -44,7 +47,7 @@ public class Main {
          */
         //System.out.println(activityService.checkActivity("walking"));
         //loggingService.loggWalking(currentUser, "walking", 10000);
-        //loggingService.loggRunning(currentUser, "running", 0.5);
+        loggingService.loggRunning(currentUser, "running", 5.0);
 
         /***
          * SHOW STEPS
@@ -85,7 +88,7 @@ public class Main {
          //       ("10 000 STEPS", 10000, 0, 0, "user");
 
         //show user achievements:
-        achievementService.showUserAchievements(currentUser);
+        //achievementService.showUserAchievements(currentUser);
 
         //show all achievements:
         //achievementService.showAllAchievements();
@@ -94,23 +97,28 @@ public class Main {
          * CHALLENGES
          */
 
+        //show all challenges:
+        // challengeService.showAllChallenges();
+
         //enter Challenge:
-        challengeService.enterChallenge(currentUser, 21);
+        //challengeService.enterChallenge(currentUser, 21);
+
+        //get active Challenges:
+        List<Challenge> activeChallenges = challengeService.getActiveChallenges(currentUser);
+
+        //check all Challenges:
+        challengeService.checkAllActiveChallenges(currentUser, activeChallenges);
+
 
         //create Challenge:
         //challengeService.createChallenge("5K", 0, 0.0, 12,
           //      1, 9999999, 0, 5.0,
           //     2026, 2, 24, 1, 11);
 
-        //show all challenges:
-        //challengeService.showAllChallenges();
 
         /***
          *
-         * todo enter Challenge and log to Challenge
-         *
          * todo file io reader for steps input
-         *
          *
          * todo type [ENUMS: WALKING,...]  // könnte auch gender als ENUMS anlegen (ev stattdessen)
          *

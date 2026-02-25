@@ -1,28 +1,34 @@
 package at.elisabeth_tulla.walk_it_off.service;
 
+import at.elisabeth_tulla.walk_it_off.model.Achievement;
+import at.elisabeth_tulla.walk_it_off.model.Challenge;
 import at.elisabeth_tulla.walk_it_off.model.User;
+import at.elisabeth_tulla.walk_it_off.repository.AchievementRepository;
+import at.elisabeth_tulla.walk_it_off.repository.ChallengeRepository;
+import at.elisabeth_tulla.walk_it_off.repository.ComparingRepository;
 import at.elisabeth_tulla.walk_it_off.repository.UserRepository;
 import at.elisabeth_tulla.walk_it_off.util.ValidationManager;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.*;
 
 public class UserService {
 
     UserRepository userRepo = new UserRepository();
     ValidationManager valid = new ValidationManager();
 
-    //todo enterChallenge(User user, Challenge challenge
 
     public void registerUser(String firstName, String lastName, String email, String password,
-                             Integer birthYear, Integer birthMonth, Integer birthDay, String gender
-                            /*todo get user Data input from GUI*/){
+                             Integer birthYear, Integer birthMonth, Integer birthDay, String gender){
 
         //check if email already exists in the DB:
         boolean emailAlreadyExists = valid.checkEmail(email);
 
         if (emailAlreadyExists){
-            //todo show message in GUI
             System.out.println("This e-mail is already registered.");
             return;
         }
@@ -31,7 +37,6 @@ public class UserService {
         boolean isValidPassword = valid.validatePassword(password);
 
         if (!isValidPassword){
-            //todo show message in GUI
             System.out.println("The password must be between 8 - 20 characters long, \n" +
                     "must contain at least one digit, one lower case, \n" +
                     "one upper case character and one special character. \n" +
@@ -39,7 +44,7 @@ public class UserService {
             return;
         }
 
-        //todo name profanity-check (Method in at.elisabeth_tulla.walk_it_off.util.ValidationManager)
+        //todo name profanity-check (Method in ValidationManager)
 
             Integer age = calculateAge(birthYear, birthMonth, birthDay);
 
@@ -49,7 +54,6 @@ public class UserService {
 
             //register user in DB:
             userRepo.registerNewUser(newUser);
-            //todo show message in GUI
             System.out.println("Welcome " + newUser.getFirstName() + "!");
 
     }
@@ -60,7 +64,7 @@ public class UserService {
         return period.getYears();
     }
 
-    public User login(String email, String password/*todo get user Data input from GUI*/){
+    public User login(String email, String password){
 
         //fetch user from DB:
         User user1 = userRepo.getUser(email);
@@ -74,14 +78,10 @@ public class UserService {
         //Integer invalidPasswordCounter = 0;
 
         if(!correctPassword){
-            //todo show message in GUI
             System.out.println("Invalid password!");
             return null;
         } else {
             System.out.println("Hello, " + user1.getFirstName() + "!");
-
-            //todo check, if there are entered Challenges, that have hit their goal_end
-            // and check, if the goal was hit in a timely manner)
 
             return user1;
         }

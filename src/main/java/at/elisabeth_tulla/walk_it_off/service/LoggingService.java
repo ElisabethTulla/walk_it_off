@@ -8,6 +8,8 @@ import at.elisabeth_tulla.walk_it_off.repository.AchievementRepository;
 import at.elisabeth_tulla.walk_it_off.repository.ChallengeRepository;
 import at.elisabeth_tulla.walk_it_off.repository.LoggingRepository;
 
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 
 public class LoggingService {
@@ -33,21 +35,17 @@ public class LoggingService {
 
         if (steps >= 10000){
             achievementRepo.unlockAchievement(user, 12);
-
             System.out.println("Congratulations! You unlocked 10.000 steps today!");
         }
 
         //todo check for active Challenges
-        //List<Challenge> activeChallenges = challengeRepo.getActiveChallenges(user);
+        HashMap<LocalDateTime, Integer> activeChallenges = checkActiveChallenges(user);
 
         //todo for each Challenge in List of Challenges:
 
         // todo ----> ob die Challenge geschafft wurde (und das Achievement geearned wurde),
         //  wird anhand der logged activity aus tabelle activity und dem dazugehörigen Zeitraum berechnet
-        //   ---> check if completed (if yes -> log to unser_achievement)
-        //for (Challenge challenge : activeChallenges) {
-        //    loggingRepo.loggStepsToChallenge(user, challenge, steps);
-        //}
+        //   ---> check if completed (if yes -> log to unser_achievement as unlocked AND to user_challenge as active = false)
 
         loggingRepo.loggActivity(user, activity1);
     }
@@ -57,20 +55,17 @@ public class LoggingService {
         Activity activity1 = new Activity(user.getId(), activity, distanceInKm);
 
         //todo check for active Challenges
-        List<Challenge> activeChallenges = challengeRepo.getActiveChallenges(user);
+        HashMap<LocalDateTime, Integer> activeChallenges = checkActiveChallenges(user);
 
         //todo for each Challenge in List of Challenges:
         // ---> log km to active Challenges
         // ---> check if completed (if yes -> log to unser_achievement)
-        for (Challenge challenge : activeChallenges) {
-            loggingRepo.loggKmToChallenge(user, challenge, distanceInKm);
-        }
 
         loggingRepo.loggActivity(user, activity1);
     }
 
-    public void checkActiveChallenges(User user){
-
+    public HashMap<LocalDateTime, Integer> checkActiveChallenges(User user){
+        return challengeRepo.getActiveChallenges(user);
     }
 
 }
