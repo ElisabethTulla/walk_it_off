@@ -1,12 +1,22 @@
 package at.elisabeth_tulla.walk_it_off.service;
 
+import at.elisabeth_tulla.walk_it_off.model.Achievement;
 import at.elisabeth_tulla.walk_it_off.model.Activity;
+import at.elisabeth_tulla.walk_it_off.model.Challenge;
 import at.elisabeth_tulla.walk_it_off.model.User;
+import at.elisabeth_tulla.walk_it_off.repository.AchievementRepository;
+import at.elisabeth_tulla.walk_it_off.repository.ChallengeRepository;
 import at.elisabeth_tulla.walk_it_off.repository.LoggingRepository;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 
 public class LoggingService {
 
     LoggingRepository loggingRepo = new LoggingRepository();
+    ChallengeRepository challengeRepo = new ChallengeRepository();
+    AchievementRepository achievementRepo = new AchievementRepository();
 
     public String checkActivity(String activityName) {
 
@@ -20,17 +30,26 @@ public class LoggingService {
     }
 
     public void loggWalking(User user, String activity, Integer steps){
-        //create at.elisabeth_tulla.walk_it_off.model.Activity:
+        //create Activity:
         Activity activity1 = new Activity(user.getId(), activity, steps);
+
+        if (steps >= 10000){
+            achievementRepo.unlockAchievement(user, 12);
+            System.out.println("Congratulations! You unlocked 10.000 steps today!");
+        }
 
         loggingRepo.loggActivity(user, activity1);
     }
 
     public void loggRunning(User user, String activity, double distanceInKm){
-        //create at.elisabeth_tulla.walk_it_off.model.Activity:
+        //create Activity:
         Activity activity1 = new Activity(user.getId(), activity, distanceInKm);
 
         loggingRepo.loggActivity(user, activity1);
+    }
+
+    public HashMap<LocalDateTime, Integer> checkActiveChallenges(User user){
+        return challengeRepo.getActiveChallenges(user);
     }
 
 }

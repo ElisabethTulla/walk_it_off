@@ -2,6 +2,7 @@ package at.elisabeth_tulla.walk_it_off.repository;
 
 import at.elisabeth_tulla.walk_it_off.config.DatabaseConfig;
 import at.elisabeth_tulla.walk_it_off.model.Activity;
+import at.elisabeth_tulla.walk_it_off.model.Challenge;
 import at.elisabeth_tulla.walk_it_off.model.User;
 
 import java.sql.*;
@@ -26,12 +27,14 @@ public class LoggingRepository {
             ps.setInt(3, activity.getSteps());
             ps.setDouble(4, activity.getDistanceInKm());
 
+            ps.executeUpdate();
+
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 if (keys.next()) {
                     activity.setId(keys.getInt(1));
                 }
             }
-            ps.executeUpdate();
+
             conn.commit();
 
         } catch (SQLException e) {

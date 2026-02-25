@@ -14,20 +14,19 @@ public class Activity {
     private Integer stepsAll = null;
     private double distanceInKmAll = 0;
 
-    //constructor walking + running:
+    //constructor walking:
     public Activity(Integer id, String activity, Integer steps) {
         this.id = id;
         this.activityName = activity;
         this.steps = steps;
     }
 
+    //constructor running:
     public Activity(Integer id, String activity, double distanceInKm) {
         this.id = id;
         this.activityName = activity;
         this.distanceInKm = distanceInKm;
     }
-
-    //todo Constructor
 
     //todo activityName ENUMS: WALKING, RUNNING, BIKING, SWIMMING, ...
 
