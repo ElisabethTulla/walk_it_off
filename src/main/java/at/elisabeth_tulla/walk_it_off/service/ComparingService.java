@@ -35,7 +35,6 @@ public class ComparingService {
         LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
         LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
 
-        //todo Show in GUI:
         System.out.println("All Steps walked between " + startDate + " and " + endDate + ": "
                 + compRepo.getStepsSumDateToDate(user, startDate, endDate));
 
@@ -80,7 +79,6 @@ public class ComparingService {
         LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
         LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
 
-        //todo Show in GUI:
         System.out.println("Kilometers ran between " + startDate + " and " + endDate + ": "
                 + compRepo.getKmSumDateToDate(user, startDate, endDate));
 
@@ -97,7 +95,6 @@ public class ComparingService {
         System.out.println("Overall ran kilometers: " + compRepo.getKmSumAll(user));
     }
 
-    //todo show ran km in map (timeframe)
     public void mapRunsTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
                                   Integer endYear, Integer endMonth, Integer endDay){
 
@@ -135,7 +132,7 @@ public class ComparingService {
                                           Integer endYear1, Integer endMonth1, Integer endDay1, Integer startYear2, Integer startMonth2, Integer startDay2,
                                           Integer endYear2, Integer endMonth2, Integer endDay2){
 
-        //todo GUI at.elisabeth_tulla.walk_it_off.model.User input choice: compare day to day / week to week / month to month / year to year
+        //todo GUI User input choice: compare day to day / week to week / month to month / year to year
         // -> CHANGE PARAMETERS from at.elisabeth_tulla.walk_it_off.model.User input ... is there a simpler way?
         // -> calculate the wright start- and endDates for the selected timeframes (to give to sumUpStepsTimeframe)
 

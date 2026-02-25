@@ -16,8 +16,7 @@ import java.util.*;
 
 public class ChallengeService {
 
-    public ChallengeService() {
-    }
+    public ChallengeService() {}
 
     ChallengeRepository challengeRepo = new ChallengeRepository();
     AchievementRepository achievementRepo = new AchievementRepository();
@@ -56,13 +55,10 @@ public class ChallengeService {
         challengeRepo.enterChallenge(user, currentChallenge);
         System.out.println("Challenge accepted! You are now participating in the "
                 + currentChallenge.getName() + " challenge.");
-
     }
 
     //get List of all active Challenges:
     public List<Challenge> getActiveChallenges(User user1) {
-
-        //todo only fetch challenges, that are truly still active (maybe with joined table sql statement
 
         //get HashMap of active ChallengeIDs:
         HashMap<LocalDateTime, Integer> mapActiveChallenges = challengeRepo.getActiveChallenges(user1);
@@ -72,9 +68,13 @@ public class ChallengeService {
         for (Map.Entry<LocalDateTime, Integer> entry : mapActiveChallenges.entrySet()) {
             activeChallenges.add(challengeRepo.getChallenge(entry.getValue()));
         }
-        System.out.println("Your active Challenges: \n");
-        for (Challenge challenge : activeChallenges) {
-            System.out.println(challenge);
+        if (activeChallenges.isEmpty()) {
+            System.out.println("There are no active challenges.");
+        } else {
+            System.out.println("Your active Challenges: \n");
+            for (Challenge challenge : activeChallenges) {
+                System.out.println(challenge);
+            }
         }
         return activeChallenges;
     }
@@ -113,10 +113,14 @@ public class ChallengeService {
             double sumKM = comparingRepo.getKmSumDateToDate(user1, startTime, nowTime);
             double diffKM = challenge.getGoalDistanceKm() - sumKM;
 
-            System.out.println("You already ran " + sumKM + " km. " + diffKM +
-                    " km left to run until " + challenge.getEndsAt());
-        }
+            System.out.println("You already ran " + sumKM + " km. ");
 
+            if (diffKM <= 0) {
+                System.out.println("You already reached your goal!");
+            } else {
+                System.out.println(diffKM + " km left to run until " + challenge.getEndsAt());
+            }
+        }
     }
 
     private boolean checkChallengeEnded(User user1, Challenge challenge) {
@@ -162,7 +166,8 @@ public class ChallengeService {
                 }
             }
 
-            //set active=FALSE in user_challenge:
+            //set active=FALSE in user_challenge: todo eventuell ist "active" eine unnötige Spalte in "user_challenge",
+            // todo          weil die Abfrage der aktiven Challenges jetzt JOINed mit challenge Tabelle abläuft
             challengeRepo.deactivateChallenge(user1, challenge);
             return true;
         }
@@ -177,17 +182,14 @@ public class ChallengeService {
         }
     }
 
-
     public void createChallenge(String name, Integer reqSteps, double reqKm, Integer requiredAchievementID,
                                 Integer minParticipants, Integer maxParticipants, Integer goalSteps, double goalKm,
                                 Integer startYear, Integer startMonth, Integer startDay, Integer lastsForDays,
                                 Integer rewardAchievementID) {
 
-        //todo check, if Challenge with that name already exists
+        //todo check, if Challenge with that name + same startDate already exists
 
-        //todo FRAGE: ist unix time besser? bei meiner Lösung hier wird viel herum formatiert...
-        //todo FRAGE: WRITE EXTERNAL METHOD for DATE FORMATING .... (also for use in ComparingService)????????
-
+        //todo FRAGE: ist unix time besser? bei meiner Lösung hier wird viel herum formatiert... (extra formatier-Methode?)
 
         LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
 
@@ -217,17 +219,5 @@ public class ChallengeService {
         challengeRepo.createChallenge(newChallenge);
         System.out.println("Challenge created\n");
         System.out.println(newChallenge);
-
     }
-
-
-    /*
-    //todo deleteChallenge(Challenge challenge)
-    public void deleteChallenge(Integer challengeID){
-        challengeRepo.deleteChallenge(challengeID);
-        System.out.println("Challenge deleted\n");
-    }
-     */
-
-
 }

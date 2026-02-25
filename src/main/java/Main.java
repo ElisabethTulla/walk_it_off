@@ -47,7 +47,7 @@ public class Main {
          */
         //System.out.println(activityService.checkActivity("walking"));
         //loggingService.loggWalking(currentUser, "walking", 10000);
-        loggingService.loggRunning(currentUser, "running", 5.0);
+        //loggingService.loggRunning(currentUser, "running", 5.0);
 
         /***
          * SHOW STEPS
@@ -68,7 +68,7 @@ public class Main {
          * SHOW KM (RUNS)
          */
         //sum up runs in Timeframe:
-        //comparingService.sumUpKmTimeframe(currentUser, 'y', 2026, 1, 1, 2026, 2, 18);
+        //comparingService.sumUpKmTimeframe(currentUser, 'y', 2026, 2, 25, 2026, 2, 25);
 
         //comparingService.mapRunsTimeframe(currentUser, 2026, 1, 1, 2026, 2, 18);
 
@@ -91,7 +91,7 @@ public class Main {
         //achievementService.showUserAchievements(currentUser);
 
         //show all achievements:
-        //achievementService.showAllAchievements();
+        achievementService.showAllAchievements();
 
         /***
          * CHALLENGES
@@ -101,22 +101,25 @@ public class Main {
         // challengeService.showAllChallenges();
 
         //enter Challenge:
-        //challengeService.enterChallenge(currentUser, 21);
+        //challengeService.enterChallenge(currentUser, 22);
 
         //get active Challenges:
-        List<Challenge> activeChallenges = challengeService.getActiveChallenges(currentUser);
+        //List<Challenge> activeChallenges = challengeService.getActiveChallenges(currentUser);
 
         //check all Challenges:
-        challengeService.checkAllActiveChallenges(currentUser, activeChallenges);
-
+        //challengeService.checkAllActiveChallenges(currentUser, activeChallenges);
 
         //create Challenge:
-        //challengeService.createChallenge("5K", 0, 0.0, 12,
-          //      1, 9999999, 0, 5.0,
-          //     2026, 2, 24, 1, 11);
+       // challengeService.createChallenge("5K", 0, 0.0, 12,
+        //        1, 9999999, 0, 5.0,
+          //     2026, 2, 25, 1, 11);
 
 
         /***
+         *
+         * todo compare stats to other user
+         *
+         * todo compare stats to user-group (eg others in your age group, ...)
          *
          * todo file io reader for steps input
          *
@@ -128,8 +131,6 @@ public class Main {
          *
          * create at.elisabeth_tulla.walk_it_off.repository.ComparingRepository
          * (Methods: readDataFromDB)
-         *
-         * todo Create Challenges
          *
          * todo log time with runs (also in db) and compare times per km improvements (add maxTime to createChallenge)
          */

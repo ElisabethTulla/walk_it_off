@@ -38,28 +38,12 @@ public class LoggingService {
             System.out.println("Congratulations! You unlocked 10.000 steps today!");
         }
 
-        //todo check for active Challenges
-        HashMap<LocalDateTime, Integer> activeChallenges = checkActiveChallenges(user);
-
-        //todo for each Challenge in List of Challenges:
-
-        // todo ----> ob die Challenge geschafft wurde (und das Achievement geearned wurde),
-        //  wird anhand der logged activity aus tabelle activity und dem dazugehörigen Zeitraum berechnet
-        //   ---> check if completed (if yes -> log to unser_achievement as unlocked AND to user_challenge as active = false)
-
         loggingRepo.loggActivity(user, activity1);
     }
 
     public void loggRunning(User user, String activity, double distanceInKm){
         //create Activity:
         Activity activity1 = new Activity(user.getId(), activity, distanceInKm);
-
-        //todo check for active Challenges
-        HashMap<LocalDateTime, Integer> activeChallenges = checkActiveChallenges(user);
-
-        //todo for each Challenge in List of Challenges:
-        // ---> log km to active Challenges
-        // ---> check if completed (if yes -> log to unser_achievement)
 
         loggingRepo.loggActivity(user, activity1);
     }

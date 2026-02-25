@@ -21,7 +21,6 @@ public class UserService {
     UserRepository userRepo = new UserRepository();
     ValidationManager valid = new ValidationManager();
 
-
     public void registerUser(String firstName, String lastName, String email, String password,
                              Integer birthYear, Integer birthMonth, Integer birthDay, String gender){
 
@@ -55,7 +54,6 @@ public class UserService {
             //register user in DB:
             userRepo.registerNewUser(newUser);
             System.out.println("Welcome " + newUser.getFirstName() + "!");
-
     }
 
     public Integer calculateAge(Integer birthYear, Integer birthMonth, Integer birthDay){
@@ -85,7 +83,5 @@ public class UserService {
 
             return user1;
         }
-
     }
-
 }

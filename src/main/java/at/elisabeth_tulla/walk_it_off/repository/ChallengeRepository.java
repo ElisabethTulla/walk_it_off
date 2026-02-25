@@ -62,7 +62,8 @@ public class ChallengeRepository {
 
     public HashMap<LocalDateTime, Integer> getActiveChallenges(User user) {
 
-            String sql = "SELECT * FROM user_challenge WHERE user_id = ? AND active = true";
+            String sql = "SELECT * FROM user_challenge JOIN challenge " +
+                    "ON challenge.id = user_challenge.challenge_id WHERE user_id = ?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)){
 
@@ -72,8 +73,10 @@ public class ChallengeRepository {
                 HashMap<LocalDateTime, Integer> activeChallenges = new HashMap<>();
 
                 while (rs.next()) {
+                    if (rs.getTimestamp("goal_end").toLocalDateTime().isAfter(LocalDateTime.now())) {
                         activeChallenges.put(rs.getTimestamp("entered_at").toLocalDateTime(),
                                 rs.getInt("challenge_id"));
+                    }
                 }
                 return activeChallenges;
             }
