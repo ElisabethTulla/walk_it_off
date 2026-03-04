@@ -197,18 +197,26 @@ public class ChallengeService {
         Instant instant = startDate.atZone(ZoneId.systemDefault()).toInstant();
         Date date = Date.from(instant);
 
-        LocalDateTime endDate;
+        //LocalDateTime endDate; todo : (check if it works)
+
+        LocalDateTime endDate = LocalDate.of(startYear, startMonth, startDay)
+         .plusDays(Math.max(lastsForDays - 1, 0)).atTime(23, 59);
 
         if (lastsForDays <= 1) {
             endDate = LocalDate.of(startYear, startMonth, startDay).atTime(23, 59);
         } else {
             Calendar c = Calendar.getInstance();
+
             c.setTime(date);
             c.add(Calendar.DATE, lastsForDays - 1);
             date = c.getTime();
 
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             endDate = localDate.atTime(23, 59);
+
+
+            //LocalDate localDate = LocalDate.ofInstant(calendar.toInstant(), ZoneId.systemDefault());
+            //LocalDate localDate = LocalDate.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId());
         }
 
         //create Challenge - Object:

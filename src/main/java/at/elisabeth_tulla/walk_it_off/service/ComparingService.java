@@ -53,6 +53,7 @@ public class ComparingService {
         System.out.println("Overall walked Steps: " + compRepo.getStepsSumAll(user));
     }
 
+    //map of all Steps in specific timeframe:
     public void mapStepsTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
                                    Integer endYear, Integer endMonth, Integer endDay){
 
@@ -97,6 +98,7 @@ public class ComparingService {
         System.out.println("Overall ran kilometers: " + compRepo.getKmSumAll(user));
     }
 
+    //map runs in specific timeframe:
     public void mapRunsTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
                                   Integer endYear, Integer endMonth, Integer endDay){
 
@@ -115,7 +117,7 @@ public class ComparingService {
     }
 
     /***
-     *  LOGGING ACTIVITY:
+     *  LOGGING ACTIVITY: (todo NICE TO HAVE..)
      */
 
     //todo show how often steps/runs were logged overall ("SELECT COUNT(steps_logged) FROM activity WHERE user_id =?";)
@@ -123,7 +125,6 @@ public class ComparingService {
 
     //todo compare number of runs/walks from timeframe to runs/walks from different timeframe
     //          (this month you went for a run 10 times!, that's 3 more runs than in ...)
-
 
     /***
      * COMPARISONS:
@@ -172,7 +173,8 @@ public class ComparingService {
         }
     }
 
-    public void compareSumUpStepsTimeframeUsers(User currentUser, String email, char activityCounter, Integer startYear, Integer startMonth, Integer startDay,
+    public void compareSumUpStepsTimeframeUsers(User currentUser, String email, char activityCounter,
+                                                Integer startYear, Integer startMonth, Integer startDay,
                                                 Integer endYear, Integer endMonth, Integer endDay) {
 
         //fetch other user from DB:
@@ -195,7 +197,8 @@ public class ComparingService {
         }
     }
 
-    public void compareSumUpKmTimeframeUsers(User currentUser, String email, char activityCounter, Integer startYear, Integer startMonth, Integer startDay,
+    public void compareSumUpKmTimeframeUsers(User currentUser, String email, char activityCounter,
+                                             Integer startYear, Integer startMonth, Integer startDay,
                                              Integer endYear, Integer endMonth, Integer endDay) {
 
         //fetch other user from DB:
@@ -217,11 +220,4 @@ public class ComparingService {
             System.out.println(otherUser.getFirstName() + " ran " + diffKmsPositive + " kilometers more than you.");
         }
     }
-
-
-
-    //todo junit tests für methoden, die nicht direkt auf die db zugreifen
-
-
-
 }

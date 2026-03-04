@@ -66,6 +66,7 @@ public class Main {
 
         //comparingService.compareSumUpStepsTimeframeUsers(currentUser, "felix@tulla.at", 'y',
          //       2026, 1, 1, 2026, 2, 25);
+        //todo timeframe als eigenes Object (mit start und end datum -> liefert einen timestamp)
 
         /***
          * SHOW KM (RUNS)
@@ -130,7 +131,16 @@ public class Main {
          *
          * ---------
          *
+         * logger statt system.out (kann auch zur konsole ausgeben) error/warning/degub
+         *
+         * von gui die Integers year, month, day gleich als LocalDateTime umformatieren und so an die Methoden
+         * weitergeben (nicht dann in der methode erst umformatiern)
+         *
          * todo file io reader for steps input
+         *
+         * todo class diagramm für db (nice to have)
+         *
+         * todo junit tests für methoden, die nicht direkt auf die db zugreifen
          *
          * todo type [ENUMS: WALKING,...]  // könnte auch gender als ENUMS anlegen (ev stattdessen)
          *
@@ -225,6 +235,13 @@ public class Main {
      * ├── config/         # Konfigurationsklassen
      * ├── exception/      # Custom Exceptions + Handler
      * └── util/           # Hilfsfunktionen
+     *
+     *
+     *
+     *
+     * vaadin gui framework für java
+     * quakus + spring
+     *
      */
 
 }
