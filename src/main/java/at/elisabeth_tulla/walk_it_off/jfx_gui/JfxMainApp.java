@@ -13,21 +13,14 @@ public class JfxMainApp extends Application {
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/views/WelcomeView.fxml"));
-           // FXMLLoader loader = new FXMLLoader();
-
-            //URL resource = JfxMainApp.class.getResource("/v.fxml");
-            //loader.setLocation(resource);
-            //VBox rootLayout = loader.load();
-
-            //Label l = new Label("Loading application...");
 
             // Zeige die Szene an
-            Scene scene = new Scene(root, 1000, 800);
+            Scene scene = new Scene(root, 1400, 1200);
 
-            // Fügen Sie hier ggf. die CSS-Datei hinzu, falls Sie eine verwenden
+            // CSS-Datei hinzufügen ODER in der fxml file verknüpfen...:
             // scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
-            primaryStage.setTitle("Welcome to walk_it_off");
+            primaryStage.setTitle("walk_it_off");
             primaryStage.setScene(scene);
             primaryStage.show();
 

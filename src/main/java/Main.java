@@ -24,9 +24,9 @@ public class Main {
          * LOGIN
          */
         //User currentUser = userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
-        //User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
+        User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
         //User currentUser = userService.login("felix@tulla.at", "Postgres1!");
-        User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
+        //User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
         //User currentUser = userService.login("elvis@tulla.at", "Postgres1!");
 
         System.out.println(currentUser.toString());
@@ -46,8 +46,8 @@ public class Main {
          * LOG ACTIVITY
          */
         //System.out.println(activityService.checkActivity("walking"));
-        //loggingService.loggWalking(currentUser, "walking", 10000);
-        //loggingService.loggRunning(currentUser, "running", 5.0);
+        //loggingService.loggWalking(currentUser, "walking", 8000);
+        //loggingService.loggRunning(currentUser, "running", 3.0);
 
         /***
          * SHOW STEPS
@@ -92,7 +92,7 @@ public class Main {
 
         //create Achievement:
         //achievementService.createAchievement
-         //       ("10 000 STEPS", 10000, 0, 0, "user");
+         //       ("Ran20kmIn1Week", 0, 20, 0, "challenge");
 
         //show user achievements:
         //achievementService.showUserAchievements(currentUser);
@@ -117,9 +117,9 @@ public class Main {
         //challengeService.checkAllActiveChallenges(currentUser, activeChallenges);
 
         //create Challenge:
-       // challengeService.createChallenge("5K", 0, 0.0, 12,
-        //        1, 9999999, 0, 5.0,
-          //     2026, 2, 25, 1, 11);
+        //challengeService.createChallenge("Run20Kms", 0, 0.0, 0,
+         //       1, 9999999, 0, 20,
+          //     2026, 3, 9, 7, 14);
 
 
         /***

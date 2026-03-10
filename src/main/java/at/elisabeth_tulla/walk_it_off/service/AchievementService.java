@@ -22,6 +22,8 @@ public class AchievementService {
         achievementRepository.createAchievement(newAchievement);
         System.out.println("New achievement has been created");
         System.out.println(newAchievement);
+
+        //todo return achievement ID !
     }
 
     //show Achievements from user

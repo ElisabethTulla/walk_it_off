@@ -189,8 +189,6 @@ public class ChallengeService {
 
         //todo check, if Challenge with that name + same startDate already exists
 
-        //todo FRAGE: ist unix time besser? bei meiner Lösung hier wird viel herum formatiert... (extra formatier-Methode?)
-
         LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
 
         //convert LocalDateTime to date:
@@ -219,8 +217,16 @@ public class ChallengeService {
             //LocalDate localDate = LocalDate.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId());
         }
 
+        Integer trueRequiredAchievementID;
+
+        //set default AchievementID if not otherwise specified:
+        if (requiredAchievementID == 0) {
+            trueRequiredAchievementID = 13;
+        } else
+            trueRequiredAchievementID = requiredAchievementID;
+
         //create Challenge - Object:
-        Challenge newChallenge = new Challenge(name, reqSteps, reqKm, requiredAchievementID, minParticipants, maxParticipants,
+        Challenge newChallenge = new Challenge(name, reqSteps, reqKm, trueRequiredAchievementID, minParticipants, maxParticipants,
                 goalSteps, goalKm, Timestamp.valueOf(startDate), Timestamp.valueOf(endDate), rewardAchievementID);
 
         //create Challenge in DB:
