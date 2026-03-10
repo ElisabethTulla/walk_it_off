@@ -13,27 +13,22 @@ public class User {
     private String password;
     private Timestamp created_at;
     private boolean active;
-    private Integer birthYear;
-    private Integer birthMonth;
-    private Integer birthDay;
+    private LocalDate birthdayDate;
     private Integer age;
     private String gender; //todo als enum
 
     public User (String firstName, String lastName, String email, String password,
-                 Integer birthYear, Integer birthMonth, Integer birthDay, Integer age, String gender){
+                 LocalDate birthdayDate, String gender){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.birthYear = birthYear;
-        this.birthMonth = birthMonth;
-        this.birthDay = birthDay;
-        this.age = age;
+        this.birthdayDate = birthdayDate;
         this.gender = gender;
     }
 
     public User(Integer id, String firstName, String lastName, String email, String password,
-                Timestamp created_at, boolean active, Integer birthYear, Integer birthMonth, Integer birthDay, Integer age, String gender) {
+                Timestamp created_at, boolean active, LocalDate birthdayDate, String gender) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,10 +36,7 @@ public class User {
         this.password = password;
         this.created_at = created_at;
         this.active = active;
-        this.birthYear = birthYear;
-        this.birthMonth = birthMonth;
-        this.birthDay = birthDay;
-        this.age = age;
+        this.birthdayDate = birthdayDate;
         this.gender = gender;}
 
     public String getFirstName() {
@@ -71,41 +63,20 @@ public class User {
         this.password = password;
     }
 
+    public LocalDate getBirthdayDate() {
+        return birthdayDate;
+    }
+
+    public void setBirthdayDate(LocalDate birthdayDate) {
+        this.birthdayDate = birthdayDate;
+    }
+
     public Integer getAge() {
-        if (age == 0){
-            LocalDate birthDate = LocalDate.of(birthYear, birthMonth, birthDay);
-            Period period = Period.between(birthDate, LocalDate.now());
-           return age = period.getYears();
-        }
-        return age;
+           return age = Period.between(birthdayDate, LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {
         this.age = age;
-    }
-
-    public Integer getBirthYear() {
-        return birthYear;
-    }
-
-    public void setBirthYear(Integer birthYear) {
-        this.birthYear = birthYear;
-    }
-
-    public Integer getBirthMonth() {
-        return birthMonth;
-    }
-
-    public void setBirthMonth(Integer birthMonth) {
-        this.birthMonth = birthMonth;
-    }
-
-    public Integer getBirthDay(){
-        return birthDay;
-    }
-
-    public void setBirthDay(Integer birthDay) {
-        this.birthDay = birthDay;
     }
 
     public String getGender() {
@@ -153,7 +124,7 @@ public class User {
     @Override
     public String toString(){
         return "ID: " + id + " | name: " + firstName + " " + lastName + " | e-mail: " + email
-                 + "| member since: " + created_at + " | \nage: " + getAge() + " | birthday: " + birthDay
-                + "." + birthMonth + "." + birthYear + " | gender: " + gender;
+                 + "| member since: " + created_at + " | \nage: " + getAge() +
+                " | birthday: " + birthdayDate + " | gender: " + gender;
     }
 }

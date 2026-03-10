@@ -17,6 +17,8 @@ import java.io.IOException;
 
 public class WelcomeController {
 
+    //todo FRAGE: implements Initializable ?
+
     UserService userService = new UserService();
 
     @FXML
@@ -26,7 +28,7 @@ public class WelcomeController {
     @FXML
     private Text txtMessage;
 
-    //todo FRAGE: Konstruktor erstellen? (in AccountController inizializen??)
+    //todo FRAGE: Konstruktor erstellen? (in AccountController inizializen der Tabellen??)
 
     @FXML
     public void loginButtonClicked(ActionEvent event) throws IOException {
@@ -42,10 +44,14 @@ public class WelcomeController {
 
         if (user != null) {
 
-            //todo FRAGE: wie kann ich der neuen Scene den user mit übergeben?
-
-            Parent root = FXMLLoader.load(getClass().getResource("/views/AccountView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AccountView.fxml"));
+            Parent root = loader.load();
+            //Parent root = FXMLLoader.load(getClass().getResource("/views/AccountView.fxml"));
             Scene scene = new Scene(root);
+
+            //hand over user to initData Method in AccountController:
+            AccountController accController = loader.getController();
+            accController.initData(user);
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 

@@ -4,6 +4,7 @@ import at.elisabeth_tulla.walk_it_off.config.DatabaseConfig;
 import at.elisabeth_tulla.walk_it_off.model.User;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 
 public class UserRepository {
@@ -13,11 +14,10 @@ public class UserRepository {
     public UserRepository() {
     }
 
-    public void registerNewUser(User newUser) {
+    public boolean registerNewUser(User newUser) {
 
-        String sql = "INSERT INTO user_walkitoff (first_name, last_name, email, password, age, gender, " +
-                "birth_year, birth_month, birth_day) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO user_walkitoff (first_name, last_name, email, password, gender, birthday) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -27,11 +27,8 @@ public class UserRepository {
             ps.setString(2, newUser.getLastName());
             ps.setString(3, newUser.getEmail());
             ps.setString(4, newUser.getPassword());
-            ps.setInt(5, newUser.getAge());
-            ps.setString(6, newUser.getGender());
-            ps.setInt(7, newUser.getBirthYear());
-            ps.setInt(8, newUser.getBirthMonth());
-            ps.setInt(9, newUser.getBirthDay());
+            ps.setString(5, newUser.getGender());
+            ps.setDate(6, Date.valueOf(newUser.getBirthdayDate()));
 
             ps.executeUpdate();
 
@@ -43,10 +40,13 @@ public class UserRepository {
 
             conn.commit();
 
+            return true;
+
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
             try {
                 conn.rollback();
+                return false; //todo FRAGE ist der false return hier richtig platziert? Oder besser ganz zum Schluss?
             } catch (SQLException ex) {
                 System.err.println("Fehler beim rollback:" + ex.getMessage());
                 throw new RuntimeException(ex);
@@ -85,14 +85,11 @@ public class UserRepository {
         Timestamp created_at = rs.getTimestamp("created_at");
         //Instant createdAt = ts != null ? ts.toInstant() : null;
         boolean active = rs.getBoolean("active");
-        Integer birthYear = rs.getInt("birth_year");
-        Integer birthMonth = rs.getInt("birth_month");
-        Integer birthDay = rs.getInt("birth_day");
-        Integer age = rs.getInt("age");
+        LocalDate birthday = rs.getDate("birthday").toLocalDate();
         String gender = rs.getString("gender");
 
         return new User(id, firstName, lastName, email, password, created_at, active,
-                birthYear, birthMonth, birthDay, age, gender);
+                birthday, gender);
     }
 
     public boolean checkPassword(User user1, String password) {

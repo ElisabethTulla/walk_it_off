@@ -23,8 +23,8 @@ public class UserService {
     AchievementRepository achievementRepo = new AchievementRepository();
 
 
-    public void registerUser(String firstName, String lastName, String email, String password,
-            /*todo LocalDate birthdayDate*/ Integer birthYear, Integer birthMonth, Integer birthDay, String gender){
+    public boolean registerUser(String firstName, String lastName, String email, String password,
+            LocalDate birthdayDate, String gender){
 
 /*  MOVED TO REGISTER CONTROLLER!!!
 
@@ -48,20 +48,20 @@ public class UserService {
         }
  */
 
-            Integer age = calculateAge(birthYear, birthMonth, birthDay);
-            //todo Integer age = calculateAge(birthdayDate);
+           // Integer age = calculateAge(birthYear, birthMonth, birthDay);
+            //todo Integer age = calculateAge(birthdayDate); ... WE DON'T NEED AGE IN DB
 
             //create user:
-            User newUser = new User(firstName, lastName, email, password,/*todo birthdayDate*/
-                    birthYear, birthMonth, birthDay, age, gender);
+            User newUser = new User(firstName, lastName, email, password, birthdayDate, gender);
 
             //register user in DB:
-            userRepo.registerNewUser(newUser);
+            boolean registered = userRepo.registerNewUser(newUser);
             System.out.println("Welcome " + newUser.getFirstName() + "!");
 
             achievementRepo.unlockAchievement(newUser, 13);
         System.out.println("Congratulations! You just made the first step towards your goals!");
 
+        return registered;
     }
 
     public Integer calculateAge(Integer birthYear, Integer birthMonth, Integer birthDay){

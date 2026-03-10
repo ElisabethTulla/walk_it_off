@@ -38,7 +38,7 @@
             <HBox alignment="CENTER_LEFT" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First name:" />
-                  <TextField promptText="name" />
+                  <TextField fx:id="txtFirstName" promptText="name" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -47,7 +47,7 @@
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Last name:" />
-                  <TextField promptText="name" />
+                  <TextField fx:id="txtLastName" promptText="name" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -56,7 +56,7 @@
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="102.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email Address:" />
-                  <TextField promptText="***@***.***" />
+                  <TextField fx:id="txtEmail" promptText="***@***.***" />
                   <Text fx:id="txtEmailMessage" fill="RED" layoutX="25.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
                </children>
                <padding>
@@ -70,7 +70,7 @@
                         <HBox alignment="CENTER_LEFT" spacing="20.0">
                            <children>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" />
-                              <PasswordField promptText="password" />
+                              <PasswordField fx:id="txtPassword" promptText="password" />
                            </children>
                            <padding>
                               <Insets bottom="10.0" />
@@ -88,7 +88,7 @@
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="196.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday:" />
-                  <DatePicker promptText="01/01/1990" />
+                  <DatePicker fx:id="birthdayDate" promptText="01/01/1990" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -97,7 +97,7 @@
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="102.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gender:" />
-                  <TextField prefHeight="27.0" prefWidth="167.0" promptText="male/female/non-binary" />
+                  <TextField fx:id="txtGender" prefHeight="27.0" prefWidth="167.0" promptText="male/female/non-binary" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -105,9 +105,14 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text=" create user" />
+                  <Button mnemonicParsing="false" onAction="#btnCreateUserClicked" text=" create user" />
                </children>
             </HBox>
+            <Text fx:id="txtRegisterMessage" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text=" ">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="15.0" top="20.0" />
+               </VBox.margin>
+            </Text>
          </children>
       </VBox>
    </children>
