@@ -24,12 +24,13 @@ public class Main {
          * LOGIN
          */
         //User currentUser = userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
-        User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
+        //User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
         //User currentUser = userService.login("felix@tulla.at", "Postgres1!");
         //User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
         //User currentUser = userService.login("elvis@tulla.at", "Postgres1!");
+        //User currentUser = userService.login("test@test.at", "Postgres1!");
 
-        System.out.println(currentUser.toString());
+        //System.out.println(currentUser.toString());
 
         /***
          * ACCOUNT MANAGEMENT
@@ -46,8 +47,8 @@ public class Main {
          * LOG ACTIVITY
          */
         //System.out.println(activityService.checkActivity("walking"));
-        //loggingService.loggWalking(currentUser, "walking", 8000);
-        //loggingService.loggRunning(currentUser, "running", 3.0);
+        //loggingService.loggWalking(currentUser, "walking", 10000);
+        //loggingService.loggRunning(currentUser, "running", 2.0);
 
         /***
          * SHOW STEPS
@@ -72,7 +73,7 @@ public class Main {
          * SHOW KM (RUNS)
          */
         //sum up runs in Timeframe:
-        //comparingService.sumUpKmTimeframe(currentUser, 'y', 2026, 2, 25, 2026, 2, 25);
+        //comparingService.sumUpKmTimeframe(currentUser, 'y', 2026, 3, 12, 2026, 3, 12);
 
         //comparingService.mapRunsTimeframe(currentUser, 2026, 1, 1, 2026, 2, 18);
 
@@ -105,24 +106,28 @@ public class Main {
          */
 
         //show all challenges:
-        // challengeService.showAllChallenges();
+         //challengeService.showAllChallenges();
 
         //enter Challenge:
-        //challengeService.enterChallenge(currentUser, 22);
+        //challengeService.enterChallenge(currentUser, 26);
 
         //get active Challenges:
-        //List<Challenge> activeChallenges = challengeService.getActiveChallenges(currentUser);
+        //List<Challenge> activeChallenges = challengeService.getOngoingChallenges(currentUser);
 
         //check all Challenges:
         //challengeService.checkAllActiveChallenges(currentUser, activeChallenges);
 
         //create Challenge:
-        //challengeService.createChallenge("Run20Kms", 0, 0.0, 0,
-         //       1, 9999999, 0, 20,
-          //     2026, 3, 9, 7, 14);
+        //challengeService.createChallenge("Walk 10.000 Steps With Me", 0, 0.0, 12,
+         //       1, 9999999, 100000, 0,
+          //     2026, 3, 12, 1, 12);
 
 
         /***
+         *
+         * todo POP UP ALERT FÜR ACHIEVEMENTS (IN LOGGINGCONTROLLER) KAPUTT!!!!! -> Es sind keine Achievements in der Liste!
+         * todo Nur das 10.000 Steps Achievement geht, das im LoggingService hardcodiert zur Liste zugefügt wird...
+         *
          *
          *todo NICE TO HAVE:
          *   FEAT show and compare stats #21:

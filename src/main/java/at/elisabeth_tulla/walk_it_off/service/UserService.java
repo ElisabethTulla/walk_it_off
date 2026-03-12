@@ -48,9 +48,6 @@ public class UserService {
         }
  */
 
-           // Integer age = calculateAge(birthYear, birthMonth, birthDay);
-            //todo Integer age = calculateAge(birthdayDate); ... WE DON'T NEED AGE IN DB
-
             //create user:
             User newUser = new User(firstName, lastName, email, password, birthdayDate, gender);
 
@@ -60,6 +57,7 @@ public class UserService {
 
             achievementRepo.unlockAchievement(newUser, 13);
         System.out.println("Congratulations! You just made the first step towards your goals!");
+        //todo inlcude in gui pop up alert, that you can now log in...
 
         return registered;
     }

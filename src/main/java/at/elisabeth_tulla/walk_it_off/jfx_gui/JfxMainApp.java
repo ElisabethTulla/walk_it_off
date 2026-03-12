@@ -15,7 +15,7 @@ public class JfxMainApp extends Application {
             Parent root = FXMLLoader.load(getClass().getResource("/views/WelcomeView.fxml"));
 
             // Zeige die Szene an
-            Scene scene = new Scene(root, 1400, 1200);
+            Scene scene = new Scene(root, 900, 850);
 
             // CSS-Datei hinzufügen ODER in der fxml file verknüpfen...:
             // scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());

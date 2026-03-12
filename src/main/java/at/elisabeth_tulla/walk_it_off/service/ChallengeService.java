@@ -16,79 +16,99 @@ import java.util.*;
 
 public class ChallengeService {
 
-    public ChallengeService() {}
+    public ChallengeService() {
+    }
 
     ChallengeRepository challengeRepo = new ChallengeRepository();
     AchievementRepository achievementRepo = new AchievementRepository();
     ComparingRepository comparingRepo = new ComparingRepository();
 
-    //enter Challenge:
-    public void enterChallenge(User user, Integer challengeID) {
+    public Challenge getChallenge(Integer challengeId) {
+        return challengeRepo.getChallenge(challengeId);
+    }
 
-        Challenge currentChallenge = challengeRepo.getChallenge(challengeID);
+    public String checkReqAchievements(User user, Integer challengeId) {
+
+        Challenge currentChallenge = challengeRepo.getChallenge(challengeId);
 
         //check, if user fulfills challenge requirements:
         List<Achievement> userAchievements = achievementRepo.getUserAchievements(user);
-        boolean userHasAchievement = false;
 
         for (Achievement achievement : userAchievements) {
             if (achievement.getId().equals(currentChallenge.getRequiredAchievementID())) {
-                userHasAchievement = true;
+                return null;
             }
         }
 
-        if (!userHasAchievement) {
-            Achievement requiredAchievement = achievementRepo.getAchievement(currentChallenge.getRequiredAchievementID());
+        Achievement requiredAchievement = achievementRepo.getAchievement(currentChallenge.getRequiredAchievementID());
 
-            System.out.println("If you want to participate in this challenge, " +
-                    "you first have to earn the following achievement: " + requiredAchievement.getName());
-            return;
-        }
+            return requiredAchievement.getName();
+    }
+
+    //enter Challenge:
+    public boolean enterChallenge(User user, Integer challengeID) {
+
+       Challenge currentChallenge = challengeRepo.getChallenge(challengeID);
+
+        return challengeRepo.enterChallenge(user, currentChallenge);
+    }
+
+    public boolean checkParticipantsOutmaxed(Integer challengeId) {
+
+        Challenge currentChallenge = challengeRepo.getChallenge(challengeId);
+
         //check, if Challenge would exceed its maxParticipants:
         Integer numberParticipants = challengeRepo.getParticipantsCount(currentChallenge);
 
         if (numberParticipants == currentChallenge.getMaxNumberParticipants()) {
-            System.out.println("This Challenge has already reached the maximum amount of participants.");
-            return;
+            //Objects.equals(numberParticipants, currentChallenge.getMaxNumberParticipants())//todo replace with equals?
+            return false;
         }
-
-        challengeRepo.enterChallenge(user, currentChallenge);
-        System.out.println("Challenge accepted! You are now participating in the "
-                + currentChallenge.getName() + " challenge.");
+        return true;
     }
 
-    //get List of all active Challenges:
-    public List<Challenge> getActiveChallenges(User user1) {
+    //get List of all ongoing Challenges:
+    public List<Challenge> getOngoingChallenges(User user1) {
 
         //get HashMap of active ChallengeIDs:
-        HashMap<LocalDateTime, Integer> mapActiveChallenges = challengeRepo.getActiveChallenges(user1);
-        List<Challenge> activeChallenges = new ArrayList<>();
+        HashMap<LocalDateTime, Integer> mapOngoingChallenges = challengeRepo.getOngoingChallenges(user1);
+        List<Challenge> ongoingChallenges = new ArrayList<>();
 
         //get active Challenges:
-        for (Map.Entry<LocalDateTime, Integer> entry : mapActiveChallenges.entrySet()) {
-            activeChallenges.add(challengeRepo.getChallenge(entry.getValue()));
+        for (Map.Entry<LocalDateTime, Integer> entry : mapOngoingChallenges.entrySet()) {
+            ongoingChallenges.add(challengeRepo.getChallenge(entry.getValue()));
         }
-        if (activeChallenges.isEmpty()) {
+        /*
+        if (ongoingChallenges.isEmpty()) {
             System.out.println("There are no active challenges.");
         } else {
             System.out.println("Your active Challenges: \n");
-            for (Challenge challenge : activeChallenges) {
+            for (Challenge challenge : ongoingChallenges) {
                 System.out.println(challenge);
             }
         }
-        return activeChallenges;
+        
+         */
+        return ongoingChallenges;
     }
 
     //check all active Challenges:
-    public void checkAllActiveChallenges(User user1, List<Challenge> activeChallenges) {
+    public void checkAllOngoingChallenges(User user1, List<Challenge> ongoingChallenges) {
 
-        for (Challenge challenge : activeChallenges) {
 
-            boolean challengeEnded = checkChallengeEnded(user1, challenge);
+        for (Challenge challenge : ongoingChallenges) {
 
-            if (!challengeEnded) {
-                checkChallengeProgress(user1, challenge);
-            }
+            // boolean challengeEnded = checkChallengeEnded(user1, challenge);
+
+            //todo WRONG!!!!! there are no ended Challenges in ongoingChallenges List!!!!
+            // It already filtered out the ended Challenges while fetching them from the DB!
+
+            //todo  give update on weather or not it was completed in AccountController (from method checkChallengeEnded)!
+
+
+            //if (!challengeEnded) {
+            //    checkChallengeProgress(user1, challenge);
+            //}
         }
     }
 
@@ -105,7 +125,7 @@ public class ChallengeService {
             Integer sumSteps = comparingRepo.getStepsSumDateToDate(user1, startTime, nowTime);
             Integer diffSteps = challenge.getGoalSteps() - sumSteps;
 
-            System.out.println("You have already walked " + sumSteps + " steps. " +  diffSteps +
+            System.out.println("You have already walked " + sumSteps + " steps. " + diffSteps +
                     " steps left to walk until " + challenge.getEndsAt());
 
         } else if (challenge.getGoalDistanceKm() >= 1) {
@@ -123,63 +143,80 @@ public class ChallengeService {
         }
     }
 
-    private boolean checkChallengeEnded(User user1, Challenge challenge) {
+    public Achievement checkChallengeSuccess(User user1, Challenge challenge) {
 
-        if (challenge.getEndsAt().before(Timestamp.from(Instant.now()))) {
-            System.out.println("The challenge " + challenge.getName() + " has ended at " + challenge.getEndsAt());
+        LocalDateTime startTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(challenge.getStartedAt().getTime()),
+                TimeZone.getDefault().toZoneId());
+        LocalDateTime endTime = LocalDateTime.now();
 
-            LocalDateTime startTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(challenge.getStartedAt().getTime()),
-                    TimeZone.getDefault().toZoneId());
-            LocalDateTime endTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(challenge.getEndsAt().getTime()),
-                    TimeZone.getDefault().toZoneId());
+        //check if challenge goal is STEPS:
+        if (challenge.getGoalSteps() >= 1) {
+            //count sum steps in Timeframe (from DB):
+            Integer sumSteps = comparingRepo.getStepsSumDateToDate(user1, startTime, endTime);
 
-            //check if challenge goal is STEPS:
-            if (challenge.getGoalSteps() >= 1) {
+            //check, if goal was reached:
+            if (sumSteps >= challenge.getGoalSteps()) {
 
-                //count sum steps in Timeframe (from DB):
-                Integer sumSteps = comparingRepo.getStepsSumDateToDate(user1, startTime, endTime);
+                //get achievement-object:
+                Achievement achievement = achievementRepo.getAchievement(challenge.getRewardAchievementID());
 
-                //check, if goal was reached:
-                if (sumSteps < challenge.getGoalSteps()) {
-                    System.out.println("You didn't quite get to the finish line this time.");
-                } else {
+                //unlock achievement:
+                achievementRepo.unlockAchievement(user1, achievement.getId());
 
-                    //get achievement-object:
-                    Achievement achievement = achievementRepo.getAchievement(challenge.getRewardAchievementID());
+                //deactivate Challenge, because finished
+                challengeRepo.deactivateChallenge(user1, challenge);
 
-                    //unlock achievement:  todo als eigene Methode auslagern (+ km unten)
-                    achievementRepo.unlockAchievement(user1, achievement.getId());
-                    System.out.println("Congratulations! You unlocked " + achievement.getName() + "!");
-                }
-            } else if (challenge.getGoalDistanceKm() >= 1) {
+                return achievement;
 
-                double sumKM = comparingRepo.getKmSumDateToDate(user1, startTime, endTime);
+            } else {
 
-                if (sumKM < challenge.getGoalDistanceKm()) {
-                    System.out.println("You didn't quite get to the finish line this time.");
-                } else {
-
-                    Achievement achievement = achievementRepo.getAchievement(challenge.getRewardAchievementID());
-
-                    achievementRepo.unlockAchievement(user1, achievement.getId());
-                    System.out.println("Congratulations! You unlocked " + achievement.getName() + "!");
-                }
+                return null;
             }
 
-            //set active=FALSE in user_challenge: todo eventuell ist "active" eine unnötige Spalte in "user_challenge",
-            // todo          weil die Abfrage der aktiven Challenges jetzt JOINed mit challenge Tabelle abläuft
-            challengeRepo.deactivateChallenge(user1, challenge);
-            return true;
+        } else if (challenge.getGoalDistanceKm() >= 1) {
+
+            double sumKM = comparingRepo.getKmSumDateToDate(user1, startTime, endTime);
+
+            if (sumKM < challenge.getGoalDistanceKm()) {
+
+                return null;
+
+            } else {
+
+                Achievement achievement = achievementRepo.getAchievement(challenge.getRewardAchievementID());
+
+                achievementRepo.unlockAchievement(user1, achievement.getId());
+
+                //deactivate Challenge, because finished
+                challengeRepo.deactivateChallenge(user1, challenge);
+
+                return achievement;
+            }
         }
-        return false;
+
+        return null;
+    }
+
+    public void updateActiveChallenges(User user1) {
+
+        List<Challenge> activeChallenges = getActiveChallenges(user1);
+
+        for (Challenge challenge : activeChallenges) {
+            boolean ended = checkChallengeEnded(challenge);
+            if (ended) {
+                challengeRepo.deactivateChallenge(user1, challenge);
+            }
+        }
+    }
+
+    public boolean checkChallengeEnded(Challenge challenge) {
+
+        return challenge.getEndsAt().before(Timestamp.from(Instant.now()));
     }
 
     //show all Challenges
-    public void showAllChallenges() {
-        List<Challenge> allChallenges = challengeRepo.getAllChallenges();
-        for (Challenge challenge : allChallenges) {
-            System.out.println(challenge);
-        }
+    public List<Challenge> showAllChallenges() {
+        return challengeRepo.getAllChallenges();
     }
 
     public void createChallenge(String name, Integer reqSteps, double reqKm, Integer requiredAchievementID,
@@ -198,7 +235,7 @@ public class ChallengeService {
         //LocalDateTime endDate; todo : (check if it works)
 
         LocalDateTime endDate = LocalDate.of(startYear, startMonth, startDay)
-         .plusDays(Math.max(lastsForDays - 1, 0)).atTime(23, 59);
+                .plusDays(Math.max(lastsForDays - 1, 0)).atTime(23, 59);
 
         if (lastsForDays <= 1) {
             endDate = LocalDate.of(startYear, startMonth, startDay).atTime(23, 59);
@@ -233,5 +270,11 @@ public class ChallengeService {
         challengeRepo.createChallenge(newChallenge);
         System.out.println("Challenge created\n");
         System.out.println(newChallenge);
+    }
+
+    public List<Challenge> getActiveChallenges(User user) {
+
+        return challengeRepo.getActiveChallenges(user);
+
     }
 }

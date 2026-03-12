@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="868.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.elisabeth_tulla.walk_it_off.jfx_gui.ManageAccountController">
+<AnchorPane prefHeight="900.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.elisabeth_tulla.walk_it_off.jfx_gui.ManageAccountController">
    <children>
-      <VBox prefHeight="875.0" prefWidth="841.0">
+      <VBox prefHeight="900.0" prefWidth="850.0">
          <children>
             <MenuBar nodeOrientation="RIGHT_TO_LEFT">
               <menus>

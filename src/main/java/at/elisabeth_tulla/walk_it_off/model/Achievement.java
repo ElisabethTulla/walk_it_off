@@ -43,6 +43,14 @@ public class Achievement {
         this.type = type;
     }
 
+    public Boolean getUnlocked() {
+        return unlocked;
+    }
+
+    public void setUnlocked(Boolean unlocked) {
+        this.unlocked = unlocked;
+    }
+
     public Integer getId() {
         return id;
     }

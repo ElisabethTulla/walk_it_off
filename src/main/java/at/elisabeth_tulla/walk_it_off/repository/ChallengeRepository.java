@@ -1,7 +1,6 @@
 package at.elisabeth_tulla.walk_it_off.repository;
 
 import at.elisabeth_tulla.walk_it_off.config.DatabaseConfig;
-import at.elisabeth_tulla.walk_it_off.model.Achievement;
 import at.elisabeth_tulla.walk_it_off.model.Challenge;
 import at.elisabeth_tulla.walk_it_off.model.User;
 
@@ -60,7 +59,7 @@ public class ChallengeRepository {
         }
     }
 
-    public HashMap<LocalDateTime, Integer> getActiveChallenges(User user) {
+    public HashMap<LocalDateTime, Integer> getOngoingChallenges(User user) {
 
             String sql = "SELECT * FROM user_challenge JOIN challenge " +
                     "ON challenge.id = user_challenge.challenge_id WHERE user_id = ?";
@@ -147,7 +146,7 @@ public class ChallengeRepository {
         }
     }
 
-    public void enterChallenge(User user, Challenge currentChallenge) {
+    public boolean enterChallenge(User user, Challenge currentChallenge) {
 
         String sql = "INSERT INTO user_challenge (user_id, challenge_id) VALUES (?, ?)";
 
@@ -162,10 +161,13 @@ public class ChallengeRepository {
             ps.executeUpdate();
             conn.commit();
 
+            return true;
+
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
             try {
                 conn.rollback();
+                return false; //todo return an der richtigen Stelle?
             } catch (SQLException ex) {
                 System.err.println("Fehler beim rollback:" + ex.getMessage());
                 throw new RuntimeException(ex);
@@ -217,5 +219,29 @@ public class ChallengeRepository {
             }
         }
 
+    }
+
+    public List<Challenge> getActiveChallenges(User user) {
+
+        String sql = "SELECT * FROM user_challenge JOIN challenge " +
+                "ON challenge.id = user_challenge.challenge_id WHERE user_id = ? AND active = true";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)){
+
+            ps.setInt(1, user.getId());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                List<Challenge> activeChallenges = new ArrayList<>();
+
+                while (rs.next()) {
+                    Challenge c = mapRows(rs);
+                    activeChallenges.add(c);
+                }
+                return activeChallenges;
+
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
