@@ -54,21 +54,21 @@ public class ComparingService {
     }
 
     //map of all Steps in specific timeframe:
-    public void mapStepsTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
-                                   Integer endYear, Integer endMonth, Integer endDay){
+    public HashMap<LocalDateTime, Integer> mapStepsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
 
-        LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
-        LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
+        LocalDateTime startDate = startdate.atStartOfDay();
+        LocalDateTime endDate = enddate.atTime(23, 59);
 
-        HashMap<LocalDateTime, Integer> stepsMap = compRepo.getStepsDateToDate(user, startDate, endDate);
+        return compRepo.getStepsDateToDate(user, startDate, endDate);
 
+/*
         if (!stepsMap.isEmpty()){
             for (Map.Entry<LocalDateTime, Integer> entry : stepsMap.entrySet()) {
                 System.out.println(entry.getKey() +  ": " + entry.getValue() + " steps");
             }
         } else
             System.out.println("No steps found");
-        //todo show Steps in grafic/table in GUI
+ */
     }
 
     /***
@@ -99,21 +99,20 @@ public class ComparingService {
     }
 
     //map runs in specific timeframe:
-    public void mapRunsTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
-                                  Integer endYear, Integer endMonth, Integer endDay){
+    public HashMap<LocalDateTime, Double> mapRunsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
 
-        LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
-        LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
+        LocalDateTime startDate = startdate.atStartOfDay();
+        LocalDateTime endDate = enddate.atTime(23, 59);
 
-        HashMap<LocalDateTime, Double> runsMap = compRepo.getRunsDateToDate(user, startDate, endDate);
-
+        return compRepo.getRunsDateToDate(user, startDate, endDate);
+/*
         if (!runsMap.isEmpty()){
             for (Map.Entry<LocalDateTime, Double> entry : runsMap.entrySet()) {
                 System.out.println(entry.getKey() +  ": " + entry.getValue() + " kilometers ran");
             }
         } else
             System.out.println("No runs found");
-        //todo show Steps in grafic/table in GUI
+ */
     }
 
     /***

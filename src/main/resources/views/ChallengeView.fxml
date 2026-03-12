@@ -80,9 +80,9 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="293.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reward-Achievement Name:" />
-                  <TextField promptText="MasterWalker" />
+                  <TextField fx:id="txtRewardAchievementName" promptText="MasterWalker" />
                   <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achievement Type:" />
-                  <TextField editable="false" layoutX="127.0" layoutY="20.0" text="challenge" />
+                  <TextField fx:id="txtAchievementType" editable="false" layoutX="127.0" layoutY="20.0" text="challenge" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -91,10 +91,10 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="378.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Goal Steps:" />
-                  <TextField promptText="100000" />
+                  <TextField fx:id="txtGoalSteps" promptText="100000" />
                   <Text layoutX="452.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR" underline="true" />
                   <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Goal Kms:" />
-                  <TextField layoutX="127.0" layoutY="20.0" text="0" />
+                  <TextField fx:id="txtGoalKms" layoutX="127.0" layoutY="20.0" text="0" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -102,8 +102,8 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="422.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" text="Load Reward-Achievement ID" />
-                  <TextField editable="false" layoutX="127.0" layoutY="20.0" />
+                  <Button fx:id="btnLoadRewardAchievementId" mnemonicParsing="false" onAction="#btnLoadRewardAchievementIdClicked" text="Load Reward-Achievement ID:" />
+                  <TextField fx:id="txtloadRewardAchievementId" editable="false" layoutX="127.0" layoutY="20.0" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -112,7 +112,7 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="566.0" spacing="20.0">
                <children>
                   <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Challenge Name:" />
-                  <TextField layoutX="127.0" layoutY="20.0" promptText="MasterChallenge" />
+                  <TextField fx:id="txtChallengeName" layoutX="127.0" layoutY="20.0" promptText="MasterChallenge" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -121,9 +121,9 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="425.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mininum Participants:" />
-                  <TextField text="1" />
+                  <TextField fx:id="txtMinParticipants" text="1" />
                   <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum Participants:" />
-                  <TextField layoutX="127.0" layoutY="20.0" text="999999" />
+                  <TextField fx:id="txtMaxParticipants" layoutX="127.0" layoutY="20.0" text="999999" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -132,9 +132,9 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="519.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date:" />
-                  <DatePicker promptText="05/01/2026" />
+                  <DatePicker fx:id="startDate" promptText="05/01/2026" />
                   <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lasts for * days:" />
-                  <TextField layoutX="127.0" layoutY="20.0" promptText="7" />
+                  <TextField fx:id="txtLastsForDays" layoutX="127.0" layoutY="20.0" promptText="7" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -144,10 +144,10 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="472.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Required Steps:" />
-                  <TextField text="0" />
+                  <TextField fx:id="txtRequiredSteps" text="0" />
                   <Text layoutX="452.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR" underline="true" />
                   <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Kms:" />
-                  <TextField layoutX="127.0" layoutY="20.0" text="0" />
+                  <TextField fx:id="txtRequiredKms" layoutX="127.0" layoutY="20.0" text="0" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -156,13 +156,13 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="587.0" spacing="20.0">
                <children>
                   <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Achievement ID:" />
-                  <TextField layoutX="127.0" layoutY="20.0" text="0" />
+                  <TextField fx:id="txtRequiredAchievementId" layoutX="127.0" layoutY="20.0" text="0" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
                </padding>
             </HBox>
-            <Button mnemonicParsing="false" text="create Challenge">
+            <Button mnemonicParsing="false" onAction="#btnCreateChallengeClicked" text="create Challenge">
                <VBox.margin>
                   <Insets bottom="20.0" top="10.0" />
                </VBox.margin>

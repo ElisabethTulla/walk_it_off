@@ -13,15 +13,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -33,6 +31,7 @@ public class ChallengeController {
 
     private User currentUser;
 
+    //ChallengesTable:
     @FXML
     private TableView<Challenge> allChallengesTable;
     @FXML
@@ -57,6 +56,38 @@ public class ChallengeController {
     @FXML
     private TextField txtchallengeId;
 
+    //createChallenge:
+    @FXML
+    private TextField txtRewardAchievementName;
+    @FXML
+    private TextField txtAchievementType;
+    @FXML
+    private TextField txtGoalSteps;
+    @FXML
+    private TextField txtGoalKms;
+
+    @FXML
+    private Button btnLoadRewardAchievementId;
+    @FXML
+    private TextField txtRewardAchievementId;
+    @FXML
+    private TextField txtChallengeName;
+    @FXML
+    private TextField txtMinParticipants;
+    @FXML
+    private TextField txtMaxParticipants;
+    @FXML
+    private DatePicker startDate;
+    @FXML
+    private TextField txtLastsForDays;
+    @FXML
+    private TextField txtRequiredSteps;
+    @FXML
+    private TextField txtRequiredKms;
+    @FXML
+    private TextField txtRequiredAchievementId;
+
+    //AchievementsTable:
     @FXML
     private TableView<Achievement> achievementTable;
     @FXML
@@ -120,7 +151,7 @@ public class ChallengeController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Missing Achievement");
             alert.setHeaderText("You don't have the required Achievement to enter this Challenge.");
-            alert.setContentText("Missing Achievement: " +  missingAchievement);
+            alert.setContentText("Missing Achievement: " + missingAchievement);
             alert.showAndWait();
         }
 
@@ -132,7 +163,7 @@ public class ChallengeController {
             alert.showAndWait();
         }
 
-        if (underMaxParticipants && missingAchievement==null) {
+        if (underMaxParticipants && missingAchievement == null) {
 
             //enter challenge:
             boolean entered = challengeService.enterChallenge(currentUser, challengeId);
@@ -160,13 +191,57 @@ public class ChallengeController {
         AccountController accController = loader.getController();
         accController.initData(currentUser);
 
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
         stage.setScene(scene);
         stage.show();
     }
 
     public void btnCloseClicked(ActionEvent actionEvent) throws IOException {
+
+        backToAccount(actionEvent);
+    }
+
+    private Integer rewardAchievementId;
+
+    public void btnLoadRewardAchievementIdClicked(ActionEvent actionEvent) throws IOException {
+
+        String rewardAchievementName = txtRewardAchievementName.getText();
+        String type = txtAchievementType.getText();
+        Integer goalSteps = Integer.parseInt(txtGoalSteps.getText());
+        Integer goalKms = Integer.parseInt(txtGoalKms.getText());
+
+        this.rewardAchievementId = achievementService.createAchievement
+                (rewardAchievementName, goalSteps, goalKms, 0, type);
+        //txtRewardAchievementId.setText(rewardAchievementId.toString());
+        //todo FRAGE Wie kann ich das Textfeld txtRewardAchievement mit der rewardAchievementId befüllen?
+        // -> ERROR sagt rewardAchievementId is null...
+
+        btnLoadRewardAchievementId.setDisable(false);
+    }
+
+    public void btnCreateChallengeClicked(ActionEvent actionEvent) throws IOException {
+
+        Integer goalSteps = Integer.parseInt(txtGoalSteps.getText());
+        Integer goalKms = Integer.parseInt(txtGoalKms.getText());
+        String challengeName = txtChallengeName.getText();
+        Integer minParticipants = Integer.parseInt(txtMinParticipants.getText());
+        Integer maxParticipants = Integer.parseInt(txtMaxParticipants.getText());
+        LocalDate start = startDate.getValue();
+        Integer lastsFor = Integer.parseInt(txtLastsForDays.getText());
+        Integer reqSteps = Integer.parseInt(txtRequiredSteps.getText());
+        Double reqKms = Double.parseDouble(txtRequiredKms.getText());
+        Integer reqAchievementId = Integer.parseInt(txtRequiredAchievementId.getText());
+
+        challengeService.createChallenge(challengeName, reqSteps, reqKms, reqAchievementId,
+                minParticipants, maxParticipants, goalSteps, goalKms, start, lastsFor, rewardAchievementId);
+
+        //todo handle if createChallenge didn't go threw
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Challenge created!");
+        alert.setHeaderText("You successfully created a new challenge!");
+        alert.showAndWait();
 
         backToAccount(actionEvent);
     }

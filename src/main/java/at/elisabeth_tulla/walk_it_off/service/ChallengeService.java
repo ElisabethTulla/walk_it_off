@@ -67,51 +67,6 @@ public class ChallengeService {
         return true;
     }
 
-    //get List of all ongoing Challenges:
-    public List<Challenge> getOngoingChallenges(User user1) {
-
-        //get HashMap of active ChallengeIDs:
-        HashMap<LocalDateTime, Integer> mapOngoingChallenges = challengeRepo.getOngoingChallenges(user1);
-        List<Challenge> ongoingChallenges = new ArrayList<>();
-
-        //get active Challenges:
-        for (Map.Entry<LocalDateTime, Integer> entry : mapOngoingChallenges.entrySet()) {
-            ongoingChallenges.add(challengeRepo.getChallenge(entry.getValue()));
-        }
-        /*
-        if (ongoingChallenges.isEmpty()) {
-            System.out.println("There are no active challenges.");
-        } else {
-            System.out.println("Your active Challenges: \n");
-            for (Challenge challenge : ongoingChallenges) {
-                System.out.println(challenge);
-            }
-        }
-        
-         */
-        return ongoingChallenges;
-    }
-
-    //check all active Challenges:
-    public void checkAllOngoingChallenges(User user1, List<Challenge> ongoingChallenges) {
-
-
-        for (Challenge challenge : ongoingChallenges) {
-
-            // boolean challengeEnded = checkChallengeEnded(user1, challenge);
-
-            //todo WRONG!!!!! there are no ended Challenges in ongoingChallenges List!!!!
-            // It already filtered out the ended Challenges while fetching them from the DB!
-
-            //todo  give update on weather or not it was completed in AccountController (from method checkChallengeEnded)!
-
-
-            //if (!challengeEnded) {
-            //    checkChallengeProgress(user1, challenge);
-            //}
-        }
-    }
-
     //check Progress:
     private void checkChallengeProgress(User user1, Challenge challenge) {
 
@@ -157,19 +112,16 @@ public class ChallengeService {
             //check, if goal was reached:
             if (sumSteps >= challenge.getGoalSteps()) {
 
-                //get achievement-object:
+                //get achievement-object and unlock it:
                 Achievement achievement = achievementRepo.getAchievement(challenge.getRewardAchievementID());
-
-                //unlock achievement:
                 achievementRepo.unlockAchievement(user1, achievement.getId());
 
-                //deactivate Challenge, because finished
+                //deactivate Challenge, because finished:
                 challengeRepo.deactivateChallenge(user1, challenge);
 
                 return achievement;
 
             } else {
-
                 return null;
             }
 
@@ -178,7 +130,6 @@ public class ChallengeService {
             double sumKM = comparingRepo.getKmSumDateToDate(user1, startTime, endTime);
 
             if (sumKM < challenge.getGoalDistanceKm()) {
-
                 return null;
 
             } else {
@@ -193,7 +144,6 @@ public class ChallengeService {
                 return achievement;
             }
         }
-
         return null;
     }
 
@@ -210,7 +160,6 @@ public class ChallengeService {
     }
 
     public boolean checkChallengeEnded(Challenge challenge) {
-
         return challenge.getEndsAt().before(Timestamp.from(Instant.now()));
     }
 
@@ -221,12 +170,11 @@ public class ChallengeService {
 
     public void createChallenge(String name, Integer reqSteps, double reqKm, Integer requiredAchievementID,
                                 Integer minParticipants, Integer maxParticipants, Integer goalSteps, double goalKm,
-                                Integer startYear, Integer startMonth, Integer startDay, Integer lastsForDays,
+                                LocalDate startdate, Integer lastsForDays,
                                 Integer rewardAchievementID) {
-
         //todo check, if Challenge with that name + same startDate already exists
 
-        LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
+        LocalDateTime startDate = startdate.atStartOfDay();
 
         //convert LocalDateTime to date:
         Instant instant = startDate.atZone(ZoneId.systemDefault()).toInstant();
@@ -234,11 +182,11 @@ public class ChallengeService {
 
         //LocalDateTime endDate; todo : (check if it works)
 
-        LocalDateTime endDate = LocalDate.of(startYear, startMonth, startDay)
+        LocalDateTime endDate = startdate
                 .plusDays(Math.max(lastsForDays - 1, 0)).atTime(23, 59);
 
         if (lastsForDays <= 1) {
-            endDate = LocalDate.of(startYear, startMonth, startDay).atTime(23, 59);
+            endDate = startdate.atTime(23, 59);
         } else {
             Calendar c = Calendar.getInstance();
 
@@ -248,7 +196,6 @@ public class ChallengeService {
 
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             endDate = localDate.atTime(23, 59);
-
 
             //LocalDate localDate = LocalDate.ofInstant(calendar.toInstant(), ZoneId.systemDefault());
             //LocalDate localDate = LocalDate.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId());
@@ -268,13 +215,9 @@ public class ChallengeService {
 
         //create Challenge in DB:
         challengeRepo.createChallenge(newChallenge);
-        System.out.println("Challenge created\n");
-        System.out.println(newChallenge);
     }
 
     public List<Challenge> getActiveChallenges(User user) {
-
         return challengeRepo.getActiveChallenges(user);
-
     }
 }

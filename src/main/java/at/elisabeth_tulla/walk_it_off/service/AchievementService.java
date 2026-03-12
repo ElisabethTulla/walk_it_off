@@ -12,7 +12,7 @@ public class AchievementService {
 
 
     //create Achievement
-    public void createAchievement(String name, Integer requiredSteps, double requiredKm,
+    public Integer createAchievement(String name, Integer requiredSteps, double requiredKm,
                                   Integer requiredDays, String type){
 
         //create Achievement Object
@@ -20,10 +20,9 @@ public class AchievementService {
 
         //create Achievement in DB
         achievementRepository.createAchievement(newAchievement);
-        System.out.println("New achievement has been created");
-        System.out.println(newAchievement);
 
-        //todo return achievement ID !
+        return newAchievement.getId();
+
     }
 
     //show Achievements from user
