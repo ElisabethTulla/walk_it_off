@@ -9,6 +9,7 @@ import at.elisabeth_tulla.walk_it_off.repository.ChallengeRepository;
 import at.elisabeth_tulla.walk_it_off.repository.LoggingRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,7 +19,11 @@ public class LoggingService {
     ChallengeRepository challengeRepo = new ChallengeRepository();
     AchievementRepository achievementRepo = new AchievementRepository();
 
+    ChallengeService challengeService = new ChallengeService();
+
     public String checkActivity(String activityName) {
+
+        //todo is this method still necessary?
 
         return switch (activityName.toUpperCase()) {
             case "WALKING" -> "GUI pop-up for user input walking";
@@ -29,27 +34,50 @@ public class LoggingService {
         };
     }
 
-    public void loggWalking(User user, String activity, Integer steps){
+    public List<Achievement> loggWalking(User user, String activity, Integer steps) {
         //create Activity:
         Activity activity1 = new Activity(user.getId(), activity, steps);
 
-        if (steps >= 10000){
+        loggingRepo.loggActivity(user, activity1);
+
+        List<Achievement> achievements = getAchievementsFromChallenges(user);
+
+        if (steps >= 10000) {
             achievementRepo.unlockAchievement(user, 12);
-            System.out.println("Congratulations! You unlocked 10.000 steps today!");
+            achievements.add(achievementRepo.getAchievement(12));
         }
 
-        loggingRepo.loggActivity(user, activity1);
+        return achievements;
     }
 
-    public void loggRunning(User user, String activity, double distanceInKm){
+    public List<Achievement> loggRunning(User user, String activity, double distanceInKm) {
         //create Activity:
         Activity activity1 = new Activity(user.getId(), activity, distanceInKm);
 
         loggingRepo.loggActivity(user, activity1);
+        return getAchievementsFromChallenges(user);
     }
 
-    public HashMap<LocalDateTime, Integer> checkActiveChallenges(User user){
-        return challengeRepo.getActiveChallenges(user);
+    private List<Achievement> getAchievementsFromChallenges(User user) {
+
+        //get all active Challenges:
+        List<Challenge> activeChallenges = challengeService.getActiveChallenges(user);
+
+        List<Achievement> achievedAchievements = new ArrayList<>();
+
+        //check, if any ChallengeGoal was reached:
+        for (Challenge challenge : activeChallenges) {
+            Achievement achievement = challengeService.checkChallengeSuccess(user, challenge);
+
+            if (achievement != null) {
+                achievedAchievements.add(achievement);
+            }
+        }
+        return achievedAchievements;
+    }
+
+    public HashMap<LocalDateTime, Integer> checkActiveChallenges(User user) {
+        return challengeRepo.getOngoingChallenges(user);
     }
 
 }

@@ -43,6 +43,14 @@ public class Achievement {
         this.type = type;
     }
 
+    public Boolean getUnlocked() {
+        return unlocked;
+    }
+
+    public void setUnlocked(Boolean unlocked) {
+        this.unlocked = unlocked;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -110,8 +118,4 @@ public class Achievement {
                 ", type='" + type + '\'' + ", unlocked=" + unlocked + ", unlocked at=" + unlockedAt +
                 '}';
     }
-
-    //todo FRAGE: Wenn ich die Liste aller möglichen Achievements anzeigen lassen will,
-    // möchte ich die letzten beiden Werte (unlocked + unlocked at) nicht mitanzeigen.
-    // Soll ich dafür ein zweites .toString() machen, oder so wie jetzt lassen und als false und null anzeigen?
 }

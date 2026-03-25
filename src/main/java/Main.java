@@ -26,10 +26,11 @@ public class Main {
         //User currentUser = userService.login("ofaderbauer@gmail.com", "ofaderbauer@gmail.com");
         //User currentUser = userService.login("tulla.elisabeth@gmx.at", "postgres");
         //User currentUser = userService.login("felix@tulla.at", "Postgres1!");
-        User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
+        //User currentUser = userService.login("nachi@tulla.at", "Postgres1!");
         //User currentUser = userService.login("elvis@tulla.at", "Postgres1!");
+        //User currentUser = userService.login("test@test.at", "Postgres1!");
 
-        System.out.println(currentUser.toString());
+        //System.out.println(currentUser.toString());
 
         /***
          * ACCOUNT MANAGEMENT
@@ -47,7 +48,7 @@ public class Main {
          */
         //System.out.println(activityService.checkActivity("walking"));
         //loggingService.loggWalking(currentUser, "walking", 10000);
-        //loggingService.loggRunning(currentUser, "running", 5.0);
+        //loggingService.loggRunning(currentUser, "running", 2.0);
 
         /***
          * SHOW STEPS
@@ -66,12 +67,13 @@ public class Main {
 
         //comparingService.compareSumUpStepsTimeframeUsers(currentUser, "felix@tulla.at", 'y',
          //       2026, 1, 1, 2026, 2, 25);
+        //todo timeframe als eigenes Object (mit start und end datum -> liefert einen timestamp)
 
         /***
          * SHOW KM (RUNS)
          */
         //sum up runs in Timeframe:
-        //comparingService.sumUpKmTimeframe(currentUser, 'y', 2026, 2, 25, 2026, 2, 25);
+        //comparingService.sumUpKmTimeframe(currentUser, 'y', 2026, 3, 12, 2026, 3, 12);
 
         //comparingService.mapRunsTimeframe(currentUser, 2026, 1, 1, 2026, 2, 18);
 
@@ -91,7 +93,7 @@ public class Main {
 
         //create Achievement:
         //achievementService.createAchievement
-         //       ("10 000 STEPS", 10000, 0, 0, "user");
+         //       ("Ran20kmIn1Week", 0, 20, 0, "challenge");
 
         //show user achievements:
         //achievementService.showUserAchievements(currentUser);
@@ -104,24 +106,28 @@ public class Main {
          */
 
         //show all challenges:
-        // challengeService.showAllChallenges();
+         //challengeService.showAllChallenges();
 
         //enter Challenge:
-        //challengeService.enterChallenge(currentUser, 22);
+        //challengeService.enterChallenge(currentUser, 26);
 
         //get active Challenges:
-        //List<Challenge> activeChallenges = challengeService.getActiveChallenges(currentUser);
+        //List<Challenge> activeChallenges = challengeService.getOngoingChallenges(currentUser);
 
         //check all Challenges:
         //challengeService.checkAllActiveChallenges(currentUser, activeChallenges);
 
         //create Challenge:
-       // challengeService.createChallenge("5K", 0, 0.0, 12,
-        //        1, 9999999, 0, 5.0,
-          //     2026, 2, 25, 1, 11);
+        //challengeService.createChallenge("Walk 10.000 Steps With Me", 0, 0.0, 12,
+         //       1, 9999999, 100000, 0,
+          //     2026, 3, 12, 1, 12);
 
 
         /***
+         *
+         * todo POP UP ALERT FÜR ACHIEVEMENTS (IN LOGGINGCONTROLLER) KAPUTT!!!!! -> Es sind keine Achievements in der Liste!
+         * todo Nur das 10.000 Steps Achievement geht, das im LoggingService hardcodiert zur Liste zugefügt wird...
+         *
          *
          *todo NICE TO HAVE:
          *   FEAT show and compare stats #21:
@@ -130,7 +136,16 @@ public class Main {
          *
          * ---------
          *
+         * logger statt system.out (kann auch zur konsole ausgeben) error/warning/degub
+         *
+         * von gui die Integers year, month, day gleich als LocalDateTime umformatieren und so an die Methoden
+         * weitergeben (nicht dann in der methode erst umformatiern)
+         *
          * todo file io reader for steps input
+         *
+         * todo class diagramm für db (nice to have)
+         *
+         * todo junit tests für methoden, die nicht direkt auf die db zugreifen
          *
          * todo type [ENUMS: WALKING,...]  // könnte auch gender als ENUMS anlegen (ev stattdessen)
          *
@@ -225,6 +240,13 @@ public class Main {
      * ├── config/         # Konfigurationsklassen
      * ├── exception/      # Custom Exceptions + Handler
      * └── util/           # Hilfsfunktionen
+     *
+     *
+     *
+     *
+     * vaadin gui framework für java
+     * quakus + spring
+     *
      */
 
 }

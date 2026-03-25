@@ -20,9 +20,13 @@ public class UserService {
 
     UserRepository userRepo = new UserRepository();
     ValidationManager valid = new ValidationManager();
+    AchievementRepository achievementRepo = new AchievementRepository();
 
-    public void registerUser(String firstName, String lastName, String email, String password,
-                             Integer birthYear, Integer birthMonth, Integer birthDay, String gender){
+
+    public boolean registerUser(String firstName, String lastName, String email, String password,
+            LocalDate birthdayDate, String gender){
+
+/*  MOVED TO REGISTER CONTROLLER!!!
 
         //check if email already exists in the DB:
         boolean emailAlreadyExists = valid.checkEmail(email);
@@ -42,18 +46,20 @@ public class UserService {
                     "No space between characters.");
             return;
         }
-
-        //todo name profanity-check (Method in ValidationManager)
-
-            Integer age = calculateAge(birthYear, birthMonth, birthDay);
+ */
 
             //create user:
-            User newUser = new User(firstName, lastName, email, password,
-                    birthYear, birthMonth, birthDay, age, gender);
+            User newUser = new User(firstName, lastName, email, password, birthdayDate, gender);
 
             //register user in DB:
-            userRepo.registerNewUser(newUser);
+            boolean registered = userRepo.registerNewUser(newUser);
             System.out.println("Welcome " + newUser.getFirstName() + "!");
+
+            achievementRepo.unlockAchievement(newUser, 13);
+        System.out.println("Congratulations! You just made the first step towards your goals!");
+        //todo inlcude in gui pop up alert, that you can now log in...
+
+        return registered;
     }
 
     public Integer calculateAge(Integer birthYear, Integer birthMonth, Integer birthDay){

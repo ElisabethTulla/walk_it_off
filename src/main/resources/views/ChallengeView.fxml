@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="900.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.elisabeth_tulla.walk_it_off.jfx_gui.ChallengeController">
+   <children>
+      <ButtonBar buttonMinWidth="40.0" prefHeight="40.0" prefWidth="850.0">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#btnCloseClicked" text="close" />
+        </buttons>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+      </ButtonBar>
+      <VBox alignment="TOP_CENTER" layoutY="28.0" prefHeight="840.0" prefWidth="850.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Challenge">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All Challenges:">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </Text>
+            <TableView fx:id="allChallengesTable">
+              <columns>
+                <TableColumn fx:id="chaIdColumn" prefWidth="27.5" text="ID" />
+                <TableColumn fx:id="chaNameColumn" prefWidth="184.5" text="Name" />
+                  <TableColumn fx:id="chaReqStepsColumn" prefWidth="107.0" text="required Steps" />
+                  <TableColumn fx:id="chaReqKmsColumn" prefWidth="94.0" text="required Kms" />
+                  <TableColumn fx:id="chaGoalStepsColumn" prefWidth="75.0" text="Goal Steps" />
+                  <TableColumn fx:id="chaGoalKmsColumn" prefWidth="81.0" text="Goal Kms" />
+                  <TableColumn fx:id="chaStartColumn" prefWidth="97.0" text="Start" />
+                  <TableColumn fx:id="chaEndColumn" prefWidth="92.5" text="End" />
+                  <TableColumn fx:id="chaRewardId" prefWidth="68.5" text="reward Achievement ID" />
+              </columns>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+            </TableView>
+            <HBox spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Challenge ID:" />
+                  <TextField fx:id="txtchallengeId" />
+                  <Button mnemonicParsing="false" onAction="#btnEnterChallengeClicked" text="enter Challenge" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <Text layoutX="386.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="***********************">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="20.0" />
+               </VBox.margin>
+            </Text>
+            <Text layoutX="342.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="... or create a New Challenge:">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Text>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="293.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reward-Achievement Name:" />
+                  <TextField fx:id="txtRewardAchievementName" promptText="MasterWalker" />
+                  <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Achievement Type:" />
+                  <TextField fx:id="txtAchievementType" editable="false" layoutX="127.0" layoutY="20.0" text="challenge" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="378.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Goal Steps:" />
+                  <TextField fx:id="txtGoalSteps" promptText="100000" />
+                  <Text layoutX="452.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR" underline="true" />
+                  <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Goal Kms:" />
+                  <TextField fx:id="txtGoalKms" layoutX="127.0" layoutY="20.0" text="0" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="422.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnLoadRewardAchievementId" mnemonicParsing="false" onAction="#btnLoadRewardAchievementIdClicked" text="Load Reward-Achievement ID:" />
+                  <TextField fx:id="txtloadRewardAchievementId" editable="false" layoutX="127.0" layoutY="20.0" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="566.0" spacing="20.0">
+               <children>
+                  <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Challenge Name:" />
+                  <TextField fx:id="txtChallengeName" layoutX="127.0" layoutY="20.0" promptText="MasterChallenge" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="425.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mininum Participants:" />
+                  <TextField fx:id="txtMinParticipants" text="1" />
+                  <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum Participants:" />
+                  <TextField fx:id="txtMaxParticipants" layoutX="127.0" layoutY="20.0" text="999999" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="519.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Date:" />
+                  <DatePicker fx:id="startDate" promptText="05/01/2026" />
+                  <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lasts for * days:" />
+                  <TextField fx:id="txtLastsForDays" layoutX="127.0" layoutY="20.0" promptText="7" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <Text layoutX="342.0" layoutY="480.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requirements to join the Challenge:" />
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="472.0" spacing="20.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Required Steps:" />
+                  <TextField fx:id="txtRequiredSteps" text="0" />
+                  <Text layoutX="452.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR" underline="true" />
+                  <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Kms:" />
+                  <TextField fx:id="txtRequiredKms" layoutX="127.0" layoutY="20.0" text="0" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="587.0" spacing="20.0">
+               <children>
+                  <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Achievement ID:" />
+                  <TextField fx:id="txtRequiredAchievementId" layoutX="127.0" layoutY="20.0" text="0" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="15.0" top="10.0" />
+               </padding>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#btnCreateChallengeClicked" text="create Challenge">
+               <VBox.margin>
+                  <Insets bottom="20.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Text layoutX="386.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Achievements:" />
+            <TableView fx:id="achievementTable" layoutX="10.0" layoutY="93.0">
+               <columns>
+                  <TableColumn fx:id="achIdColumn" prefWidth="28.5" text="ID" />
+                  <TableColumn fx:id="achNameColumn" prefWidth="263.5" text="Name" />
+                  <TableColumn fx:id="achStepsColumn" prefWidth="193.0" text="required Steps" />
+                  <TableColumn fx:id="achKmsColumn" prefWidth="162.5" text="required Kms" />
+                  <TableColumn fx:id="achTypeColumn" prefWidth="134.5" text="Type" />
+               </columns>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

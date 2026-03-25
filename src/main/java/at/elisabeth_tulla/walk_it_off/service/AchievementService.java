@@ -12,7 +12,7 @@ public class AchievementService {
 
 
     //create Achievement
-    public void createAchievement(String name, Integer requiredSteps, double requiredKm,
+    public Integer createAchievement(String name, Integer requiredSteps, double requiredKm,
                                   Integer requiredDays, String type){
 
         //create Achievement Object
@@ -20,26 +20,18 @@ public class AchievementService {
 
         //create Achievement in DB
         achievementRepository.createAchievement(newAchievement);
-        System.out.println("New achievement has been created");
-        System.out.println(newAchievement);
+
+        return newAchievement.getId();
+
     }
 
     //show Achievements from user
-    public void showUserAchievements(User user) {
-        List<Achievement> unlockedAchievements = achievementRepository.getUserAchievements(user);
-        System.out.println("Your achievements: \n");
-        for (Achievement a : unlockedAchievements) {
-            System.out.println(a);
-        }
+    public List<Achievement> showUserAchievements(User user) {
+        return achievementRepository.getUserAchievements(user);
     }
 
     //show all possible achievements:
-    public void showAllAchievements() {
-        List<Achievement> allAchievements = achievementRepository.getAllAchievements();
-        System.out.println("List of all achievements: \n");
-        for (Achievement a : allAchievements) {
-            System.out.println(a);
-        }
+    public List<Achievement> showAllAchievements() {
+                return achievementRepository.getAllAchievements();
     }
-
 }

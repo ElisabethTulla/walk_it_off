@@ -53,21 +53,22 @@ public class ComparingService {
         System.out.println("Overall walked Steps: " + compRepo.getStepsSumAll(user));
     }
 
-    public void mapStepsTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
-                                   Integer endYear, Integer endMonth, Integer endDay){
+    //map of all Steps in specific timeframe:
+    public HashMap<LocalDateTime, Integer> mapStepsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
 
-        LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
-        LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
+        LocalDateTime startDate = startdate.atStartOfDay();
+        LocalDateTime endDate = enddate.atTime(23, 59);
 
-        HashMap<LocalDateTime, Integer> stepsMap = compRepo.getStepsDateToDate(user, startDate, endDate);
+        return compRepo.getStepsDateToDate(user, startDate, endDate);
 
+/*
         if (!stepsMap.isEmpty()){
             for (Map.Entry<LocalDateTime, Integer> entry : stepsMap.entrySet()) {
                 System.out.println(entry.getKey() +  ": " + entry.getValue() + " steps");
             }
         } else
             System.out.println("No steps found");
-        //todo show Steps in grafic/table in GUI
+ */
     }
 
     /***
@@ -97,25 +98,25 @@ public class ComparingService {
         System.out.println("Overall ran kilometers: " + compRepo.getKmSumAll(user));
     }
 
-    public void mapRunsTimeframe(User user, Integer startYear, Integer startMonth, Integer startDay,
-                                  Integer endYear, Integer endMonth, Integer endDay){
+    //map runs in specific timeframe:
+    public HashMap<LocalDateTime, Double> mapRunsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
 
-        LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
-        LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
+        LocalDateTime startDate = startdate.atStartOfDay();
+        LocalDateTime endDate = enddate.atTime(23, 59);
 
-        HashMap<LocalDateTime, Double> runsMap = compRepo.getRunsDateToDate(user, startDate, endDate);
-
+        return compRepo.getRunsDateToDate(user, startDate, endDate);
+/*
         if (!runsMap.isEmpty()){
             for (Map.Entry<LocalDateTime, Double> entry : runsMap.entrySet()) {
                 System.out.println(entry.getKey() +  ": " + entry.getValue() + " kilometers ran");
             }
         } else
             System.out.println("No runs found");
-        //todo show Steps in grafic/table in GUI
+ */
     }
 
     /***
-     *  LOGGING ACTIVITY:
+     *  LOGGING ACTIVITY: (todo NICE TO HAVE..)
      */
 
     //todo show how often steps/runs were logged overall ("SELECT COUNT(steps_logged) FROM activity WHERE user_id =?";)
@@ -123,7 +124,6 @@ public class ComparingService {
 
     //todo compare number of runs/walks from timeframe to runs/walks from different timeframe
     //          (this month you went for a run 10 times!, that's 3 more runs than in ...)
-
 
     /***
      * COMPARISONS:
@@ -172,7 +172,8 @@ public class ComparingService {
         }
     }
 
-    public void compareSumUpStepsTimeframeUsers(User currentUser, String email, char activityCounter, Integer startYear, Integer startMonth, Integer startDay,
+    public void compareSumUpStepsTimeframeUsers(User currentUser, String email, char activityCounter,
+                                                Integer startYear, Integer startMonth, Integer startDay,
                                                 Integer endYear, Integer endMonth, Integer endDay) {
 
         //fetch other user from DB:
@@ -195,7 +196,8 @@ public class ComparingService {
         }
     }
 
-    public void compareSumUpKmTimeframeUsers(User currentUser, String email, char activityCounter, Integer startYear, Integer startMonth, Integer startDay,
+    public void compareSumUpKmTimeframeUsers(User currentUser, String email, char activityCounter,
+                                             Integer startYear, Integer startMonth, Integer startDay,
                                              Integer endYear, Integer endMonth, Integer endDay) {
 
         //fetch other user from DB:
@@ -217,11 +219,4 @@ public class ComparingService {
             System.out.println(otherUser.getFirstName() + " ran " + diffKmsPositive + " kilometers more than you.");
         }
     }
-
-
-
-    //todo junit tests für methoden, die nicht direkt auf die db zugreifen
-
-
-
 }

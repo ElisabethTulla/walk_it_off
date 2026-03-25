@@ -1,6 +1,7 @@
 package at.elisabeth_tulla.walk_it_off.model;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Activity {
 
@@ -14,18 +15,28 @@ public class Activity {
     private Integer stepsAll = null;
     private double distanceInKmAll = 0;
 
-    //constructor walking:
+    //constructors walking:
     public Activity(Integer id, String activity, Integer steps) {
         this.id = id;
         this.activityName = activity;
         this.steps = steps;
     }
 
-    //constructor running:
+    public Activity(LocalDateTime loggedAt, Integer steps) {
+        this.loggedAt = Timestamp.valueOf(loggedAt);
+        this.steps = steps;
+    }
+
+    //constructors running:
     public Activity(Integer id, String activity, double distanceInKm) {
         this.id = id;
         this.activityName = activity;
         this.distanceInKm = distanceInKm;
+    }
+
+    public Activity(LocalDateTime loggedAt, Double kms) {
+        this.loggedAt = Timestamp.valueOf(loggedAt);
+        this.distanceInKm = kms;
     }
 
     //todo activityName ENUMS: WALKING, RUNNING, BIKING, SWIMMING, ...
@@ -92,5 +103,12 @@ public class Activity {
     //todo add distanceInKm to distanceInKmAll --> in DB ?!?!
 
 
-
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "loggedAt=" + loggedAt +
+                ", distanceInKm=" + distanceInKm +
+                ", steps=" + steps +
+                '}';
+    }
 }
