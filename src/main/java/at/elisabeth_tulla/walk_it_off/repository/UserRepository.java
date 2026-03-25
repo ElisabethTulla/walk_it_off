@@ -46,7 +46,7 @@ public class UserRepository {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
             try {
                 conn.rollback();
-                return false; //todo FRAGE ist der false return hier richtig platziert? Oder besser ganz zum Schluss?
+                return false; //todo throw new RuntimeException(e);
             } catch (SQLException ex) {
                 System.err.println("Fehler beim rollback:" + ex.getMessage());
                 throw new RuntimeException(ex);
@@ -113,9 +113,5 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
 
 }

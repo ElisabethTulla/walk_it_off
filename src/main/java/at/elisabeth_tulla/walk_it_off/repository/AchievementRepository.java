@@ -41,7 +41,7 @@ public class AchievementRepository {
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
             try {
-                conn.rollback();
+                conn.rollback();//todo throw new RuntimeException(e);
             } catch (SQLException ex) {
                 System.err.println("Fehler beim rollback:" + ex.getMessage());
                 throw new RuntimeException(ex);
@@ -67,7 +67,7 @@ public class AchievementRepository {
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
             try {
-                conn.rollback();
+                conn.rollback();//todo throw new RuntimeException(e);
             } catch (SQLException ex) {
                 System.err.println("Fehler beim rollback:" + ex.getMessage());
                 throw new RuntimeException(ex);

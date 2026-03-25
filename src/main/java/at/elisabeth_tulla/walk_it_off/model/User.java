@@ -119,8 +119,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    //todo age-up on every birthday
-
     @Override
     public String toString(){
         return "ID: " + id + " | name: " + firstName + " " + lastName + " | e-mail: " + email

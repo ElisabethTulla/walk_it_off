@@ -9,7 +9,7 @@ public class Achievement {
     private Integer requiredSteps;
     private double requiredKm;
     private Integer requiredDaysActive;
-    private String type; //todo challenge OR user      //todo ENUMS:  CHALLENGE, USER
+    private String type;
     private Boolean unlocked = false;
     private Timestamp unlockedAt = null;
 

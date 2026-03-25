@@ -5,14 +5,11 @@ import java.time.LocalDateTime;
 
 public class Activity {
 
-    //Attributes: type [ENUMS: WALKING,...], stepsLogged, distanceLoggedKm, loggedAt, stepsAll
-
     private Integer id;
     private String activityName;
     private Integer steps = 0;
     private double distanceInKm = 0;
     private Timestamp loggedAt;
-    private Integer stepsAll = null;
     private double distanceInKmAll = 0;
 
     //constructors walking:
@@ -38,8 +35,6 @@ public class Activity {
         this.loggedAt = Timestamp.valueOf(loggedAt);
         this.distanceInKm = kms;
     }
-
-    //todo activityName ENUMS: WALKING, RUNNING, BIKING, SWIMMING, ...
 
     public Integer getId() {
         return id;
@@ -73,14 +68,6 @@ public class Activity {
         this.distanceInKm = distanceInKm;
     }
 
-    public Integer getStepsAll() {
-        return stepsAll;
-    }
-
-    public void setStepsAll(Integer stepsAll) {
-        this.stepsAll = stepsAll;
-    }
-
     public Timestamp getLoggedAt() {
         return loggedAt;
     }
@@ -96,12 +83,6 @@ public class Activity {
     public void setDistanceInKmAll(double distanceInKmAll) {
         this.distanceInKmAll = distanceInKmAll;
     }
-
-
-    //todo add steps to stepsAll --> in DB ?!?!
-
-    //todo add distanceInKm to distanceInKmAll --> in DB ?!?!
-
 
     @Override
     public String toString() {

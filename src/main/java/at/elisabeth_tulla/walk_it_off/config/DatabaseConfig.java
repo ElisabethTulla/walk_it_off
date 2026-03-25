@@ -16,8 +16,6 @@ public class DatabaseConfig {
 
     public static Connection configure() {
 
-        //todo eventuell könnte man nur das passwort aus einer file holen, den Rest nicht
-
         try {
 
             Properties config = new Properties();
@@ -55,12 +53,10 @@ public class DatabaseConfig {
 
     }
     public static boolean checkForProperty(Properties config){
-        //System.out.println("Checking for Properties...");
 
         Path configPath = Path.of("config.properties");
 
         if (!Files.exists(configPath)) {
-            //System.out.println("Externe Config-Datei nicht vorhanden: " + configPath);
             return false;
         } else {
             return true;

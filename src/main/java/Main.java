@@ -122,83 +122,9 @@ public class Main {
          //       1, 9999999, 100000, 0,
           //     2026, 3, 12, 1, 12);
 
-
-        /***
-         *
-         * todo POP UP ALERT FÜR ACHIEVEMENTS (IN LOGGINGCONTROLLER) KAPUTT!!!!! -> Es sind keine Achievements in der Liste!
-         * todo Nur das 10.000 Steps Achievement geht, das im LoggingService hardcodiert zur Liste zugefügt wird...
-         *
-         *
-         *todo NICE TO HAVE:
-         *   FEAT show and compare stats #21:
-         * - todo compare achievements to other user
-         * - todo compare stats to user-group (eg others in your age group, ...)
-         *
-         * ---------
-         *
-         * logger statt system.out (kann auch zur konsole ausgeben) error/warning/degub
-         *
-         * von gui die Integers year, month, day gleich als LocalDateTime umformatieren und so an die Methoden
-         * weitergeben (nicht dann in der methode erst umformatiern)
-         *
-         * todo file io reader for steps input
-         *
-         * todo class diagramm für db (nice to have)
-         *
-         * todo junit tests für methoden, die nicht direkt auf die db zugreifen
-         *
-         * todo type [ENUMS: WALKING,...]  // könnte auch gender als ENUMS anlegen (ev stattdessen)
-         *
-         * todo log time with runs (also in db) and compare times per km improvements (add maxTime to createChallenge)
-         */
-
     }
 
     /***
-     *
-
-     *
-     * Package Struktur:
-     *
-     *  (mit at.elisabethTulla.walk_it_off. ... beginnen
-     *
-     * com.training.walkit
-     * ├── walk/
-     * │   ├── Walk.java            # Entity
-     * │   ├── WalkRepository.java
-     * │   ├── WalkService.java
-     * │   └── WalkResource.java    # REST-Endpoint
-     * ├── user/
-     * │   ├── at.elisabeth_tulla.walk_it_off.model.User.java
-     * │   ├── at.elisabeth_tulla.walk_it_off.repository.UserRepository.java
-     * │   ├── at.elisabeth_tulla.walk_it_off.service.UserService.java
-     * │   └── UserResource.java
-     * ├── route/
-     * │   ├── Route.java
-     * │   ├── RouteRepository.java
-     * │   ├── RouteService.java
-     * │   └── RouteResource.java
-     * └── shared/
-     *     ├── config/
-     *     ├── exception/
-     *     └── util/
-     *
-     *
-     *     andere Variante:
-     *
-     * (mit at.elisabethTulla.walk_it_off. ... beginnen
-     * ----------------------
-     * com.training.walkit
-     * ├── model/          # Entities, DTOs
-     * ├── repository/     # Datenzugriff (JPA, Panache)
-     * ├── service/        # Business-Logik
-     * ├── controller/     # REST-Endpoints (JAX-RS / Spring MVC)
-     * ├── config/         # Konfigurationsklassen
-     * ├── exception/      # Custom Exceptions + Handler
-     * └── util/           # Hilfsfunktionen
-     *
-     *
-     *
      *
      * vaadin gui framework für java
      * quakus + spring

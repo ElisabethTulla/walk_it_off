@@ -51,7 +51,7 @@ public class ChallengeRepository {
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
             try {
-                conn.rollback();
+                conn.rollback(); //todo throw new RuntimeException(e);
             } catch (SQLException ex) {
                 System.err.println("Fehler beim rollback:" + ex.getMessage());
                 throw new RuntimeException(ex);
@@ -167,8 +167,7 @@ public class ChallengeRepository {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
             try {
                 conn.rollback();
-                return false; //todo besser ohne return false, sondern die Exceptions werfen lassen
-                //todo eigene Exception
+                return false; //todo throw new RuntimeException(e);
             } catch (SQLException ex) {
                 System.err.println("Fehler beim rollback:" + ex.getMessage());
                 throw new RuntimeException(ex);
@@ -213,7 +212,7 @@ public class ChallengeRepository {
         } catch (SQLException e) {
             System.err.println("Fehler beim Updaten der Datenbank :" + e.getMessage());
             try {
-                conn.rollback();
+                conn.rollback(); //todo throw new RuntimeException(e);
             } catch (SQLException ex) {
                 System.err.println("Fehler beim rollback:" + ex.getMessage());
                 throw new RuntimeException(ex);
