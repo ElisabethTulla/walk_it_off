@@ -1,9 +1,9 @@
-# at.elisabeth_tulla.walk_it_off.model.Activity Diagrams
+# Activity Diagrams
 
 ## Overview
 This document contains activity diagrams that model the business processes and workflows.
 
-## at.elisabeth_tulla.walk_it_off.model.Activity Diagram 1: [Process Name]
+## Activity Diagram 1: [Process Name]
 
 ### Description
 [Description of the process or workflow]
@@ -24,7 +24,7 @@ This document contains activity diagrams that model the business processes and w
 - [Decision point 1]: [Conditions]
 - [Decision point 2]: [Conditions]
 
-## at.elisabeth_tulla.walk_it_off.model.Activity Diagram 2: [Process Name]
+## Activity Diagram 2: [Process Name]
 
 ### Description
 [Description of the process or workflow]

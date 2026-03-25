@@ -45,7 +45,6 @@ public class ChallengeService {
             return requiredAchievement.getName();
     }
 
-    //enter Challenge:
     public boolean enterChallenge(User user, Integer challengeID) {
 
        Challenge currentChallenge = challengeRepo.getChallenge(challengeID);
@@ -57,11 +56,10 @@ public class ChallengeService {
 
         Challenge currentChallenge = challengeRepo.getChallenge(challengeId);
 
-        //check, if Challenge would exceed its maxParticipants:
         Integer numberParticipants = challengeRepo.getParticipantsCount(currentChallenge);
 
         if (numberParticipants == currentChallenge.getMaxNumberParticipants()) {
-            //Objects.equals(numberParticipants, currentChallenge.getMaxNumberParticipants())//todo replace with equals?
+            //Objects.equals(numberParticipants, currentChallenge.getMaxNumberParticipants())//todo FRAGE: replace with equals?
             return false;
         }
         return true;
@@ -88,13 +86,8 @@ public class ChallengeService {
             double sumKM = comparingRepo.getKmSumDateToDate(user1, startTime, nowTime);
             double diffKM = challenge.getGoalDistanceKm() - sumKM;
 
-            System.out.println("You already ran " + sumKM + " km. ");
-
-            if (diffKM <= 0) {
-                System.out.println("You already reached your goal!");
-            } else {
-                System.out.println(diffKM + " km left to run until " + challenge.getEndsAt());
-            }
+            System.out.println("You already ran " + sumKM + " km. " +
+                    diffKM + " km left to run until " + challenge.getEndsAt());
         }
     }
 
@@ -106,17 +99,14 @@ public class ChallengeService {
 
         //check if challenge goal is STEPS:
         if (challenge.getGoalSteps() >= 1) {
-            //count sum steps in Timeframe (from DB):
+
             Integer sumSteps = comparingRepo.getStepsSumDateToDate(user1, startTime, endTime);
 
-            //check, if goal was reached:
             if (sumSteps >= challenge.getGoalSteps()) {
 
-                //get achievement-object and unlock it:
                 Achievement achievement = achievementRepo.getAchievement(challenge.getRewardAchievementID());
                 achievementRepo.unlockAchievement(user1, achievement.getId());
 
-                //deactivate Challenge, because finished:
                 challengeRepo.deactivateChallenge(user1, challenge);
 
                 return achievement;
@@ -138,7 +128,6 @@ public class ChallengeService {
 
                 achievementRepo.unlockAchievement(user1, achievement.getId());
 
-                //deactivate Challenge, because finished
                 challengeRepo.deactivateChallenge(user1, challenge);
 
                 return achievement;
@@ -163,7 +152,6 @@ public class ChallengeService {
         return challenge.getEndsAt().before(Timestamp.from(Instant.now()));
     }
 
-    //show all Challenges
     public List<Challenge> showAllChallenges() {
         return challengeRepo.getAllChallenges();
     }
@@ -172,7 +160,6 @@ public class ChallengeService {
                                 Integer minParticipants, Integer maxParticipants, Integer goalSteps, double goalKm,
                                 LocalDate startdate, Integer lastsForDays,
                                 Integer rewardAchievementID) {
-        //todo check, if Challenge with that name + same startDate already exists
 
         LocalDateTime startDate = startdate.atStartOfDay();
 
@@ -197,23 +184,19 @@ public class ChallengeService {
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             endDate = localDate.atTime(23, 59);
 
-            //LocalDate localDate = LocalDate.ofInstant(calendar.toInstant(), ZoneId.systemDefault());
             //LocalDate localDate = LocalDate.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId());
         }
 
         Integer trueRequiredAchievementID;
 
-        //set default AchievementID if not otherwise specified:
         if (requiredAchievementID == 0) {
             trueRequiredAchievementID = 13;
         } else
             trueRequiredAchievementID = requiredAchievementID;
 
-        //create Challenge - Object:
         Challenge newChallenge = new Challenge(name, reqSteps, reqKm, trueRequiredAchievementID, minParticipants, maxParticipants,
                 goalSteps, goalKm, Timestamp.valueOf(startDate), Timestamp.valueOf(endDate), rewardAchievementID);
 
-        //create Challenge in DB:
         challengeRepo.createChallenge(newChallenge);
     }
 

@@ -156,51 +156,7 @@ public class Main {
 
     /***
      *
-     * FXML GUI
-     *
-     * Liste mit Detail Ansicht
-     * (Tabelle)
-     *
-     * ev. Grafiken dazu (eigene Library)
-     *
-     *
-     *
-     * eigenes JSOn file importieren für steps input
-     * + ev noch andere Formate (XML,...)
-     *
-     * + ev GAMIN Device XML : (BSP)
-     *
-     * <?xml version="1.0" encoding="UTF-8"?>
-     * <TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2">
-     * <Activities>
-     * <at.elisabeth_tulla.walk_it_off.model.Activity Sport="Running">
-     * <Id>2023-10-25T10:00:00Z</Id>
-     * <Lap StartTime="2023-10-25T10:00:00Z">
-     * <TotalTimeSeconds>1800</TotalTimeSeconds>
-     * <DistanceMeters>5000</DistanceMeters>
-     * <Calories>400</Calories>
-     * <Intensity>Active</Intensity>
-     * <Track>
-     * <Trackpoint>
-     * <Time>2023-10-25T10:00:00Z</Time>
-     * <Position>
-     * <LatitudeDegrees>50.123</LatitudeDegrees>
-     * <LongitudeDegrees>8.456</LongitudeDegrees>
-     * </Position>
-     * <AltitudeMeters>120</AltitudeMeters>
-     * <DistanceMeters>0</DistanceMeters>
-     * <HeartRateBpm><Value>120</Value></HeartRateBpm>
-     * </Trackpoint>
-     * <!-- Weitere Trackpoints -->
-     * </Track>
-     * </Lap>
-     * </at.elisabeth_tulla.walk_it_off.model.Activity>
-     * </Activities>
-     * </TrainingCenterDatabase>
-     *
-     * -> ev auf JSON file umwandeln und so importieren (ev mit ChatGPT)
-     *
-     *
+
      *
      * Package Struktur:
      *

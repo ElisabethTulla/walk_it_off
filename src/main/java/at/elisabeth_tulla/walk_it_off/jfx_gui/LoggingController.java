@@ -95,10 +95,15 @@ public class LoggingController {
             } else if (achievements.size() > 1) {
                 alert.setHeaderText("Congratulations! You have unlocked " + achievements.size() + " Achievements!");
             }
+
+            StringBuilder stringBuilder = new StringBuilder();
+
             for (Achievement achievement : achievements) {
-                alert.setContentText(achievement.getName());
-                //todo FRAGE: funktioniert das, oder überschreibt es sich selbst?
+                stringBuilder.append(achievement.getName());
+                stringBuilder.append("\n");
             }
+            alert.setContentText(stringBuilder.toString());
+
             alert.showAndWait();
         }
     }

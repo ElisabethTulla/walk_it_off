@@ -12,7 +12,7 @@ This document contains sketches and wireframes for the graphical user interface.
 
 ### View 1: [View Name]
 **Purpose:** [Description of the view's purpose]
-**at.elisabeth_tulla.walk_it_off.model.User:** [Target user role]
+**User:** [Target user role]
 
 [Insert sketch/wireframe here]
 
@@ -27,7 +27,7 @@ This document contains sketches and wireframes for the graphical user interface.
 
 ### View 2: [View Name]
 **Purpose:** [Description of the view's purpose]
-**at.elisabeth_tulla.walk_it_off.model.User:** [Target user role]
+**User:** [Target user role]
 
 [Insert sketch/wireframe here]
 

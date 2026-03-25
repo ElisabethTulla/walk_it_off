@@ -17,7 +17,7 @@
 
 ## Sprint Backlog
 
-### Committed at.elisabeth_tulla.walk_it_off.model.User Stories
+### Committed User Stories
 
 #### PBI-001: [at.elisabeth_tulla.walk_it_off.model.User Story Title]
 **Priority:** High

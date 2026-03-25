@@ -13,9 +13,9 @@ This document contains the product backlog - the prioritized list of features, e
 **Business Value:** [High/Medium/Low]
 **Status:** [Not Started/In Progress/Done]
 
-#### at.elisabeth_tulla.walk_it_off.model.User Stories
+#### User Stories
 
-##### PBI-001: [at.elisabeth_tulla.walk_it_off.model.User Story Title]
+##### PBI-001: [User Story Title]
 **As a** [user role]
 **I want** [goal]
 **So that** [benefit]
@@ -31,7 +31,7 @@ This document contains the product backlog - the prioritized list of features, e
 **Sprint:** [Sprint number or N/A]
 **Notes:** [Additional notes]
 
-##### PBI-002: [at.elisabeth_tulla.walk_it_off.model.User Story Title]
+##### PBI-002: [User Story Title]
 **As a** [user role]
 **I want** [goal]
 **So that** [benefit]
@@ -50,13 +50,13 @@ This document contains the product backlog - the prioritized list of features, e
 **Business Value:** [High/Medium/Low]
 **Status:** [Not Started/In Progress/Done]
 
-#### at.elisabeth_tulla.walk_it_off.model.User Stories
+#### User Stories
 
-##### PBI-003: [at.elisabeth_tulla.walk_it_off.model.User Story Title]
-[at.elisabeth_tulla.walk_it_off.model.User story details]
+##### PBI-003: [User Story Title]
+[User story details]
 
-##### PBI-004: [at.elisabeth_tulla.walk_it_off.model.User Story Title]
-[at.elisabeth_tulla.walk_it_off.model.User story details]
+##### PBI-004: [User Story Title]
+[User story details]
 
 ## Technical Debt Items
 

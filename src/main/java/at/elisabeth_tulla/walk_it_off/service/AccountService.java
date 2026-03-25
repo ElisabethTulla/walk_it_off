@@ -10,73 +10,70 @@ public class AccountService {
     ValidationManager valid = new ValidationManager();
 
 
-    public void changeLastName(User user1, String newName){
+    public String changeLastName(User user1, String newName){
 
-        // todo profanity-check (Method in ValidationManager)
-
-        //change at.elisabeth_tulla.walk_it_off.model.User-Object:
         user1.setLastName(newName);
-        //change Name in DB:
+
         accountRepo.changeLastname(user1);
-        System.out.println("Lastname changed to " + newName);
+
+        return user1.getLastName();
     }
 
-    public void changeFirstName(User user1, String newName){
+    public String changeFirstName(User user1, String newName){
 
-        // todo profanity-check (Method in ValidationManager)
-
-        //change at.elisabeth_tulla.walk_it_off.model.User-Object:
         user1.setFirstName(newName);
-        //change Name in DB:
+
         accountRepo.changeFirstname(user1);
-        System.out.println("Firstname changed to " + newName);
+
+        return user1.getFirstName();
     }
 
-    public void changeEmail(User user1, String newEmail){
+    public String changeEmail(User user1, String newEmail){
 
-        //check, if email already exists in db:
         boolean emailAlreadyExists = valid.checkEmail(newEmail);
 
         if (emailAlreadyExists){
-            System.out.println("This e-mail is already registered.");
+            return null;
         } else {
-            //change at.elisabeth_tulla.walk_it_off.model.User-Object:
+
             user1.setEmail(newEmail);
-            //change Name in DB:
+
             accountRepo.changeEmail(user1);
-            System.out.println("E-mail changed.");
+
+            return user1.getEmail();
         }
     }
 
-    public void changePassword(User user1, String newPassword){
+    public boolean changePassword(User user1, String newPassword){
 
-        //check if password is valid:
         boolean isValidPassword = valid.validatePassword(newPassword);
 
-        if (!isValidPassword){
-            System.out.println("The password must be between 8 - 20 characters long, \n" +
-                    "must contain at least one digit, one lower case, \n" +
-                    "one upper case character and one special character. \n" +
-                    "No spaces between characters.");
-            return;}
+        boolean passwordChanged;
 
-        //change at.elisabeth_tulla.walk_it_off.model.User-Object:
-        user1.setPassword(newPassword);
-        //change Password in DB:
-        accountRepo.changePassword(user1);
-        System.out.println("Password changed");
+        if (!isValidPassword){
+            passwordChanged = false;
+        } else {
+
+            user1.setPassword(newPassword);
+
+            accountRepo.changePassword(user1);
+            passwordChanged = true;
+        }
+        return passwordChanged;
     }
 
-    public void deleteUser(String email){
+    public boolean deleteUser(String email){
 
         boolean deleted = accountRepo.deleteUserAccount(email);
 
-        if (deleted){
-            System.out.println("Account deleted");
-        } else {
-            System.out.println("Account not found");
-        }
+        boolean accountDeleted;
 
+        if (deleted){
+            accountDeleted = true;
+        } else {
+            accountDeleted = false;
+        }
+        return accountDeleted;
     }
 
 }

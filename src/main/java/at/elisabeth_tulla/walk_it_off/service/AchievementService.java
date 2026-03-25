@@ -10,27 +10,21 @@ public class AchievementService {
 
     AchievementRepository achievementRepository = new AchievementRepository();
 
-
-    //create Achievement
     public Integer createAchievement(String name, Integer requiredSteps, double requiredKm,
                                   Integer requiredDays, String type){
 
-        //create Achievement Object
         Achievement newAchievement = new Achievement(name, requiredSteps, requiredKm, requiredDays, type);
 
-        //create Achievement in DB
         achievementRepository.createAchievement(newAchievement);
 
         return newAchievement.getId();
 
     }
 
-    //show Achievements from user
     public List<Achievement> showUserAchievements(User user) {
         return achievementRepository.getUserAchievements(user);
     }
 
-    //show all possible achievements:
     public List<Achievement> showAllAchievements() {
                 return achievementRepository.getAllAchievements();
     }

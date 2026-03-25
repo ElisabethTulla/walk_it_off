@@ -167,7 +167,8 @@ public class ChallengeRepository {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
             try {
                 conn.rollback();
-                return false; //todo return an der richtigen Stelle?
+                return false; //todo besser ohne return false, sondern die Exceptions werfen lassen
+                //todo eigene Exception
             } catch (SQLException ex) {
                 System.err.println("Fehler beim rollback:" + ex.getMessage());
                 throw new RuntimeException(ex);

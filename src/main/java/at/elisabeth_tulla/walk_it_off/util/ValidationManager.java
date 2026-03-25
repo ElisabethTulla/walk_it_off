@@ -34,7 +34,7 @@ public class ValidationManager {
         if (password == null) {
             return false;
         }
-        // Regex to check valid password.
+
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*['*°?/!@#$%^&-+=()])(?=\\S+$).{8,20}$";
 
         // Compile Regex:
@@ -43,10 +43,7 @@ public class ValidationManager {
         // Matcher finds matching Regex - password:
         Matcher m = p.matcher(password);
 
-        // Return true if the password matched the Regex:
         return m.matches();
     }
-
-    //todo profanity check
 
 }

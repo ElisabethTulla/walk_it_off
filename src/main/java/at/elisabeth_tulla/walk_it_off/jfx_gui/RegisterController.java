@@ -43,6 +43,8 @@ public class RegisterController {
 
     public void btnCreateUserClicked(ActionEvent actionEvent) throws IOException {
 
+        //todo try catch -> im catch den Alert "Fehler beim ..." an den User schicken
+
         String firstName = txtFirstName.getText();
         String lastName = txtLastName.getText();
         String email = txtEmail.getText();

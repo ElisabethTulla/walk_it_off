@@ -21,9 +21,8 @@ public class LoggingService {
 
     ChallengeService challengeService = new ChallengeService();
 
+    /*
     public String checkActivity(String activityName) {
-
-        //todo is this method still necessary?
 
         return switch (activityName.toUpperCase()) {
             case "WALKING" -> "GUI pop-up for user input walking";
@@ -34,8 +33,10 @@ public class LoggingService {
         };
     }
 
+     */
+
     public List<Achievement> loggWalking(User user, String activity, Integer steps) {
-        //create Activity:
+
         Activity activity1 = new Activity(user.getId(), activity, steps);
 
         loggingRepo.loggActivity(user, activity1);
@@ -51,7 +52,7 @@ public class LoggingService {
     }
 
     public List<Achievement> loggRunning(User user, String activity, double distanceInKm) {
-        //create Activity:
+
         Activity activity1 = new Activity(user.getId(), activity, distanceInKm);
 
         loggingRepo.loggActivity(user, activity1);
@@ -60,7 +61,6 @@ public class LoggingService {
 
     private List<Achievement> getAchievementsFromChallenges(User user) {
 
-        //get all active Challenges:
         List<Challenge> activeChallenges = challengeService.getActiveChallenges(user);
 
         List<Achievement> achievedAchievements = new ArrayList<>();
@@ -76,8 +76,12 @@ public class LoggingService {
         return achievedAchievements;
     }
 
+
+    /*
     public HashMap<LocalDateTime, Integer> checkActiveChallenges(User user) {
         return challengeRepo.getOngoingChallenges(user);
     }
+
+     */
 
 }

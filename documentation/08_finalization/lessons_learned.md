@@ -1,9 +1,9 @@
 # Lessons Learned
 
 ## Project Overview
-**Project Name:** [Project name]
-**Duration:** [Start date] to [End date]
-**Team Size:** [Number of team members]
+**Project Name:** Walk it off
+**Duration:** 1.2.26 to 9.4.26
+**Team Size:** 1
 **Final Status:** [Successful/Completed/Cancelled]
 
 ## Executive Summary

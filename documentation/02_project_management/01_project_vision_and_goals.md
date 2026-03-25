@@ -1,13 +1,22 @@
 # Project Vision and Goals
 
 ## Vision
-High-level vision of the product.
+Walk_it_off is an application that allows users to track their steps and kilometers.
+It uses gamification through a reward system and lets people create and enter challenges
+that either aim at a specific step- or kilometer- goal in a certain timeframe.
+The project aims to encourage users to better their health by moving more. 
+
 
 ## Problem Statement
-What problem is being solved?
+This project aims to lessen the general lack of movement of society and 
+improve the overall health of people in a way that's fun and easy to do.
 
 ## Goals
-List of measurable project goals.
+- active users
+- users tracking steps and/or kilometers
+- users completing challenges
+- users earning achievements
 
 ## Success Criteria
-When is the project considered successful?
+The application is considered successful when people use it to track their movement 
+and try to earn achievements, therefore bettering their health.

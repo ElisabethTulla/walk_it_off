@@ -224,10 +224,11 @@ public class AccountController {
             List<Activity> items = yourSteps.keySet().stream()
                     .map(key -> new Activity(key, yourSteps.get(key)))
                     .toList();
-
+/*
             for (Activity item : items) {
                 System.out.println(item.toString());
             }
+ */
 
             ObservableList<Activity> obsItems = FXCollections.observableArrayList(items);
 
