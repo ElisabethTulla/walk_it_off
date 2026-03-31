@@ -1,12 +1,12 @@
 package at.elisabeth_tulla.walk_it_off.service;
 
 import at.elisabeth_tulla.walk_it_off.model.User;
-import at.elisabeth_tulla.walk_it_off.repository.AccountRepository;
+import at.elisabeth_tulla.walk_it_off.repository.ManageAccountRepository;
 import at.elisabeth_tulla.walk_it_off.util.ValidationManager;
 
-public class AccountService {
+public class ManageAccountService {
 
-    AccountRepository accountRepo = new AccountRepository();
+    ManageAccountRepository accountRepo = new ManageAccountRepository();
     ValidationManager valid = new ValidationManager();
 
 

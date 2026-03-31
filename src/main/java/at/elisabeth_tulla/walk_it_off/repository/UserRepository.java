@@ -14,7 +14,7 @@ public class UserRepository {
     public UserRepository() {
     }
 
-    public boolean registerNewUser(User newUser) {
+    public void registerNewUser(User newUser) {
 
         String sql = "INSERT INTO user_walkitoff (first_name, last_name, email, password, gender, birthday) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
@@ -40,17 +40,9 @@ public class UserRepository {
 
             conn.commit();
 
-            return true;
-
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();
-                return false; //todo throw new RuntimeException(e);
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+                throw new RuntimeException(e);
         }
     }
 

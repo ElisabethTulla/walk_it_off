@@ -32,48 +32,86 @@ public class JfxMainApp extends Application {
 
 
     /*** TODO:
-     * class diagarmm mit relationsships und kardinalitäten ( ein user kann x acchievements haben 1 -n , .....)
      *
-     *      (nice tot have) class diagramm für db?
+     * class diagramm -> add notes between the object-classes to indicate Zwischentabellen in the db
      *
      * Enter Challenge -> bug! does not show in "ongoing Challenges" in AccountView
      *
-     * Check if Pop up alert für achievements (in loggingController) funktioniert
-     *
-     * compare Options in Gui eventuell entfernen? Oder vll disablen
-     *
      *      (nice to have) Logger? for login password/email wrong (error/warning/debug)
      *
-     * UNIT Test für Methode, die nicht direkt auf die db zugreift
+     * UNIT Tests fertig machen
      *
-     * try-catch in Controller IO Exception
+     * Controller Interface (with current user)
      *
-     * ChallengeView make challenge- and achievement tables longer!!
+     *      (nice to have) prevent empty textfields in Register-, Logging- und ChallengeController
      *
-     * in ChallengeView load AchievementID in textfield (oder change to text -> *.setText(..))
+     * grüne-Sternchen-Kommentare -> für jede Klasse wofür sie da ist und bei den ganz wichtigen Methoden auch wieso sie da sind
      *
-     * todo FRAGE: documentation/01_project_overview ->ganz unten Jira link ??;
-     * /02_project_management/02_stakeholders -> Risks and Assumptions;
-     * /02_project_management/03 !?!?;
-     * 03_analysis (use-case-diagram)
+     * Inhalt der PowerPoint -> Dokumentation!, refactoring der Achievement-Logik kann erwähnt werden     *
      *
-     * todo FRAGE: JFXMain im jfx_gui package lassen?
      *
-     * todo FRAGE: toString() der Object-Klassen wird nie verwendet... notwendig?
      *
-     * todo FRAGE: grüne-Sternchen-Kommentare für alle/manche Methoden machen?
+     *  class diagramm note zwischen achievement und user -> zwischentabelle + user und challenge -> zwischentabelle
      *
-     * todo FRAGE: keine ENUMS... (possibilities: gender, type of achievement, type of activity)
+     *  controller interface mit current user, die controller sind abstrakte klassen die davon ableiten -> class diagramm einzeichnen
      *
+     *  statt ActivityService/ ActivityRepository -> anderer Begriff statt logging  => activityController, service, repository
+     *
+     * in der documentation use cases aus dem backlog von github (die features) - eventuell kann man es aus dem project exportieren -> ev AI markdown machen lassen)
+     *
+     * requirements_and_user_stories: hier die user Stories von github (wenn ich es exportiern kann, wenn Export von github nicht geht, nur exemplarisch hier und auf github verweisen)
+     *
+     * FEATURES zu den usecasses , STORIES zu requirements_and_user_stories
+     *
+     * [STORY] compare to group stats	https://github.com/ElisabethTulla/walk_it_off/issues/25
+     * [STORY] file IO activity input	https://github.com/ElisabethTulla/walk_it_off/issues/36
+     * [FEAT] activity logging	https://github.com/ElisabethTulla/walk_it_off/issues/18
+     * [FEAT] gui	https://github.com/ElisabethTulla/walk_it_off/issues/31
+     * [FEAT] show and compare stats	https://github.com/ElisabethTulla/walk_it_off/issues/21
+     * [STORY] implement database configuration	https://github.com/ElisabethTulla/walk_it_off/issues/10
+     * [FEAT] Project Setup and Configuration	https://github.com/ElisabethTulla/walk_it_off/issues/4
+     * [STORY] manuel input	https://github.com/ElisabethTulla/walk_it_off/issues/19
+     * [STORY] write to database	https://github.com/ElisabethTulla/walk_it_off/issues/20
+     * [STORY] Setup Github and initial structure	https://github.com/ElisabethTulla/walk_it_off/issues/5
+     * [STORY] create postgres database	https://github.com/ElisabethTulla/walk_it_off/issues/8
+     * [STORY] implement database connection	https://github.com/ElisabethTulla/walk_it_off/issues/11
+     * [STORY] create database tables and relations	https://github.com/ElisabethTulla/walk_it_off/issues/9
+     * [FEAT] database setup	https://github.com/ElisabethTulla/walk_it_off/issues/7
+     * [STORY] write to database	https://github.com/ElisabethTulla/walk_it_off/issues/17
+     * [STORY] project setup	https://github.com/ElisabethTulla/walk_it_off/issues/6
+     * [STORY] user registration	https://github.com/ElisabethTulla/walk_it_off/issues/13
+     * [STORY] user account deletion	https://github.com/ElisabethTulla/walk_it_off/issues/16
+     * [STORY] user name change	https://github.com/ElisabethTulla/walk_it_off/issues/15
+     * [STORY] user login	https://github.com/ElisabethTulla/walk_it_off/issues/14
+     * [FEAT] account management	https://github.com/ElisabethTulla/walk_it_off/issues/12
+     * [STORY] read from database	https://github.com/ElisabethTulla/walk_it_off/issues/22
+     * [STORY] compare stats to own old stats	https://github.com/ElisabethTulla/walk_it_off/issues/23
+     * [STORY] compare stats to other user	https://github.com/ElisabethTulla/walk_it_off/issues/24
+     * [FEAT] challenges	https://github.com/ElisabethTulla/walk_it_off/issues/26
+     * [STORY] enter challenge	https://github.com/ElisabethTulla/walk_it_off/issues/27
+     * [STORY] show challenges	https://github.com/ElisabethTulla/walk_it_off/issues/28
+     * [STORY] create challenges	https://github.com/ElisabethTulla/walk_it_off/issues/32
+     * [STORY] create achievements	https://github.com/ElisabethTulla/walk_it_off/issues/33
+     *
+     *
+     * (libraries used:
+     *      * - java.sql
+     *      * - java.time
+     *      * - java.util
+     *      * - java.io
+     *      * - javafx
+     *      * - Junit)
      */
 
-    /*** FURURE PLANS:
+    /*** FUTURE PLANS:
      *
-     *   FEAT show and compare stats #21:
      *  - compare achievements to other user
      *  - compare stats to user-group (eg others in your age group, ...)
      *
      *  - log time with runs (also in db) and compare times per km improvements (add maxTime to createChallenge)
+     *
+     *  - Tooltip "Show Progress" when hover over Item in TableView challengesTable
+     *  - load new Scene(view+controller) onClick on Item in TableView challengesTable
      *
      */
 }

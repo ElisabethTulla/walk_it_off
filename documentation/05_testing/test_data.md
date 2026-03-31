@@ -3,6 +3,8 @@
 ## Overview
 This document describes the test data used for testing the system.
 
+User, die ich erstellt hab, während ich das programm getestet hab (sql file link!)
+
 ## Test Data Strategy
 
 ### Data Generation Approach

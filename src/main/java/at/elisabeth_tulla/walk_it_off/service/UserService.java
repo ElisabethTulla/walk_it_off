@@ -13,16 +13,14 @@ public class UserService {
     AchievementRepository achievementRepo = new AchievementRepository();
 
 
-    public boolean registerUser(String firstName, String lastName, String email, String password,
+    public void registerUser(String firstName, String lastName, String email, String password,
             LocalDate birthdayDate, String gender){
 
             User newUser = new User(firstName, lastName, email, password, birthdayDate, gender);
 
-            boolean registered = userRepo.registerNewUser(newUser);
+            userRepo.registerNewUser(newUser);
 
             achievementRepo.unlockAchievement(newUser, 13);
-
-        return registered;
     }
 
     public User login(String email, String password){
@@ -42,8 +40,6 @@ public class UserService {
             System.out.println("Invalid password!");
             return null;
         } else {
-            System.out.println("Hello, " + user1.getFirstName() + "!");
-
             return user1;
         }
     }

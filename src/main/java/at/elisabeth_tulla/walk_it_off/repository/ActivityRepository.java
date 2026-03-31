@@ -6,10 +6,10 @@ import at.elisabeth_tulla.walk_it_off.model.User;
 
 import java.sql.*;
 
-public class LoggingRepository {
+public class ActivityRepository {
     public Connection conn = DatabaseConfig.configure();
 
-    public LoggingRepository() {
+    public ActivityRepository() {
     }
 
     public void loggActivity(User user, Activity activity) {
@@ -38,14 +38,8 @@ public class LoggingRepository {
 
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback(); //todo throw new RuntimeException(e);
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            throw new RuntimeException(e);
         }
     }
-
-
 }
+

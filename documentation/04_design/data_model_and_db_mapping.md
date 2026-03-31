@@ -3,6 +3,9 @@
 ## Overview
 This document describes the data model and how it maps to the database schema.
 
+die zwischentabellen angeben und link zum SQL file, das die Tabellen erstellt
+
+
 ## Conceptual Data Model
 [Description of the conceptual data model]
 

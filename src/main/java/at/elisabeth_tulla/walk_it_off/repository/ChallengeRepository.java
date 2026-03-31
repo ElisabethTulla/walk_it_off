@@ -50,12 +50,7 @@ public class ChallengeRepository {
 
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback(); //todo throw new RuntimeException(e);
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            throw new RuntimeException(e);
         }
     }
 
@@ -107,7 +102,7 @@ public class ChallengeRepository {
         }
     }
 
-    public Challenge mapRows(ResultSet rs) throws SQLException {
+    private Challenge mapRows(ResultSet rs) throws SQLException {
 
         Integer id = rs.getInt("id");
         String name = rs.getString("name");
@@ -146,7 +141,7 @@ public class ChallengeRepository {
         }
     }
 
-    public boolean enterChallenge(User user, Challenge currentChallenge) {
+    public void enterChallenge(User user, Challenge currentChallenge) {
 
         String sql = "INSERT INTO user_challenge (user_id, challenge_id) VALUES (?, ?)";
 
@@ -157,21 +152,12 @@ public class ChallengeRepository {
             ps.setInt(1, user.getId());
             ps.setInt(2, currentChallenge.getId());
 
-
             ps.executeUpdate();
             conn.commit();
 
-            return true;
-
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();
-                return false; //todo throw new RuntimeException(e);
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            throw new RuntimeException(e);
         }
     }
 
@@ -192,7 +178,6 @@ public class ChallengeRepository {
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void deactivateChallenge(User user, Challenge challenge) {
@@ -211,14 +196,8 @@ public class ChallengeRepository {
 
         } catch (SQLException e) {
             System.err.println("Fehler beim Updaten der Datenbank :" + e.getMessage());
-            try {
-                conn.rollback(); //todo throw new RuntimeException(e);
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            throw new RuntimeException(e);
         }
-
     }
 
     public List<Challenge> getActiveChallenges(User user) {
@@ -238,7 +217,6 @@ public class ChallengeRepository {
                     activeChallenges.add(c);
                 }
                 return activeChallenges;
-
             }
         }catch (SQLException e) {
             throw new RuntimeException(e);

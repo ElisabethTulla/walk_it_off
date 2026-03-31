@@ -3,6 +3,8 @@
 ## Overview
 This document contains test cases derived from the analysis phase, based on requirements and use cases.
 
+zu den userStories Testfälle generieren lassen (ai) 
+
 ## Test Case Template
 
 ### TC-A-XXX: [Test Case Name]

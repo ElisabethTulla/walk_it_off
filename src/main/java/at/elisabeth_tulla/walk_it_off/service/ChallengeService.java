@@ -45,11 +45,11 @@ public class ChallengeService {
             return requiredAchievement.getName();
     }
 
-    public boolean enterChallenge(User user, Integer challengeID) {
+    public void enterChallenge(User user, Integer challengeID) {
 
        Challenge currentChallenge = challengeRepo.getChallenge(challengeID);
 
-        return challengeRepo.enterChallenge(user, currentChallenge);
+        challengeRepo.enterChallenge(user, currentChallenge);
     }
 
     public boolean checkParticipantsOutmaxed(Integer challengeId) {

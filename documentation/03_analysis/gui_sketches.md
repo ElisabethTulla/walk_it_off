@@ -1,6 +1,8 @@
 # GUI Sketches
 
 ## Overview
+This is out of scope .. 
+
 This document contains sketches and wireframes for the graphical user interface.
 
 ## Design Principles

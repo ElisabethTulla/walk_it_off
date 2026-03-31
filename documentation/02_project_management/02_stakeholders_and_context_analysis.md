@@ -2,7 +2,7 @@
 
 ## Stakeholders
 | Christian Schäfer | Trainer | Graduation of Students |
-|-------------------|---------|--------------------------------|
+|-------------------| User | tracking of activities |
 
 ## Business Context
 Organizational and business environment.
@@ -12,8 +12,11 @@ It is the independent work of the student and is monitored within biweekly coach
 ## Technical Context
 Technologies, platforms, constraints.
 
-This application is a maven project programmed in Java version 25 
+This application should be a maven project programmed in Java version 25 
 using Intellij, postgresql and Github.
 
 ## Risks and Assumptions
 Key risks and assumptions.
+Failing the wifi course.
+The feature set exceeds the amount of hours available.
+Slimming down the features to fit the available timeframe.

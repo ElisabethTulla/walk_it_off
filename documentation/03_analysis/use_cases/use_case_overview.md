@@ -4,7 +4,9 @@
 This document provides an overview of all use cases for the system.
 
 ## Use Case Diagram
-[Insert use case diagram here]
+
+![UseCaseDiagrammWalkItOff.png](UseCaseDiagrammWalkItOff.png)
+
 
 ## Use Case List
 
@@ -15,11 +17,7 @@ This document provides an overview of all use cases for the system.
 
 ## Actors
 
-### [Actor Name 1]
-**Description:** [Actor description]
-**Responsibilities:** [Actor responsibilities]
-
-### [Actor Name 2]
+### User
 **Description:** [Actor description]
 **Responsibilities:** [Actor responsibilities]
 

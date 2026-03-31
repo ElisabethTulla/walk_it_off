@@ -40,12 +40,7 @@ public class AchievementRepository {
             conn.commit();
         } catch (SQLException e) {
             System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();//todo throw new RuntimeException(e);
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            throw new RuntimeException(e);
         }
     }
 
@@ -65,13 +60,7 @@ public class AchievementRepository {
             conn.commit();
 
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();//todo throw new RuntimeException(e);
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            throw new RuntimeException(e);
         }
     }
 
@@ -102,7 +91,7 @@ public class AchievementRepository {
         }
     }
 
-    public Achievement extendedMapRows(ResultSet rs) throws SQLException {
+    private Achievement extendedMapRows(ResultSet rs) throws SQLException {
 
         Integer id = rs.getInt("achievement_id");
         String name = rs.getString("name");
@@ -139,7 +128,7 @@ public class AchievementRepository {
         }
     }
 
-    public Achievement mapRows(ResultSet rs) throws SQLException {
+    private Achievement mapRows(ResultSet rs) throws SQLException {
 
         Integer id = rs.getInt("id");
         String name = rs.getString("name");

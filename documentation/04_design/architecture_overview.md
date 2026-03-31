@@ -16,14 +16,20 @@ This document provides a high-level overview of the system architecture.
 
 ## System Components
 
-### Component 1: [Name]
+### Component 1: application walk it off
 **Purpose:** [Description]
 **Responsibilities:**
 - [Responsibility 1]
 - [Responsibility 2]
 
 **Technologies:**
-- [Technology 1]
+- libraries used:
+   *      * - java.sql
+   *      * - java.time
+   *      * - java.util
+   *      * - java.io
+   *      * - javafx
+   *      * - Junit)[Technology 1]
 - [Technology 2]
 
 ### Component 2: [Name]

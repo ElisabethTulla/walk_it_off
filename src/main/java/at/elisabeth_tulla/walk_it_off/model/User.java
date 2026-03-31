@@ -15,7 +15,7 @@ public class User {
     private boolean active;
     private LocalDate birthdayDate;
     private Integer age;
-    private String gender; //todo als enum
+    private String gender;
 
     public User (String firstName, String lastName, String email, String password,
                  LocalDate birthdayDate, String gender){

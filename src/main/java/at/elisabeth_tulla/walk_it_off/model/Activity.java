@@ -10,7 +10,6 @@ public class Activity {
     private Integer steps = 0;
     private double distanceInKm = 0;
     private Timestamp loggedAt;
-    private double distanceInKmAll = 0;
 
     //constructors walking:
     public Activity(Integer id, String activity, Integer steps) {
@@ -74,14 +73,6 @@ public class Activity {
 
     public void setLoggedAt(Timestamp loggedAt) {
         this.loggedAt = loggedAt;
-    }
-
-    public double getDistanceInKmAll() {
-        return distanceInKmAll;
-    }
-
-    public void setDistanceInKmAll(double distanceInKmAll) {
-        this.distanceInKmAll = distanceInKmAll;
     }
 
     @Override

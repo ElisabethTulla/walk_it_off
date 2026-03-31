@@ -6,34 +6,18 @@ import at.elisabeth_tulla.walk_it_off.model.Challenge;
 import at.elisabeth_tulla.walk_it_off.model.User;
 import at.elisabeth_tulla.walk_it_off.repository.AchievementRepository;
 import at.elisabeth_tulla.walk_it_off.repository.ChallengeRepository;
-import at.elisabeth_tulla.walk_it_off.repository.LoggingRepository;
+import at.elisabeth_tulla.walk_it_off.repository.ActivityRepository;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class LoggingService {
+public class ActivityService {
 
-    LoggingRepository loggingRepo = new LoggingRepository();
+    ActivityRepository loggingRepo = new ActivityRepository();
     ChallengeRepository challengeRepo = new ChallengeRepository();
     AchievementRepository achievementRepo = new AchievementRepository();
 
     ChallengeService challengeService = new ChallengeService();
-
-    /*
-    public String checkActivity(String activityName) {
-
-        return switch (activityName.toUpperCase()) {
-            case "WALKING" -> "GUI pop-up for user input walking";
-            case "RUNNING" -> "GUI pop-up for user input running";
-            case "BIKING" -> "GUI pop-up for user input biking";
-            case "SWIMMING" -> "GUI pop-up for user input swimming";
-            default -> "Please choose an activity.";
-        };
-    }
-
-     */
 
     public List<Achievement> loggWalking(User user, String activity, Integer steps) {
 

@@ -3,6 +3,8 @@
 ## Overview
 This document outlines the overall testing strategy for the project.
 
+junit und manuell tests only
+
 ## Testing Objectives
 1. [Objective 1]
 2. [Objective 2]

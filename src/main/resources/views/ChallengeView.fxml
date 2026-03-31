@@ -30,7 +30,7 @@
                   <Font size="18.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </Text>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="All Challenges:">
@@ -38,7 +38,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </Text>
-            <TableView fx:id="allChallengesTable">
+            <TableView fx:id="allChallengesTable" minHeight="150.0">
               <columns>
                 <TableColumn fx:id="chaIdColumn" prefWidth="27.5" text="ID" />
                 <TableColumn fx:id="chaNameColumn" prefWidth="184.5" text="Name" />
@@ -67,12 +67,7 @@
                   <Insets bottom="10.0" left="15.0" top="10.0" />
                </padding>
             </HBox>
-            <Text layoutX="386.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="***********************">
-               <VBox.margin>
-                  <Insets bottom="10.0" top="20.0" />
-               </VBox.margin>
-            </Text>
-            <Text layoutX="342.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="... or create a New Challenge:">
+            <Text layoutX="342.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*****     ... or create a New Challenge:    *****">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
@@ -103,16 +98,9 @@
             <HBox alignment="CENTER" layoutX="10.0" layoutY="422.0" spacing="20.0">
                <children>
                   <Button fx:id="btnLoadRewardAchievementId" mnemonicParsing="false" onAction="#btnLoadRewardAchievementIdClicked" text="Load Reward-Achievement ID:" />
-                  <TextField fx:id="txtloadRewardAchievementId" editable="false" layoutX="127.0" layoutY="20.0" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="15.0" top="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="566.0" spacing="20.0">
-               <children>
-                  <Text layoutX="25.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Challenge Name:" />
-                  <TextField fx:id="txtChallengeName" layoutX="127.0" layoutY="20.0" promptText="MasterChallenge" />
+                  <Text fx:id="txtRewardAchievementId" layoutX="411.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*******" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Challenge Name:" />
+                  <TextField fx:id="txtChallengeName" promptText="MasterChallenge" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="15.0" top="10.0" />
@@ -162,13 +150,13 @@
                   <Insets bottom="10.0" left="15.0" top="10.0" />
                </padding>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#btnCreateChallengeClicked" text="create Challenge">
+            <Button fx:id="btnCreateChallenge" disable="true" mnemonicParsing="false" onAction="#btnCreateChallengeClicked" text="create Challenge">
                <VBox.margin>
                   <Insets bottom="20.0" top="10.0" />
                </VBox.margin>
             </Button>
             <Text layoutX="386.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Achievements:" />
-            <TableView fx:id="achievementTable" layoutX="10.0" layoutY="93.0">
+            <TableView fx:id="achievementTable" layoutX="10.0" layoutY="93.0" minHeight="150.0">
                <columns>
                   <TableColumn fx:id="achIdColumn" prefWidth="28.5" text="ID" />
                   <TableColumn fx:id="achNameColumn" prefWidth="263.5" text="Name" />

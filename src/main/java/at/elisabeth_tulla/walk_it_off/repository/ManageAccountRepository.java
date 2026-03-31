@@ -7,11 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class AccountRepository {
+public class ManageAccountRepository {
 
     public Connection conn = DatabaseConfig.configure();
 
-    public AccountRepository(){}
+    public ManageAccountRepository(){}
 
     public boolean changeLastname(User user1){
 
@@ -83,7 +83,6 @@ public class AccountRepository {
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            //ps.setInt(1, user1.getId());
             ps.setString(1, email);
 
             return ps.executeUpdate() > 0;

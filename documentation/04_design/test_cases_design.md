@@ -3,6 +3,8 @@
 ## Overview
 This document contains test cases derived from the design phase, focusing on component and integration testing.
 
+testfälle sollen autonom sein. es gibt unit test
+
 ## Test Case Template
 
 ### TC-D-XXX: [Test Case Name]

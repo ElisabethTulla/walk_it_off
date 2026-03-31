@@ -10,7 +10,6 @@ import at.elisabeth_tulla.walk_it_off.service.ComparingService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +22,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -54,14 +52,6 @@ public class AccountController {
     private TableColumn<Challenge, Timestamp> startedColumn; //todo FRAGE: besser LocalDateTime(auch im Objekt?)
     @FXML
     private TableColumn<Challenge, Timestamp> endsColumn;
-
-    //AchievementsRadioButtons:
-    @FXML
-    private RadioButton yourAchievementsRadioButton;
-    @FXML
-    private RadioButton allAchievementsRadioButton;
-    @FXML
-    private ToggleGroup achievementsRadioButtonGroup;
 
     //AchievementsTable:
     @FXML
@@ -104,9 +94,6 @@ public class AccountController {
 
     public void initData(User user) {
         this.currentUser = user;
-        achievementsRadioButtonGroup = new ToggleGroup();
-        this.yourAchievementsRadioButton.setToggleGroup(achievementsRadioButtonGroup);
-        this.allAchievementsRadioButton.setToggleGroup(achievementsRadioButtonGroup);
         activityRadioButtonGroup = new ToggleGroup();
         this.yourStepsRadioButton.setToggleGroup(activityRadioButtonGroup);
         this.yourKmsRadioButton.setToggleGroup(activityRadioButtonGroup);
@@ -130,14 +117,7 @@ public class AccountController {
 
         //fill table with active Challenges:
         challengesTable.setItems(obsActiveChallenges);
-        //todo if obsActiveChallenges.isEmpty() ...
-
-        //todo select radiobutton "yourAchievements" and fill table with unlocked Achievements.
-        // Copy select-method from loggingController!
     }
-
-    //todo Tooltip "Show Progress" when hover over Item in TableView challengesTable
-    //todo load new Scene(view+controller) onClick on Item in TableView challengesTable
 
     public void btnLogActivityClicked(ActionEvent actionEvent) throws IOException {
 
@@ -146,8 +126,8 @@ public class AccountController {
         //Parent root = FXMLLoader.load(getClass().getResource("/views/AccountView.fxml"));
         Scene scene = new Scene(root);
 
-        //hand over user to initData Method in LoggingController:
-        LoggingController logController = loader.getController();
+        //hand over user to initData Method in ActivityController:
+        ActivityController logController = loader.getController();
         logController.initData(currentUser);
 
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -177,7 +157,7 @@ public class AccountController {
         Platform.exit();
     }
 
-    public void achievementRadioButtonSelected() {
+    public void achievementButtonClicked() {
 
         achIdColumn.setCellValueFactory(new PropertyValueFactory<Achievement, Integer>("id"));
         achNameColumn.setCellValueFactory(new PropertyValueFactory<Achievement, String>("name"));
@@ -186,26 +166,13 @@ public class AccountController {
         unlockedColumn.setCellValueFactory(new PropertyValueFactory<Achievement, Boolean>("unlocked"));
         unlockedAtColumn.setCellValueFactory(new PropertyValueFactory<Achievement, Timestamp>("unlockedAt"));
 
-        if (yourAchievementsRadioButton.isSelected()) {
+        List<Achievement> yourAchievements = achievementService.showUserAchievements(currentUser);
 
-            List<Achievement> yourAchievements = achievementService.showUserAchievements(currentUser);
+        ObservableList<Achievement> obsYourAchievements = FXCollections.observableArrayList();
+        obsYourAchievements.addAll(yourAchievements);
 
-            ObservableList<Achievement> obsYourAchievements = FXCollections.observableArrayList();
-            obsYourAchievements.addAll(yourAchievements);
-
-            //fill table with all Achievements:
-            achievementTable.setItems(obsYourAchievements);
-
-        } else if (allAchievementsRadioButton.isSelected()) {
-
-            List<Achievement> allAchievements = achievementService.showAllAchievements();
-
-            ObservableList<Achievement> obsAchievements = FXCollections.observableArrayList();
-            obsAchievements.addAll(allAchievements);
-
-            //fill table with all Achievements:
-            achievementTable.setItems(obsAchievements);
-        }
+        //fill table with all Achievements:
+        achievementTable.setItems(obsYourAchievements);
     }
 
     public void activityRadioButtonSelected() {
@@ -219,21 +186,20 @@ public class AccountController {
             LocalDate startdate = startDatePicker.getValue();
             LocalDate enddate = endDatePicker.getValue();
 
-            HashMap<LocalDateTime, Integer> yourSteps = comparingService.mapStepsTimeframe(currentUser, startdate, enddate);
+            try {
+                HashMap<LocalDateTime, Integer> yourSteps = comparingService.mapStepsTimeframe(currentUser, startdate, enddate);
 
-            List<Activity> items = yourSteps.keySet().stream()
-                    .map(key -> new Activity(key, yourSteps.get(key)))
-                    .toList();
-/*
-            for (Activity item : items) {
-                System.out.println(item.toString());
+                List<Activity> items = yourSteps.keySet().stream()
+                        .map(key -> new Activity(key, yourSteps.get(key)))
+                        .toList();
+
+                ObservableList<Activity> obsItems = FXCollections.observableArrayList(items);
+
+                //fill table with ObservableList:
+                activityTable.setItems(obsItems);
+            } catch (RuntimeException e) {
+                triggerErrorAlert();
             }
- */
-
-            ObservableList<Activity> obsItems = FXCollections.observableArrayList(items);
-
-            //fill table with ObservableList:
-            activityTable.setItems(obsItems);
 
         } else if (yourKmsRadioButton.isSelected()) {
 
@@ -242,17 +208,28 @@ public class AccountController {
             LocalDate startdate = startDatePicker.getValue();
             LocalDate enddate = endDatePicker.getValue();
 
-            HashMap<LocalDateTime, Double> yourKms = comparingService.mapRunsTimeframe(currentUser, startdate, enddate);
+            try {
+                HashMap<LocalDateTime, Double> yourKms = comparingService.mapRunsTimeframe(currentUser, startdate, enddate);
 
-            List<Activity> items = yourKms.keySet().stream()
-                    .map(key -> new Activity(key, yourKms.get(key)))
-                    .toList();
+                List<Activity> items = yourKms.keySet().stream()
+                        .map(key -> new Activity(key, yourKms.get(key)))
+                        .toList();
 
-            ObservableList<Activity> obsItems = FXCollections.observableArrayList(items);
+                ObservableList<Activity> obsItems = FXCollections.observableArrayList(items);
 
-            //fill table with ObservableList:
-            activityTable.setItems(obsItems);
+                //fill table with ObservableList:
+                activityTable.setItems(obsItems);
+            } catch (RuntimeException e) {
+                triggerErrorAlert();
+            }
         }
+    }
+
+    private void triggerErrorAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("There was an error fetching your data. Contact tulla.elisabeth@gmx.at.");
+        alert.showAndWait();
     }
 
 }

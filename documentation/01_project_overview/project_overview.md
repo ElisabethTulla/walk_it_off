@@ -18,5 +18,5 @@ This project aims to entice users to walk more steps and/or run more kilometers
 and therefore better their health.
 
 ## Links
-- Jira Board: 
+- Github Project: https://github.com/users/ElisabethTulla/projects/3
 - Git Repository: https://github.com/ElisabethTulla/walk_it_off

@@ -9,9 +9,12 @@ This document contains UML class diagrams for the system design.
 [Description of this class diagram and what it represents]
 
 ### Diagram
-[Insert class diagram here]
+
+![class diagram.png](class%20diagram.png)
 
 ### Key Classes
+
+Classen anführen und sagen wofür sie da ist (nicht alle attribute und methoden nochmal anführen)
 
 #### Class: [ClassName1]
 **Responsibilities:**

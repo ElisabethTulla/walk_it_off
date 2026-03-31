@@ -1,5 +1,7 @@
 # Acceptance and Demo
 
+kriterium dass die aplikation läuft und die features laufen 
+
 ## Demo Information
 **Date:** [YYYY-MM-DD]
 **Time:** [HH:MM - HH:MM]

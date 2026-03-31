@@ -2,7 +2,7 @@ package at.elisabeth_tulla.walk_it_off.jfx_gui;
 
 import at.elisabeth_tulla.walk_it_off.model.Achievement;
 import at.elisabeth_tulla.walk_it_off.model.User;
-import at.elisabeth_tulla.walk_it_off.service.LoggingService;
+import at.elisabeth_tulla.walk_it_off.service.ActivityService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +19,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class LoggingController {
+public class ActivityController {
 
-    LoggingService loggingService = new LoggingService();
+    ActivityService activityService = new ActivityService();
 
     private User currentUser;
 
@@ -62,30 +62,25 @@ public class LoggingController {
 
     public void btnStepsSubmitClicked(ActionEvent event) throws IOException {
 
-        //todo check if textfield is empty
-
         Integer steps = Integer.parseInt(stepsTextField.getText());
-        List<Achievement> achievements = loggingService.loggWalking(currentUser, "walking", steps); //todo is "activity" necessary?
-
-        checkAchievementAlert(achievements);
+        try {
+            List<Achievement> achievements = activityService.loggWalking(currentUser, "walking", steps);
+            checkAchievementAlert(achievements);
+        } catch (RuntimeException e) {
+            triggerErrorAlert();
+        }
 
         backToAccount(event);
-/*
-        Parent root = FXMLLoader.load(getClass().getResource("/views/AccountView.fxml"));
-        Scene scene = new Scene(root);
+    }
 
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
-
-
- */
+    private void triggerErrorAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("There was an error logging the activity. Contact tulla.elisabeth@gmx.at.");
+        alert.showAndWait();
     }
 
     private void checkAchievementAlert(List<Achievement> achievements) {
-
-    //todo FRAGE: WIESO funktioniert es nicht?
 
         if (!achievements.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -110,12 +105,15 @@ public class LoggingController {
 
     public void btnKmsSubmitClicked(ActionEvent event) throws IOException {
 
-        //todo check if textfield is empty
-
         Double kms = Double.parseDouble(kmsTextField.getText());
-        List<Achievement> achievements = loggingService.loggRunning(currentUser, "running", kms);
 
-        checkAchievementAlert(achievements);
+        try {
+            List<Achievement> achievements = activityService.loggRunning(currentUser, "running", kms);
+
+            checkAchievementAlert(achievements);
+        } catch (RuntimeException e) {
+            triggerErrorAlert();
+        }
 
         backToAccount(event);
     }

@@ -28,7 +28,7 @@ public class WelcomeController {
     @FXML
     private Text txtMessage;
 
-    //todo FRAGE: Konstruktor erstellen? (in AccountController inizializen der Tabellen??)
+    //todo FRAGE: Konstruktor erstellen?
 
     @FXML
     public void loginButtonClicked(ActionEvent event) throws IOException {
