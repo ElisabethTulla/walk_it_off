@@ -9,8 +9,16 @@ class ValidationManagerTest {
     @Test
     void validatePassword() {
 
+        ValidationManager manager = new ValidationManager();
 
-        //assertTrue() assertFalse() String.matches()
+        assertFalse(manager.validatePassword("password"));
+        assertFalse(manager.validatePassword("ThisPasswordIsWayTooLong1!"));
+        assertFalse(manager.validatePassword("NOLOWERCASE1!"));
+        assertFalse(manager.validatePassword("123456789"));
+
+        assertTrue(manager.validatePassword("Password123!"));
+        assertTrue(manager.validatePassword("Postgres2?"));
+        assertTrue(manager.validatePassword("StrongPassword*8"));
 
     }
 }

@@ -17,6 +17,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * RegisterController connects the RegisterView.fxml with the Models (User, Challenge, Achievement).
+ * It hands over the user input from the GUI to the service layer in order to register a new User.
+ */
+
 public class RegisterController {
 
     ValidationManager valid = new ValidationManager();

@@ -28,13 +28,17 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
-public class AccountController {
+/**
+ * AccountController connects the AccountView.fxml with the Models (User, Challenge, Achievement, Activity).
+ * It hands over the ongoing Challenges, Achievements and Activity of the User to the GUI
+ * and furthermore leads to the ActivityView.fxml and the ChallengeView.fxml.
+ */
+
+public class AccountController extends UserController {
 
     ChallengeService challengeService = new ChallengeService();
     AchievementService achievementService = new AchievementService();
     ComparingService comparingService = new ComparingService();
-
-    private User currentUser;
 
     @FXML
     private Text txtHello;
@@ -92,8 +96,9 @@ public class AccountController {
     @FXML
     private TableColumn<Achievement, Timestamp> activityLoggedAtColumn;
 
+    @Override
     public void initData(User user) {
-        this.currentUser = user;
+        super.initData(user);
         activityRadioButtonGroup = new ToggleGroup();
         this.yourStepsRadioButton.setToggleGroup(activityRadioButtonGroup);
         this.yourKmsRadioButton.setToggleGroup(activityRadioButtonGroup);
@@ -121,7 +126,7 @@ public class AccountController {
 
     public void btnLogActivityClicked(ActionEvent actionEvent) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LoggingView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ActivityView.fxml"));
         Parent root = loader.load();
         //Parent root = FXMLLoader.load(getClass().getResource("/views/AccountView.fxml"));
         Scene scene = new Scene(root);

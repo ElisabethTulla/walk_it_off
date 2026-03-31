@@ -19,11 +19,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class ActivityController {
+/**
+ * ActivityController connects the ActivityView.fxml with the Models (User, Challenge, Achievement, Activity).
+ * It hands over the user input from the GUI to the service layer
+ * and therefor enables the logging of Activity.
+ */
+
+public class ActivityController extends UserController {
 
     ActivityService activityService = new ActivityService();
-
-    private User currentUser;
 
     @FXML
     private RadioButton stepsRadioButton;
@@ -40,9 +44,10 @@ public class ActivityController {
     @FXML
     private TextField kmsTextField;
 
+    @Override
     public void initData(User user) {
 
-        this.currentUser = user;
+        super.initData(user);
         stepsKmToggleGroup = new ToggleGroup();
         this.stepsRadioButton.setToggleGroup(stepsKmToggleGroup);
         this.kmsRadioButton.setToggleGroup(stepsKmToggleGroup);

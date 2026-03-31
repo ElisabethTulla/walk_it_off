@@ -29,7 +29,6 @@ CREATE TABLE activity
     CONSTRAINT activity_pkey PRIMARY KEY (id),
     CONSTRAINT fk_user FOREIGN KEY (user_id)
         REFERENCES user_walkitoff (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
         ON DELETE CASCADE
 );
 
@@ -54,11 +53,9 @@ CREATE TABLE challenge
     CONSTRAINT challenge_pkey PRIMARY KEY (id),
     CONSTRAINT fk_required_achievement FOREIGN KEY (required_achievement_id)
         REFERENCES achievement (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
         ON DELETE CASCADE,
     CONSTRAINT fk_rewards_achievement FOREIGN KEY (rewards_achievement_id)
         REFERENCES achievement (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
         ON DELETE CASCADE
 );
 
@@ -92,11 +89,9 @@ CREATE TABLE user_achievement
     unlocked boolean,
     CONSTRAINT fk_achievement FOREIGN KEY (achievement_id)
         REFERENCES achievement (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
         ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (user_id)
         REFERENCES user_walkitoff (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
         ON DELETE CASCADE
 );
 
@@ -112,11 +107,9 @@ CREATE TABLE user_challenge
     active boolean DEFAULT true,
     CONSTRAINT fk_challenge FOREIGN KEY (challenge_id)
         REFERENCES challenge (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
         ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (user_id)
         REFERENCES user_walkitoff (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
         ON DELETE CASCADE
 );
 

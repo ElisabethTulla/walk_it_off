@@ -15,6 +15,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * WelcomeController connects the WelcomeView.fxml with the Models (User, Challenge, Achievement).
+ * It acts as the first contact with the application and hands over the user input in order to log in
+ * and lead to the AccountView.fxml or to register via the RegisterView.fxml.
+ */
+
 public class WelcomeController {
 
     //todo FRAGE: implements Initializable ?

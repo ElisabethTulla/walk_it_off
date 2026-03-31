@@ -1,12 +1,23 @@
 package at.elisabeth_tulla.walk_it_off.jfx_gui;
 
+import at.elisabeth_tulla.walk_it_off.service.UserService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+
+/**
+ * JfxMainApp launches the application and starts the graphical user interface
+ * by loading the WelcomeView into the Scene of the Stage.
+ */
+
 public class JfxMainApp extends Application {
+
+    static UserService userService = new UserService();
 
     @Override
     public void start(Stage primaryStage) {
@@ -26,36 +37,49 @@ public class JfxMainApp extends Application {
 
    public static void main(String[] args) {
 
-        launch(); //todo launch(args);
+       if (Arrays.stream(args).anyMatch(s -> s.equalsIgnoreCase("--create-test-users"))) {
+           createTestUsers();
+       }
 
+       launch();
+    }
+
+    /***
+     * REGISTER TEST-USERS:
+     */
+    public static void createTestUsers() {
+
+        userService.registerUser("Elvis", "Tulla", "elvis@tulla.at",
+                "Postgres1!", LocalDate.of(2018, 1, 18), "male");
+        userService.registerUser("Felix", "Tulla", "felix@tulla.at",
+                "Postgres1!", LocalDate.of(2015, 1, 6), "male");
+        userService.registerUser("Elisabeth", "Tulla", "tulla.elisabeth@gmx.at",
+                "postgres", LocalDate.of(1992, 1, 16), "female");
+        userService.registerUser("Oliver", "Tulla", "oliver@tulla.at",
+                "Postgres1!", LocalDate.of(1992, 7, 21), "male");
+        userService.registerUser("Nachi", "Tulla", "nachi@tulla.at",
+                "Postgres1!", LocalDate.of(2016, 6, 3), "male");
     }
 
 
     /*** TODO:
      *
-     * class diagramm -> add notes between the object-classes to indicate Zwischentabellen in the db
-     *
      * Enter Challenge -> bug! does not show in "ongoing Challenges" in AccountView
      *
      *      (nice to have) Logger? for login password/email wrong (error/warning/debug)
      *
-     * UNIT Tests fertig machen
-     *
-     * Controller Interface (with current user)
+     * im class diagramm UserController als Überklasse einzeichnen (AccountController, ActivityController,
+     *      ChallengeController, MannageAccountController ... extends UserController)
      *
      *      (nice to have) prevent empty textfields in Register-, Logging- und ChallengeController
      *
      * grüne-Sternchen-Kommentare -> für jede Klasse wofür sie da ist und bei den ganz wichtigen Methoden auch wieso sie da sind
      *
-     * Inhalt der PowerPoint -> Dokumentation!, refactoring der Achievement-Logik kann erwähnt werden     *
      *
      *
+     * DOCUMENTATION:
      *
-     *  class diagramm note zwischen achievement und user -> zwischentabelle + user und challenge -> zwischentabelle
-     *
-     *  controller interface mit current user, die controller sind abstrakte klassen die davon ableiten -> class diagramm einzeichnen
-     *
-     *  statt ActivityService/ ActivityRepository -> anderer Begriff statt logging  => activityController, service, repository
+     * class diagramm note zwischen achievement und user -> zwischentabelle + user und challenge -> zwischentabelle
      *
      * in der documentation use cases aus dem backlog von github (die features) - eventuell kann man es aus dem project exportieren -> ev AI markdown machen lassen)
      *
@@ -101,6 +125,9 @@ public class JfxMainApp extends Application {
      *      * - java.io
      *      * - javafx
      *      * - Junit)
+     *
+     *
+     * Inhalt der POWERPOINT -> Dokumentation!, refactoring der Achievement-Logik kann erwähnt werden     *
      */
 
     /*** FUTURE PLANS:

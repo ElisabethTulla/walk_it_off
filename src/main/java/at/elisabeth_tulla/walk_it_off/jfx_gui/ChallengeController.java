@@ -23,13 +23,16 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * ChallengeController connects the ChallengeView.fxml with the Models (User, Challenge, Achievement, Activity).
+ * It hands over all Challenges and Achievements from the service layer to the GUI
+ * and enables the user to enter Challenges and create Challenges.
+ */
 
-public class ChallengeController {
+public class ChallengeController extends UserController {
 
     ChallengeService challengeService = new ChallengeService();
     AchievementService achievementService = new AchievementService();
-
-    private User currentUser;
 
     //ChallengesTable:
     @FXML
@@ -101,10 +104,10 @@ public class ChallengeController {
     @FXML
     private TableColumn<Achievement, String> achTypeColumn;
 
-
+    @Override
     public void initData(User user) {
 
-        this.currentUser = user;
+        super.initData(user);
 
         //ChallengeTable:
         chaIdColumn.setCellValueFactory(new PropertyValueFactory<Challenge, Integer>("id"));

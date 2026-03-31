@@ -8,6 +8,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * checks for the configuration from different sources
+ *
+ * 1) environment-variables
+ * 2) external file (config.properties)
+ * 3) default values
+ */
+
 public class DatabaseConfig {
 
     static String db_url = null;
@@ -20,7 +28,7 @@ public class DatabaseConfig {
 
             Properties config = new Properties();
 
-            if (System.getenv("DB_URL") != null /*|| !System.getenv("DB_URL").trim().isEmpty()*/) {
+            if (System.getenv("DB_URL") != null) {
                 //Environment Variable:
                 db_url = System.getenv("DB_URL");
                 db_user = System.getenv("DB_USER");
@@ -32,7 +40,7 @@ public class DatabaseConfig {
                 try (var reader = Files.newBufferedReader(configPath)) {
                     config.load(reader);
                 } catch (IOException e) {
-                    System.err.println("Fehler beim Laden der Configuration: " + e.getMessage());
+                    System.err.println("Error while loading the configuration: " + e.getMessage());
                 }
                 db_url = config.getProperty("DB_URL");
                 db_user = config.getProperty("DB_USER");
@@ -47,7 +55,7 @@ public class DatabaseConfig {
 
             return DriverManager.getConnection(db_url, db_user, db_password);
         } catch (SQLException e) {
-            System.err.println("Fehler beim Verbinden zur Datenbank: " + e.getMessage());
+            System.err.println("Error while connecting to the database: " + e.getMessage());
             throw new RuntimeException(e);
         }
 

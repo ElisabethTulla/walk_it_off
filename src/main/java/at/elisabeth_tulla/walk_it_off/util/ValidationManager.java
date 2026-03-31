@@ -37,10 +37,8 @@ public class ValidationManager {
 
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*['*°?/!@#$%^&-+=()])(?=\\S+$).{8,20}$";
 
-        // Compile Regex:
         Pattern p = Pattern.compile(regex);
 
-        // Matcher finds matching Regex - password:
         Matcher m = p.matcher(password);
 
         return m.matches();
