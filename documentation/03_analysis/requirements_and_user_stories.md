@@ -22,6 +22,10 @@ This document captures the functional and non-functional requirements as well as
 
 ## User Stories
 
+A detailed overview of all User Stories (and Features) alongside the planned iterations
+can be found on Github through the following link:
+https://github.com/users/ElisabethTulla/projects/3/views/1
+
 ### US-001: [Story Title]
 **As a** [user role]
 **I want** [goal]

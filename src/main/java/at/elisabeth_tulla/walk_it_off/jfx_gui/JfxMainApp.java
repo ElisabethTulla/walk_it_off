@@ -19,6 +19,10 @@ public class JfxMainApp extends Application {
 
     static UserService userService = new UserService();
 
+    /**
+     * This method loads the WelcomeView into the Scene of the Stage and starts the GUI.
+     * @param primaryStage Stage
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -42,10 +46,12 @@ public class JfxMainApp extends Application {
        }
 
        launch();
+
+       //todo FRAGE: wie kann main gestartet werden (ohne Jfx) um createTestUsers() anzusteuern?
     }
 
     /***
-     * REGISTER TEST-USERS:
+     * This method hands over test user data to the UserService in order to create test users.
      */
     public static void createTestUsers() {
 
@@ -64,8 +70,6 @@ public class JfxMainApp extends Application {
 
     /*** TODO:
      *
-     * Enter Challenge -> bug! does not show in "ongoing Challenges" in AccountView
-     *
      *      (nice to have) Logger? for login password/email wrong (error/warning/debug)
      *
      * im class diagramm UserController als Überklasse einzeichnen (AccountController, ActivityController,
@@ -73,23 +77,15 @@ public class JfxMainApp extends Application {
      *
      *      (nice to have) prevent empty textfields in Register-, Logging- und ChallengeController
      *
-     * grüne-Sternchen-Kommentare -> für jede Klasse wofür sie da ist und bei den ganz wichtigen Methoden auch wieso sie da sind
-     *
-     * replace "Fehler beim Einfügen in die Datenbank..." with "Error with insertion to database..."
-     *
      *
      * DOCUMENTATION:
      *
      * class diagramm note zwischen achievement und user -> zwischentabelle + user und challenge -> zwischentabelle
      *
-     * in der documentation use cases aus dem backlog von github (die features) - eventuell kann man es aus dem project exportieren -> ev AI markdown machen lassen)
-     *
      * requirements_and_user_stories: hier die user Stories von github (wenn ich es exportiern kann, wenn Export von github nicht geht, nur exemplarisch hier und auf github verweisen)
      *
      * FEATURES zu den usecasses , STORIES zu requirements_and_user_stories
      *
-     * [STORY] compare to group stats	https://github.com/ElisabethTulla/walk_it_off/issues/25
-     * [STORY] file IO activity input	https://github.com/ElisabethTulla/walk_it_off/issues/36
      * [FEAT] activity logging	https://github.com/ElisabethTulla/walk_it_off/issues/18
      * [FEAT] gui	https://github.com/ElisabethTulla/walk_it_off/issues/31
      * [FEAT] show and compare stats	https://github.com/ElisabethTulla/walk_it_off/issues/21

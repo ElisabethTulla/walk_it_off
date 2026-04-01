@@ -3,14 +3,12 @@
 ## In Scope
 Features and functionality included in the project.
 
-Implimenting (die dinge, die wir im kurs gelenrt haben)
+Applying the gained knowledge from the wifi course to the project.
 
 ## Out of Scope
 Explicitly excluded functionality.
 
-marktfähige Applikation (wie strava)
-deploiment, infastruktur
-
+Creating a marketable application (eg strava), deploiment, infastructur.
 
 ## Constraints
 Time, technology, legal, or organizational constraints.

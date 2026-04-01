@@ -1,51 +1,50 @@
-# Use Case 01: [Use Case Name]
-
-use cases aus dem backlog von github
+# Use Case 01: Log in
 
 ## Overview
 **ID:** UC-01
-**Name:** [Use Case Name]
-**Primary Actor:** [Actor]
-**Secondary Actors:** [Other actors]
-**Brief Description:** [Brief description of the use case]
+**Name:** Log in
+**Primary Actor:** User
+**Brief Description:** Login to application to access account
 
 ## Preconditions
-- [Precondition 1]
-- [Precondition 2]
+- User must be registered
+- User must know email and password
 
 ## Postconditions
-- [Postcondition 1]
-- [Postcondition 2]
+- Access to the user account is granted
+- The application can be used as intended by the user
 
 ## Main Success Scenario
-1. [Step 1]
-2. [Step 2]
-3. [Step 3]
-4. [Step 4]
+1. The entered email is registered and found in the database
+2. The entered password matches the correct password in the database
+3. The login button leads to the AccountView
+4. The user can now access all features of the application
 
 ## Alternative Flows
 
-### Alternative Flow 1: [Name]
-**Condition:** [When this flow occurs]
-1. [Step 1]
-2. [Step 2]
-3. Return to step X in main flow
+### Alternative Flow 1: Enter different email
+**Condition:** If the entered email isn't found in the database
+1. try a different email
+2. Return to step X in main flow
+
+### Alternative Flow 2: Enter different password
+**Condition:** If the entered password doesn't match the correct password in the database
+1. try a different password
+2. Return to step X in main flow
 
 ## Exception Flows
 
-### Exception Flow 1: [Name]
-**Condition:** [When this exception occurs]
-1. [Step 1]
-2. [Step 2]
+### Exception Flow 1: User not registered
+**Condition:** If the user doesn't yet have an account
+1. Unknown email is entered
+2. Unknown password is entered
 3. Use case ends in failure
 
 ## Special Requirements
-- [Requirement 1]
-- [Requirement 2]
+- User must be registered already
+- User must know the correct email and password
 
 ## Frequency of Use
-[How often this use case is expected to occur]
+Everytime a User uses the application
 
-## Open Issues
-- [Issue 1]
-- [Issue 2]
+
