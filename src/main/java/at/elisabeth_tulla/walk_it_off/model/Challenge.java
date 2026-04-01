@@ -2,6 +2,10 @@ package at.elisabeth_tulla.walk_it_off.model;
 
 import java.sql.Timestamp;
 
+/***
+ * This class serves as a data- and fxml-model for challenges.
+ */
+
 public class Challenge {
 
     private Integer id;

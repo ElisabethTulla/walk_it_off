@@ -6,6 +6,10 @@ import at.elisabeth_tulla.walk_it_off.model.User;
 
 import java.sql.*;
 
+/***
+ * This class is the repository/Data Access Object managing any database operations concerning Activities.
+ */
+
 public class ActivityRepository {
     public Connection conn = DatabaseConfig.configure();
 

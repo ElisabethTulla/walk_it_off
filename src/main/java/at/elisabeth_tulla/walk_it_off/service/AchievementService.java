@@ -6,6 +6,10 @@ import at.elisabeth_tulla.walk_it_off.repository.AchievementRepository;
 
 import java.util.List;
 
+/***
+ * This service creates Achievements and hands over lists of Achievements to the Graphical User Interface.
+ */
+
 public class AchievementService {
 
     AchievementRepository achievementRepository = new AchievementRepository();

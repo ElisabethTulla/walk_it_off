@@ -2,6 +2,10 @@ package at.elisabeth_tulla.walk_it_off.model;
 
 import java.sql.Timestamp;
 
+/***
+ * This class serves as a data- and fxml-model for achievements.
+ */
+
 public class Achievement {
 
     private Integer id;

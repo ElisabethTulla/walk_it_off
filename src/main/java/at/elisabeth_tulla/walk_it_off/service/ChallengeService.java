@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
 
+/***
+ * This service creates Challenges, enters Users in Challenges and checks on their progress, end and success.
+ */
+
 public class ChallengeService {
 
     public ChallengeService() {
@@ -23,10 +27,24 @@ public class ChallengeService {
     AchievementRepository achievementRepo = new AchievementRepository();
     ComparingRepository comparingRepo = new ComparingRepository();
 
+    /***
+     * This method hands over the challengeId to the ChallengeRepository
+     * @param challengeId attribute of Challenge-Object as Integer
+     * @return Challenge as Object
+     */
     public Challenge getChallenge(Integer challengeId) {
         return challengeRepo.getChallenge(challengeId);
     }
 
+    /***
+     * This method receives a Challenge from the ChallengeRepository and a List of all Achievements from User.
+     * It than compares the achievementId-attribute of the Achievements
+     * to the requiredAchievementID-Attribute of the Challenge.
+     * If there is a match, it fetches the required Achievement from the AchievementRepository
+     * @param user User Object
+     * @param challengeId Integer attribute from Challenge Object
+     * @return requiredAchievement name as String
+     */
     public String checkReqAchievements(User user, Integer challengeId) {
 
         Challenge currentChallenge = challengeRepo.getChallenge(challengeId);
@@ -65,7 +83,7 @@ public class ChallengeService {
         return true;
     }
 
-    //check Progress:
+    //check Progress:  (- not yet connected to the GUI...)
     private void checkChallengeProgress(User user1, Challenge challenge) {
 
         LocalDateTime startTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(challenge.getStartedAt().getTime()),

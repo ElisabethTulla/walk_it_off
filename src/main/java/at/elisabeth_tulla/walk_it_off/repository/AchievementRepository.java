@@ -8,6 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * This class is the repository/Data Access Object managing any database operations concerning Achievements.
+ */
+
 public class AchievementRepository {
 
     public Connection conn = DatabaseConfig.configure();

@@ -3,6 +3,10 @@ package at.elisabeth_tulla.walk_it_off.model;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/***
+ * This class serves as a data- and fxml-model for activities.
+ */
+
 public class Activity {
 
     private Integer id;

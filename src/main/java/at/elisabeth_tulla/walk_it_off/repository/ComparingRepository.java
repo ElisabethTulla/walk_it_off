@@ -7,6 +7,10 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+/***
+ * This class is the repository/Data Access Object managing any database operations
+ * concerning Calculations and Comparisons of User Data.
+ */
 
 public class ComparingRepository {
 
@@ -122,7 +126,7 @@ public class ComparingRepository {
         }
     }
 
-    public HashMap<LocalDateTime, Double> getRunsDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
+    public HashMap<LocalDateTime, Double> getKmsDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
 
         String sql = "SELECT distance_logged_km, logged_at FROM activity WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
 

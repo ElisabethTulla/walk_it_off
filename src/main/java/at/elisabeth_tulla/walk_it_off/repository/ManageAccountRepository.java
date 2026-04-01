@@ -7,6 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+/***
+ * This class is the repository/Data Access Object managing any database operations concerning changes to Users.
+ */
+
 public class ManageAccountRepository {
 
     public Connection conn = DatabaseConfig.configure();

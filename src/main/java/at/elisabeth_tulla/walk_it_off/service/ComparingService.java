@@ -8,74 +8,87 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+/***
+ * This service performs calculations and comparisons of User Data.
+ */
+
 public class ComparingService {
 
     ComparingRepository compRepo =  new ComparingRepository();
     UserRepository userRepo = new UserRepository();
 
-    public Integer getActivityCount(User user, String activity, LocalDateTime startDate, LocalDateTime endDate) {
+    /***
+     * This method reformats the LocalDate startdate and enddate to LocalDateTime
+     * and hands them over to the ComparingRepository.
+     * @param user User Object
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return summarized STEPS in specific timeframe as Integer
+     */
+    public Integer sumUpStepsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
 
-        Integer count = compRepo.getActivityCount(user, activity, startDate, endDate);
-
-        return count;
+        return compRepo.getStepsSumDateToDate(user, startdate.atStartOfDay(), enddate.atTime(23, 59));
     }
 
     /***
-     * STEPS:
+     * This method hands over the user to the ComparingRepository.
+     * @param user User Object
+     * @return summarized STEPS overall as Integer
      */
-
-    //showStepsSummarized in specific timeframe:
-    public Integer sumUpStepsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
-
-        LocalDateTime startDate = startdate.atStartOfDay();
-        LocalDateTime endDate = enddate.atTime(23, 59);
-
-        return compRepo.getStepsSumDateToDate(user, startDate, endDate);
-    }
-
-    //all Steps Sum overall:
     public Integer sumUpAllSteps(User user){
         return compRepo.getStepsSumAll(user);
     }
 
-    //map of all Steps in specific timeframe:
+    /***
+     * This method reformats the LocalDate startdate and enddate to LocalDateTime
+     * and hands them over to the ComparingRepository.
+     * @param user User Object
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return Map of all STEPS in specific timeframe as HashMap with LocalDateTime as key and Integer as value
+     */
     public HashMap<LocalDateTime, Integer> mapStepsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
 
-        LocalDateTime startDate = startdate.atStartOfDay();
-        LocalDateTime endDate = enddate.atTime(23, 59);
-
-        return compRepo.getStepsDateToDate(user, startDate, endDate);
+        return compRepo.getStepsDateToDate(user, startdate.atStartOfDay(), enddate.atTime(23, 59));
     }
 
     /***
-     *  RUNS:
+     * This method reformats the LocalDate startdate and enddate to LocalDateTime
+     * and hands them over to the ComparingRepository.
+     * @param user User Object
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return summarized KILOMETER in specific timeframe as double
      */
-
-    // ran km in timeframe (GUI input):
     public double sumUpKmTimeframe(User user, LocalDate startdate, LocalDate enddate) {
 
-        LocalDateTime startDate = startdate.atStartOfDay();
-        LocalDateTime endDate = enddate.atTime(23, 59);
-
-        return compRepo.getKmSumDateToDate(user, startDate, endDate);
+        return compRepo.getKmSumDateToDate(user, startdate.atStartOfDay(), enddate.atTime(23, 59));
     }
 
-    //all Km Sum overall:
+    /***
+     * This method hands over the user to the ComparingRepository.
+     * @param user User Object
+     * @return summarized KILOMETER overall as double
+     */
     public double sumUpAllKm(User user){
         return compRepo.getKmSumAll(user);
     }
 
-    //map runs in specific timeframe:
-    public HashMap<LocalDateTime, Double> mapRunsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
+    /***
+     * This method reformats the LocalDate startdate and enddate to LocalDateTime
+     * and hands them over to the ComparingRepository.
+     * @param user User Object
+     * @param startdate that marks the start of the timeframe
+     * @param enddate that marks the end of the timeframe
+     * @return Map of all KILOMETERS in specific timeframe as HashMap with LocalDateTime as key and Double as value
+     */
+    public HashMap<LocalDateTime, Double> mapKmsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
 
-        LocalDateTime startDate = startdate.atStartOfDay();
-        LocalDateTime endDate = enddate.atTime(23, 59);
-
-        return compRepo.getRunsDateToDate(user, startDate, endDate);
+        return compRepo.getKmsDateToDate(user, startdate.atStartOfDay(), enddate.atTime(23, 59));
     }
 
-    /***
-     *  LOGGING ACTIVITY: (NICE TO HAVE..)
+    /*
+     *  LOGGING ACTIVITY: ( -> NICE TO HAVE...) -> not yet connected to the GUI...
      *
      *  show how often steps/runs were logged overall ("SELECT COUNT(steps_logged) FROM activity WHERE user_id =?";)
      *     -> maybe achievement: you have been active 100 times! (...), you have been active 10 days in a row!(...)
@@ -85,14 +98,37 @@ public class ComparingService {
      */
 
     /***
-     * COMPARISONS:
+     * This method hands over the parameters to the ComparingRepository to receive the counted Activity.
+     * @param user User Object
+     * @param activity name of the Activity as String
+     * @param startDate LocalDateTime that marks the start of the timeframe
+     * @param endDate LocalDateTime that marks the end of the timeframe
+     * @return counted Activity as Integer
+     */
+    public Integer getActivityCount(User user, String activity, LocalDateTime startDate, LocalDateTime endDate) {
+
+        Integer count = compRepo.getActivityCount(user, activity, startDate, endDate);
+
+        return count;
+    }
+
+    /*
+     * COMPARISONS:   -> not yet connected to the GUI...
      */
 
-    //compare StepsSums from two different timeframes:
+    /***
+     * This method compares the summarized STEPS of two different timeframes.
+     * @param user User Object
+     * @param startdate1 LocalDate that marks the start of the first timeframe
+     * @param enddate1 LocalDate that marks the end of the first timeframe
+     * @param startdate2 LocalDate that marks the start of the second timeframe
+     * @param enddate2 LocalDate that marks the end of the second timeframe
+     * @return the difference in STEPS as Integer
+     */
     public Integer compareStepsSumTimeframes(User user, LocalDate startdate1, LocalDate enddate1,
                                           LocalDate startdate2, LocalDate enddate2){
 
-        //todo GUI User input choice: compare day to day / week to week / month to month / year to year
+        //GUI User input choice: compare day to day / week to week / month to month / year to year
         // -> make sure the two timeframes match each other (eg. don't compare a week to a month)
 
         Integer timeframe1 = sumUpStepsTimeframe(user, startdate1, enddate1);
@@ -112,9 +148,17 @@ public class ComparingService {
          */
     }
 
-    //compare KmSums from two different timeframes:
-    public double compareRunsSumTimeframes(User user, LocalDate startdate1, LocalDate enddate1,
-                                         LocalDate startdate2, LocalDate enddate2) {
+    /***
+     * This method compares the summarized KILOMETERS of two different timeframes.
+     * @param user User Object
+     * @param startdate1 LocalDate that marks the start of the first timeframe
+     * @param enddate1 LocalDate that marks the end of the first timeframe
+     * @param startdate2 LocalDate that marks the start of the second timeframe
+     * @param enddate2 LocalDate that marks the end of the second timeframe
+     * @return the difference in KILOMETER as double
+     */
+    public double compareKmsSumTimeframes(User user, LocalDate startdate1, LocalDate enddate1,
+                                          LocalDate startdate2, LocalDate enddate2) {
 
         double timeframe1 = sumUpKmTimeframe(user, startdate1, enddate1);
         double timeframe2 = sumUpKmTimeframe(user, startdate2, enddate2);
@@ -122,9 +166,17 @@ public class ComparingService {
         return timeframe2 - timeframe1;
     }
 
+    /***
+     * This method fetches otherUser from UserRepository with the email and creates a User-Object.
+     * It then compares the summarized STEPS of both Users.
+     * @param currentUser User Object
+     * @param email Attribute of User Object from otherUser, to whom the comparison is being made
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return the difference in STEPS as Integer
+     */
     public Integer compareSumUpStepsTimeframeUsers(User currentUser, String email, LocalDate startdate, LocalDate enddate) {
 
-        //fetch other user from DB:
         User otherUser = userRepo.getUser(email);
 
         Integer currentUserSteps = sumUpStepsTimeframe(currentUser, startdate, enddate);
@@ -145,6 +197,15 @@ public class ComparingService {
          */
     }
 
+    /***
+     * This method fetches otherUser from UserRepository with the email and creates a User-Object.
+     * It then compares the summarized KILOMETER of both Users.
+     * @param currentUser User Object
+     * @param email Attribute of User Object from otherUser, to whom the comparison is being made
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return difference in KILOMETERS as double
+     */
     public double compareSumUpKmTimeframeUsers(User currentUser, String email, LocalDate startdate, LocalDate enddate) {
 
         User otherUser = userRepo.getUser(email);

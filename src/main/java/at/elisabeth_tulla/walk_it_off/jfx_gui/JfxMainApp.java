@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 /**
  * JfxMainApp launches the application and starts the graphical user interface
- * by loading the WelcomeView into the Scene of the Stage.
+ * by loading the WelcomeView.fxml into the Scene of the Stage.
  */
 
 public class JfxMainApp extends Application {
@@ -75,6 +75,9 @@ public class JfxMainApp extends Application {
      *
      * grüne-Sternchen-Kommentare -> für jede Klasse wofür sie da ist und bei den ganz wichtigen Methoden auch wieso sie da sind
      *
+     * check in ChallengeService/createChallenge() if the alternative time claculation works
+     *
+     * replace "Fehler beim Einfügen in die Datenbank..." with "Error with insertion to database..."
      *
      *
      * DOCUMENTATION:

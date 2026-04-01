@@ -11,12 +11,14 @@ import at.elisabeth_tulla.walk_it_off.repository.ActivityRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * This service creates Activities and checks if they unlocked Achievements.
+ */
+
 public class ActivityService {
 
     ActivityRepository loggingRepo = new ActivityRepository();
-    ChallengeRepository challengeRepo = new ChallengeRepository();
     AchievementRepository achievementRepo = new AchievementRepository();
-
     ChallengeService challengeService = new ChallengeService();
 
     public List<Achievement> loggWalking(User user, String activity, Integer steps) {
@@ -59,13 +61,5 @@ public class ActivityService {
         }
         return achievedAchievements;
     }
-
-
-    /*
-    public HashMap<LocalDateTime, Integer> checkActiveChallenges(User user) {
-        return challengeRepo.getOngoingChallenges(user);
-    }
-
-     */
 
 }

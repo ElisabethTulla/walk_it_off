@@ -214,7 +214,7 @@ public class AccountController extends UserController {
             LocalDate enddate = endDatePicker.getValue();
 
             try {
-                HashMap<LocalDateTime, Double> yourKms = comparingService.mapRunsTimeframe(currentUser, startdate, enddate);
+                HashMap<LocalDateTime, Double> yourKms = comparingService.mapKmsTimeframe(currentUser, startdate, enddate);
 
                 List<Activity> items = yourKms.keySet().stream()
                         .map(key -> new Activity(key, yourKms.get(key)))

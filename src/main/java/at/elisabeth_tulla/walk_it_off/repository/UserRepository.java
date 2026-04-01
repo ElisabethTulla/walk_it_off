@@ -6,6 +6,10 @@ import at.elisabeth_tulla.walk_it_off.model.User;
 import java.sql.*;
 import java.time.LocalDate;
 
+/***
+ * This class is the repository/Data Access Object managing any database operations
+ * concerning creating and fetching a User for registration and login.
+ */
 
 public class UserRepository {
 
@@ -96,6 +100,7 @@ public class UserRepository {
                 if (rs.next()) {
                     return password.equals(rs.getString("password"));
                 } else {
+                    //todo logger
                     System.out.println("no password found in db..");
                     return false;
                 }

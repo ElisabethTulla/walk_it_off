@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/***
+ * This class is the repository/Data Access Object managing any database operations concerning Challenges.
+ */
+
 public class ChallengeRepository {
 
     public Connection conn = DatabaseConfig.configure();
