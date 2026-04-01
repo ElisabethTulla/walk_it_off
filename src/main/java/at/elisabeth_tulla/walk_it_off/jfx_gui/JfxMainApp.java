@@ -75,8 +75,6 @@ public class JfxMainApp extends Application {
      *
      * grüne-Sternchen-Kommentare -> für jede Klasse wofür sie da ist und bei den ganz wichtigen Methoden auch wieso sie da sind
      *
-     * check in ChallengeService/createChallenge() if the alternative time claculation works
-     *
      * replace "Fehler beim Einfügen in die Datenbank..." with "Error with insertion to database..."
      *
      *

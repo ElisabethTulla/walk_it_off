@@ -69,7 +69,7 @@ public class ActivityController extends UserController {
 
         Integer steps = Integer.parseInt(stepsTextField.getText());
         try {
-            List<Achievement> achievements = activityService.loggWalking(currentUser, "walking", steps);
+            List<Achievement> achievements = activityService.logWalking(currentUser, "walking", steps);
             checkAchievementAlert(achievements);
         } catch (RuntimeException e) {
             triggerErrorAlert();
@@ -113,7 +113,7 @@ public class ActivityController extends UserController {
         Double kms = Double.parseDouble(kmsTextField.getText());
 
         try {
-            List<Achievement> achievements = activityService.loggRunning(currentUser, "running", kms);
+            List<Achievement> achievements = activityService.logRunning(currentUser, "running", kms);
 
             checkAchievementAlert(achievements);
         } catch (RuntimeException e) {

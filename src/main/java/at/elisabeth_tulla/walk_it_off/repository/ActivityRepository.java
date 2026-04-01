@@ -7,7 +7,8 @@ import at.elisabeth_tulla.walk_it_off.model.User;
 import java.sql.*;
 
 /***
- * This class is the repository/Data Access Object managing any database operations concerning Activities.
+ * This class is the repository/Data Access Object managing the database operation
+ * to insert an entry in the table activity.
  */
 
 public class ActivityRepository {
@@ -16,7 +17,12 @@ public class ActivityRepository {
     public ActivityRepository() {
     }
 
-    public void loggActivity(User user, Activity activity) {
+    /***
+     * This method inserts an activity into the table activity in the database.
+     * @param user User Object
+     * @param activity Activity Object
+     */
+    public void logActivity(User user, Activity activity) {
 
         String sql = "INSERT INTO activity (user_id, activity_name, steps_logged, distance_logged_km)" +
                 "VALUES (?, ?, ?, ?)";
@@ -37,11 +43,10 @@ public class ActivityRepository {
                     activity.setId(keys.getInt(1));
                 }
             }
-
             conn.commit();
 
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
+            System.err.println("Error with insertion into the database :" + e.getMessage());
             throw new RuntimeException(e);
         }
     }
