@@ -9,11 +9,13 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * checks for the configuration from different sources
+ * DatabaseConfig checks for the configuration from different sources:
  *
  * 1) environment-variables
  * 2) external file (config.properties)
  * 3) default values
+ *
+ * and makes the Connection to the database.
  */
 
 public class DatabaseConfig {

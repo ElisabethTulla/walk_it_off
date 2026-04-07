@@ -4,7 +4,7 @@
 **Project Name:** Walk it off
 **Duration:** 1.2.26 to 9.4.26
 **Team Size:** 1
-**Final Status:** [Successful/Completed/Cancelled]
+**Final Status:** [Successful]
 
 ## Executive Summary
 [Brief summary of the project and key lessons learned]

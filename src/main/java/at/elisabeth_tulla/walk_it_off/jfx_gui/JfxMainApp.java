@@ -1,14 +1,11 @@
 package at.elisabeth_tulla.walk_it_off.jfx_gui;
 
-import at.elisabeth_tulla.walk_it_off.service.UserService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.util.Arrays;
 
 /**
  * JfxMainApp launches the application and starts the graphical user interface
@@ -55,7 +52,7 @@ public class JfxMainApp extends Application {
      * neues Screencapture (Register new User, Your Achievements, Log 10.000 steps, create new Challenge (run  5K),
      *  enter challenge, log 5km); login felix@tulla.at, show steps timeframe.
      *
-     *
+     * todo FIX CLASS DIAGRAMM in PowerPoint (n-m relationship between user - achievement!!)
      *
      * DOCUMENTATION:
      *

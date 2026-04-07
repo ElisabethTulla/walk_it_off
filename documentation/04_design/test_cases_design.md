@@ -3,7 +3,9 @@
 ## Overview
 This document contains test cases derived from the design phase, focusing on component and integration testing.
 
-testfälle sollen autonom sein. es gibt unit test
+Test cases should be autonomous.
+For a detailed description of all JUNIT5 tests in this project, see:
+05_testing/test_cases
 
 ## Test Case Template
 
@@ -44,6 +46,7 @@ testfälle sollen autonom sein. es gibt unit test
 [Test case details]
 
 ## Integration Test Cases
+OUT OF SCOPE
 
 ### Integration Point: [ComponentA ↔ ComponentB]
 
@@ -62,6 +65,7 @@ testfälle sollen autonom sein. es gibt unit test
 [Test case details]
 
 ## Performance Test Cases
+OUT OF SCOPE
 
 ### TC-D-301: [Test Case Name]
 **Metric:** [Response time/Throughput/etc.]
@@ -69,13 +73,16 @@ testfälle sollen autonom sein. es gibt unit test
 [Test case details]
 
 ## Security Test Cases
+OUT OF SCOPE
 
 ### TC-D-401: [Test Case Name]
 **Security Aspect:** [Authentication/Authorization/Encryption/etc.]
 [Test case details]
 
 ## Coverage Analysis
+OUT OF SCOPE
 [Analysis of test coverage for components and design elements]
 
 ## Test Automation Strategy
+OUT OF SCOPE
 [Describe which tests will be automated and how]

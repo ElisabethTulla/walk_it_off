@@ -53,7 +53,7 @@ public class AccountController extends UserController {
     @FXML
     private TableColumn<Challenge, Double> chaKmsColumn;
     @FXML
-    private TableColumn<Challenge, Timestamp> startedColumn; //todo FRAGE: besser LocalDateTime(auch im Objekt?)
+    private TableColumn<Challenge, Timestamp> startedColumn;
     @FXML
     private TableColumn<Challenge, Timestamp> endsColumn;
 

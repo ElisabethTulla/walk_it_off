@@ -38,7 +38,7 @@ Before setting up the project, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/chris-cgsit/walk_it_off.git
+git clone https://github.com/chris-cgsit/train_2025_java_aufbau_example_project.git
 cd walk_it_off
 ```
 

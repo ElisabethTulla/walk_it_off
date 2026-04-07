@@ -3,8 +3,7 @@
 ## Overview
 This document shows the package structure and dependencies between packages.
 
-nicht benötigt, out of scope
-
+OUT OF SCOPE
 
 ## Package Diagram
 [Insert package diagram here]

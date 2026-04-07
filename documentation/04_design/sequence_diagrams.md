@@ -3,8 +3,7 @@
 ## Overview
 This document contains sequence diagrams that show the interaction between objects over time for various scenarios.
 
-nicht benötigt, out of scope
-
+OUT OF SCOPE
 
 ## Sequence Diagram 1: [Scenario Name]
 
