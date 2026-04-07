@@ -40,21 +40,4 @@ public class JfxMainApp extends Application {
 
     }
 
-
-    /***
-     *
-     * fix different sizes in application
-     *
-     * neues Screencapture (Register new User, Your Achievements, Log 10.000 steps, create new Challenge (run  5K),
-     *  enter challenge, log 5km); login felix@tulla.at, show steps timeframe.
-     *
-     * todo FIX CLASS DIAGRAMM in PowerPoint (n-m relationship between user - achievement!!)
-     *
-     * DOCUMENTATION:
-     *
-     * todo: check 03_analysis/test_cases_analysis -> test cases to be accurate! (ai)
-     *
-     * todo: check 05_testing/test_cases -> test cases to be accurate! (ai)
-     */
-
 }
