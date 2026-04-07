@@ -124,6 +124,7 @@ OUT OF SCOPE
 **Planned Fix:** tba
 
 ### Limitations
+- limited time
 - no API(Rest Services)
 - only community editions and free to use tools (with limited features)
 
@@ -142,9 +143,9 @@ OUT OF SCOPE
 * Disk Space: 500 MB+
 
 ### Software Requirements
-- Operating System: linux, windows, macOs
+- Operating System: linux/windows/macOs
 - Database: postgresql or h2
-- Other Dependencies: [List]
+- Other Dependencies: maven, junit, javafx
 
 ## Installation and Deployment
 see docs/architecture/setup.md
@@ -169,18 +170,19 @@ see docs/architecture/setup.md
 ## Testing Summary
 
 ### Test Execution Summary
-- **Total Test Cases:** [Number]
-- **Executed:** [Number]
-- **Passed:** [Number]
-- **Failed:** [Number]
-- **Blocked:** [Number]
-- **Not Executed:** [Number]
+- **Total Test Cases:** 3 JUNIT tests
+- **Executed:** 3
+- **Passed:** 3
+- **Failed:** 0
+- **Blocked:** 0
+- **Not Executed:** 0
 
 ### Test Coverage
-- **Unit Tests:** [Coverage %]
-- **Integration Tests:** [Coverage %]
-- **System Tests:** [Coverage %]
-- **Acceptance Tests:** [Pass rate %]
+- **Unit Tests:** 5 %
+- **Manual Tests:** 100 %
+- **Integration Tests:** 0%
+- **System Tests:** 0 %
+- **Acceptance Tests:** 100 %
 
 ## Security Assessment
 OUT OF SCOPE
@@ -228,25 +230,27 @@ OUT OF SCOPE
 ## Support and Maintenance
 
 ### Support Contact Information
-- **Email:** [Support email]
-- **Phone:** [Support phone]
-- **Hours:** [Support hours]
-
-### Maintenance Windows
-[Planned maintenance schedule]
+- **Email:** tulla.elisabeth@gmx.at
 
 ## Next Steps
 
 ### Future Releases
-- **Version [X.X.X]:** [Planned for YYYY-MM-DD]
-  - [Planned feature 1]
-  - [Planned feature 2]
+- **Version 2.0.0:** tba
+  - prevent empty textfields
+  - implement a Logger to differentiate between wrong email/password during failed login
+  - compare Achievements to other users
+  - compare stats to user-groups (statistics)
+  - log time with runs and compare improvements
+  - add maxTime to challenges
+  - ChallengeProgressView + Controller
+  - UpdateUserDateView + Controller
 
 ### Continuous Improvement
-- [Improvement area 1]
-- [Improvement area 2]
+- Security
+- Scalability
 
 ## Appendices
+OUT OF SCOPE
 
 ### Appendix A: Detailed Change Log
 [Link to detailed change log]
