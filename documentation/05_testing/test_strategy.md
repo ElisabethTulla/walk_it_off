@@ -3,12 +3,12 @@
 ## Overview
 This document outlines the overall testing strategy for the project.
 
-junit und manuell tests only
+This project was test manually and with the use of JUNIT5 tests (see 05_testing/test_cases.md).
 
 ## Testing Objectives
-1. [Objective 1]
-2. [Objective 2]
-3. [Objective 3]
+1. Implemented Features run without error.
+2. The Application is performative.
+3. The database saves data consistently and reliably. 
 
 ## Testing Scope
 

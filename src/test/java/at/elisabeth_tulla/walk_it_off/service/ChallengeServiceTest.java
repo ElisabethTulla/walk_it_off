@@ -19,6 +19,5 @@ class ChallengeServiceTest {
 
         assertEquals(endDate, service.calculateEndDate(LocalDate.of(2026, 3, 1), 1));
 
-
     }
 }

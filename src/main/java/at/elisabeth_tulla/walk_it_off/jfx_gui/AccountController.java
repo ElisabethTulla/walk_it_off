@@ -107,7 +107,6 @@ public class AccountController extends UserController {
 
         //remove ended Challenges from active Challenges:
         challengeService.updateActiveChallenges(currentUser);
-        //todo pop-up: Challenge ended
 
         chaNameColumn.setCellValueFactory(new PropertyValueFactory<Challenge, String>("name"));
         chaStepsColumn.setCellValueFactory(new PropertyValueFactory<Challenge, Integer>("goalSteps"));
@@ -128,15 +127,12 @@ public class AccountController extends UserController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ActivityView.fxml"));
         Parent root = loader.load();
-        //Parent root = FXMLLoader.load(getClass().getResource("/views/AccountView.fxml"));
         Scene scene = new Scene(root);
 
-        //hand over user to initData Method in ActivityController:
         ActivityController logController = loader.getController();
         logController.initData(currentUser);
 
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-
         stage.setScene(scene);
         stage.show();
     }
@@ -145,15 +141,12 @@ public class AccountController extends UserController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/ChallengeView.fxml"));
         Parent root = loader.load();
-        //Parent root = FXMLLoader.load(getClass().getResource("/views/AccountView.fxml"));
         Scene scene = new Scene(root);
 
-        //hand over user to initData Method in ChallengeController:
         ChallengeController challengeController = loader.getController();
         challengeController.initData(currentUser);
 
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-
         stage.setScene(scene);
         stage.show();
     }
@@ -176,7 +169,6 @@ public class AccountController extends UserController {
         ObservableList<Achievement> obsYourAchievements = FXCollections.observableArrayList();
         obsYourAchievements.addAll(yourAchievements);
 
-        //fill table with all Achievements:
         achievementTable.setItems(obsYourAchievements);
     }
 
@@ -192,7 +184,8 @@ public class AccountController extends UserController {
             LocalDate enddate = endDatePicker.getValue();
 
             try {
-                HashMap<LocalDateTime, Integer> yourSteps = comparingService.mapStepsTimeframe(currentUser, startdate, enddate);
+                HashMap<LocalDateTime, Integer> yourSteps = comparingService
+                        .mapStepsTimeframe(currentUser, startdate, enddate);
 
                 List<Activity> items = yourSteps.keySet().stream()
                         .map(key -> new Activity(key, yourSteps.get(key)))
@@ -200,7 +193,6 @@ public class AccountController extends UserController {
 
                 ObservableList<Activity> obsItems = FXCollections.observableArrayList(items);
 
-                //fill table with ObservableList:
                 activityTable.setItems(obsItems);
             } catch (RuntimeException e) {
                 triggerErrorAlert();

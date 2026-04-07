@@ -25,9 +25,12 @@ public class ComparingService {
      * @param enddate LocalDate that marks the end of the timeframe
      * @return summarized STEPS in specific timeframe as Integer
      */
-    public Integer sumUpStepsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
+    public Integer sumUpStepsTimeframe
+    (User user, LocalDate startdate, LocalDate enddate) {
 
-        return compRepo.getStepsSumDateToDate(user, startdate.atStartOfDay(), enddate.atTime(23, 59));
+        return compRepo.getStepsSumDateToDate
+                (user, startdate.atStartOfDay(),
+                        enddate.atTime(23, 59));
     }
 
     /***
@@ -175,26 +178,29 @@ public class ComparingService {
      * @param enddate LocalDate that marks the end of the timeframe
      * @return the difference in STEPS as Integer
      */
-    public Integer compareSumUpStepsTimeframeUsers(User currentUser, String email, LocalDate startdate, LocalDate enddate) {
+    public Integer compareSumUpStepsTimeframeUsers
+    (User currentUser, String email, LocalDate startdate, LocalDate enddate) {
 
         User otherUser = userRepo.getUser(email);
 
-        Integer currentUserSteps = sumUpStepsTimeframe(currentUser, startdate, enddate);
-        Integer otherUserSteps = sumUpStepsTimeframe(otherUser, startdate, enddate);
+        Integer currentUserSteps = sumUpStepsTimeframe
+                (currentUser, startdate, enddate);
+        Integer otherUserSteps = sumUpStepsTimeframe
+                (otherUser, startdate, enddate);
 
         return currentUserSteps - otherUserSteps;
-
         /*
         //MOVE TO COMPARING CONTROLLER:
         if (diffStepsUsers >0){
-            *.setText("You walked/ran " + diffSteps + " more steps than " + otherUser.getFirstName());
+            *.setText("You walked/ran " + diffSteps
+            + " more steps than " + otherUser.getFirstName());
         } else if (diffStepsUsers == 0){
             *.setText("You have matched your results perfectly!");
         } else {
             Integer diffStepsPositive = diffStepsUsers * (-1);
-            *.setText(otherUser.getFirstName() + " walked/ran " + diffStepsPositive + " steps/kilometers more than you.");
-        }
-         */
+            *.setText(otherUser.getFirstName() + " walked/ran "
+            + diffStepsPositive + " steps/kilometers more than you.");
+        }*/
     }
 
     /***

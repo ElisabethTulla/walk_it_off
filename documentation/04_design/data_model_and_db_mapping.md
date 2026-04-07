@@ -10,7 +10,7 @@ die zwischentabellen angeben und link zum SQL file, das die Tabellen erstellt
 [Description of the conceptual data model]
 
 ### Entity-Relationship Diagram
-[Insert ER diagram here]
+![databaseTables.png](databaseTables.png)
 
 ## Logical Data Model
 

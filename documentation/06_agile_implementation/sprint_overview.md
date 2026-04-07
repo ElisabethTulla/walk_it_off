@@ -1,7 +1,12 @@
-# Sprint XX
+# Sprint Overview
+
+Follow this link to the Github Roadmap for this project to see the three iterations(=Sprints)
+and their Information:
+https://github.com/users/ElisabethTulla/projects/3/views/4
+
 
 ## Sprint Information
-**Sprint Number:** XX
+**Sprint Number:** 01
 **Sprint Goal:** [Define the sprint goal]
 **Start Date:** [YYYY-MM-DD]
 **End Date:** [YYYY-MM-DD]
@@ -17,10 +22,10 @@
 
 ## Sprint Backlog
 
-### Committed at.elisabeth_tulla.walk_it_off.model.User Stories
+### Committed User Stories
 
-#### PBI-XXX: [at.elisabeth_tulla.walk_it_off.model.User Story Title]
-**Priority:** [High/Medium/Low]
+#### PBI-001: [User Story Title]
+**Priority:** High
 **Estimation:** [Story points]
 **Assigned to:** [Team member]
 **Status:** To Do
@@ -28,11 +33,16 @@
 **Acceptance Criteria:**
 - [ ] Criterion 1
 - [ ] Criterion 2
+- [ ] Criterion 3
 
 **Tasks:**
 - [ ] Task 1 (Estimated: [hours], Remaining: [hours])
+- [ ] Task 2 (Estimated: [hours], Remaining: [hours])
 
 **Notes:** [Any notes]
+
+#### PBI-002: [User Story Title]
+[User story details]
 
 ## Sprint Capacity
 
@@ -55,6 +65,7 @@
 | Day | Date | Remaining Story Points | Remaining Hours |
 |-----|------|------------------------|-----------------|
 | 0 | [Date] | [Points] | [Hours] |
+| 1 | [Date] | [Points] | [Hours] |
 
 ## Impediments
 
@@ -94,4 +105,4 @@
 - [ ] [Action item 1] - **Owner:** [Name], **Due:** [Date]
 
 ## Notes and Lessons Learned
-[Additional notes for Sprint XX]
+[Additional notes for Sprint 01]

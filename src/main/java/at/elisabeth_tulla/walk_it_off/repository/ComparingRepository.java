@@ -27,12 +27,13 @@ public class ComparingRepository {
      * @param endDate LocalDateTime that marks the end of timeframe
      * @return Integer sum of STEPS
      */
-    public Integer getStepsSumDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
+    public Integer getStepsSumDateToDate
+    (User user, LocalDateTime startDate, LocalDateTime endDate) {
 
-        String sql = "SELECT SUM(steps_logged) FROM activity WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
+        String sql = "SELECT SUM(steps_logged) FROM activity " +
+                "WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)){
-
             ps.setInt(1, user.getId());
             ps.setTimestamp(2, Timestamp.valueOf(startDate));
             ps.setTimestamp(3, Timestamp.valueOf(endDate));

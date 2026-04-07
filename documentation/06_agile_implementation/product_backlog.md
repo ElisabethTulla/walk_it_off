@@ -3,10 +3,13 @@
 ## Overview
 This document contains the product backlog - the prioritized list of features, enhancements, and fixes for the product.
 
-link zu github board!!
+The complete backlog of this project can be found on Github:
+https://github.com/users/ElisabethTulla/projects/3
 
 ## Product Vision
-[Brief description of the product vision]
+Walk_it_off is an application that allows users to track their steps/kilometers and earn achievements.
+This project aims to entice users to walk more steps and/or run more kilometers
+and therefore better their health.
 
 ## Product Backlog Items
 

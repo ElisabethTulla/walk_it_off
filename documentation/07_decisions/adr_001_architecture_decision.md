@@ -1,6 +1,6 @@
 # ADR 001: Architecture Decision
 
-nochmal die decision mit achievement  logic refactoiring ( oben auf hier verlinken!)
+nochmal die decision mit achievement  logic refactoring ( oben auf hier verlinken!)
 
 ## Status
 **Status:** [Proposed/Accepted/Rejected/Deprecated/Superseded]

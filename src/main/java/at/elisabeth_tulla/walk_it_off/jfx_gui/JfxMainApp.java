@@ -17,8 +17,6 @@ import java.util.Arrays;
 
 public class JfxMainApp extends Application {
 
-    static UserService userService = new UserService();
-
     /**
      * This method loads the WelcomeView into the Scene of the Stage and starts the GUI.
      * @param primaryStage Stage
@@ -41,30 +39,8 @@ public class JfxMainApp extends Application {
 
    public static void main(String[] args) {
 
-       if (Arrays.stream(args).anyMatch(s -> s.equalsIgnoreCase("--create-test-users"))) {
-           createTestUsers();
-       }
-
        launch();
 
-       //todo FRAGE: wie kann main gestartet werden (ohne Jfx) um createTestUsers() anzusteuern?
-    }
-
-    /***
-     * This method hands over test user data to the UserService in order to create test users.
-     */
-    public static void createTestUsers() {
-
-        userService.registerUser("Elvis", "Tulla", "elvis@tulla.at",
-                "Postgres1!", LocalDate.of(2018, 1, 18), "male");
-        userService.registerUser("Felix", "Tulla", "felix@tulla.at",
-                "Postgres1!", LocalDate.of(2015, 1, 6), "male");
-        userService.registerUser("Elisabeth", "Tulla", "tulla.elisabeth@gmx.at",
-                "postgres", LocalDate.of(1992, 1, 16), "female");
-        userService.registerUser("Oliver", "Tulla", "oliver@tulla.at",
-                "Postgres1!", LocalDate.of(1992, 7, 21), "male");
-        userService.registerUser("Nachi", "Tulla", "nachi@tulla.at",
-                "Postgres1!", LocalDate.of(2016, 6, 3), "male");
     }
 
 
@@ -72,19 +48,27 @@ public class JfxMainApp extends Application {
      *
      *      (nice to have) Logger? for login password/email wrong (error/warning/debug)
      *
-     * im class diagramm UserController als Überklasse einzeichnen (AccountController, ActivityController,
-     *      ChallengeController, MannageAccountController ... extends UserController)
-     *
      *      (nice to have) prevent empty textfields in Register-, Logging- und ChallengeController
+     *
+     * fix different sizes in application
+     *
+     * neues Screencapture (Register new User, Your Achievements, Log 10.000 steps, create new Challenge (run  5K),
+     *  enter challenge, log 5km); login felix@tulla.at, show steps timeframe.
+     *
      *
      *
      * DOCUMENTATION:
+     *
+     * todo: check 03_analysis/test_cases_analysis -> test cases to be accurate! (ai)
+     *
+     * todo: check 05_testing/test_cases -> test cases to be accurate! (ai)
      *
      * class diagramm note zwischen achievement und user -> zwischentabelle + user und challenge -> zwischentabelle
      *
      * requirements_and_user_stories: hier die user Stories von github (wenn ich es exportiern kann, wenn Export von github nicht geht, nur exemplarisch hier und auf github verweisen)
      *
-     * FEATURES zu den usecasses , STORIES zu requirements_and_user_stories
+     * FEATURES zu den usecases , STORIES zu requirements_and_user_stories*
+     *
      *
      * [FEAT] activity logging	https://github.com/ElisabethTulla/walk_it_off/issues/18
      * [FEAT] gui	https://github.com/ElisabethTulla/walk_it_off/issues/31
