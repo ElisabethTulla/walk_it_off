@@ -9,6 +9,10 @@ import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/***
+ * The ValidationManager checks for Emails in the database and validates Passwords.
+ */
+
 public class ValidationManager {
 
     public Connection conn = DatabaseConfig.configure();
@@ -34,19 +38,14 @@ public class ValidationManager {
         if (password == null) {
             return false;
         }
-        // Regex to check valid password.
+
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*['*°?/!@#$%^&-+=()])(?=\\S+$).{8,20}$";
 
-        // Compile Regex:
         Pattern p = Pattern.compile(regex);
 
-        // Matcher finds matching Regex - password:
         Matcher m = p.matcher(password);
 
-        // Return true if the password matched the Regex:
         return m.matches();
     }
-
-    //todo profanity check
 
 }

@@ -15,9 +15,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class WelcomeController {
+/**
+ * WelcomeController connects the WelcomeView.fxml with the Models (User, Challenge, Achievement).
+ * It acts as the first contact with the application and hands over the user input in order to log in
+ * and lead to the AccountView.fxml or to register via the RegisterView.fxml.
+ */
 
-    //todo FRAGE: implements Initializable ?
+public class WelcomeController {
 
     UserService userService = new UserService();
 
@@ -28,33 +32,22 @@ public class WelcomeController {
     @FXML
     private Text txtMessage;
 
-    //todo FRAGE: Konstruktor erstellen? (in AccountController inizializen der Tabellen??)
-
     @FXML
     public void loginButtonClicked(ActionEvent event) throws IOException {
 
-        //String userData = ((Node) event.getSource()).getUserData().toString();
         String email = txtEmail.getText();
         String password = txtPassword.getText();
-
         User user = userService.login(email, password);
 
-        //todo FRAGE: kann ich außer NULL noch einen anderen Wert statt einem echten user hier zurückgeben,
-        // damit ich differenzieren kann zwischen WRONG EMAIL und WRONG PASSWORD?
-
         if (user != null) {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AccountView.fxml"));
             Parent root = loader.load();
-            //Parent root = FXMLLoader.load(getClass().getResource("/views/AccountView.fxml"));
             Scene scene = new Scene(root);
 
-            //hand over user to initData Method in AccountController:
             AccountController accController = loader.getController();
             accController.initData(user);
 
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
             stage.setScene(scene);
             stage.show();
         } else
@@ -68,7 +61,6 @@ public class WelcomeController {
         Scene scene = new Scene(root);
 
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
         stage.setScene(scene);
         stage.show();
     }

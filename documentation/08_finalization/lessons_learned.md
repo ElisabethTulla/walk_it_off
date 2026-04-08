@@ -1,39 +1,37 @@
 # Lessons Learned
 
 ## Project Overview
-**Project Name:** [Project name]
-**Duration:** [Start date] to [End date]
-**Team Size:** [Number of team members]
-**Final Status:** [Successful/Completed/Cancelled]
+**Project Name:** Walk it off
+**Duration:** 1.2.26 to 9.4.26
+**Team Size:** 1
+**Final Status:** Successful
 
 ## Executive Summary
-[Brief summary of the project and key lessons learned]
+Walk_it_off is an application that allows users to track their steps/kilometers and earn achievements.
+Working on this project not only allowed me to practise my newly acquired skills in software development,
+it also gave me a valuable insight into project planning.
+Working in sprints really helped me stay on top of the workload
 
 ## What Went Well (Successes)
 
 ### Technical Successes
 
-#### Success 1: [Title]
-**Description:** [Detailed description of what went well]
-**Impact:** [Positive impact on the project]
-**Why it Worked:** [Reasons for success]
-**Recommendation:** [How to replicate this in future projects]
-
-#### Success 2: [Title]
-**Description:** [Detailed description]
-**Impact:** [Positive impact]
-**Why it Worked:** [Reasons for success]
-**Recommendation:** [Future application]
+#### Success 1: The application is working as intended
+**Description:** the features are implemented correctly and the performance is acceptable
+**Impact:** This allows the application to be easy to use and no errors are occurring
+**Why it Worked:** Good time management, all necessary tools available, good preparation
+**Recommendation:** clear vision, good planning and working in sprints
 
 ### Process Successes
 
-#### Success 1: [Title]
-**Description:** [Detailed description]
-**Impact:** [Positive impact]
-**Why it Worked:** [Reasons for success]
-**Recommendation:** [Future application]
+#### Success 1: clean code and proper planning
+**Description:** A clear structure was planned and followed
+**Impact:** working on the project was easy because of the clear structure
+**Why it Worked:** good planning, working in sprints
+**Recommendation:** following a clear structure
 
 ### Team and Collaboration Successes
+OUT OF SCOPE
 
 #### Success 1: [Title]
 **Description:** [Detailed description]
@@ -45,33 +43,27 @@
 
 ### Technical Challenges
 
-#### Challenge 1: [Title]
-**Description:** [Detailed description of the challenge]
-**Impact:** [Negative impact on the project]
-**Root Cause:** [Why this happened]
-**How it was Resolved:** [Solution applied]
-**Lesson Learned:** [What we learned]
-**Prevention:** [How to avoid this in future]
+#### Challenge 1: setup of database
+**Description:** creating the database for walk it off was difficult
+**Impact:** it cost more time than intended
+**Root Cause:** the linux UBUNTU operating system differs from windows in some ways
+**How it was Resolved:** the database was created in the terminal
+**Lesson Learned:** there is always a way, but it takes time
+**Prevention:** experience
 
-#### Challenge 2: [Title]
-**Description:** [Detailed description]
-**Impact:** [Negative impact]
-**Root Cause:** [Why this happened]
-**How it was Resolved:** [Solution applied]
-**Lesson Learned:** [What we learned]
-**Prevention:** [How to avoid this in future]
 
 ### Process Challenges
 
-#### Challenge 1: [Title]
-**Description:** [Detailed description]
-**Impact:** [Negative impact]
-**Root Cause:** [Why this happened]
-**How it was Resolved:** [Solution applied]
-**Lesson Learned:** [What we learned]
-**Prevention:** [How to avoid this in future]
+#### Challenge 1: documentation
+**Description:** underestimation of the workload needed for the documentation
+**Impact:** the time buffer was completely used up
+**Root Cause:** documentation wasn't a big enough priority
+**How it was Resolved:** extra time was allocated
+**Lesson Learned:** plan more time for documentation
+**Prevention:** plan more time for documentation
 
 ### Communication and Collaboration Challenges
+OUT OF SCOPE
 
 #### Challenge 1: [Title]
 **Description:** [Detailed description]
@@ -82,6 +74,7 @@
 **Prevention:** [How to avoid this in future]
 
 ## Metrics and Performance
+OUT OF SCOPE
 
 ### Project Metrics
 | Metric | Planned | Actual | Variance | Notes |
@@ -106,29 +99,18 @@
 | Sprint 2 | [Points] | [Points] | [Points] |
 | **Average** | **[Points]** | **[Points]** | **[Points]** |
 
-## Technology and Tools
+## Technology
 
 ### Technology Decisions
 
-#### Decision 1: [Technology Choice]
-**Outcome:** [Success/Failure/Mixed]
-**Lessons Learned:** [What we learned about this technology]
-**Recommendation:** [Future use recommendation]
+#### Decision 1: working on a linux operating system
+**Outcome:** Success
+**Lessons Learned:** ubuntu is a suitable operating system for software development
+**Recommendation:** gain more experience with linux
 
-#### Decision 2: [Technology Choice]
-**Outcome:** [Success/Failure/Mixed]
-**Lessons Learned:** [What we learned]
-**Recommendation:** [Future recommendation]
-
-### Tools and Practices
-
-#### Tool 1: [Tool Name]
-**Usage:** [How it was used]
-**Effectiveness:** [How effective it was]
-**Lessons Learned:** [What we learned]
-**Recommendation:** [Continue/Change/Discontinue]
 
 ## Team Dynamics and Development
+OUT OF SCOPE
 
 ### Team Strengths
 - [Strength 1]
@@ -149,6 +131,7 @@
 - [Skill 2]
 
 ## Stakeholder Management
+OUT OF SCOPE
 
 ### Stakeholder Engagement
 **What Worked:**
@@ -171,82 +154,77 @@
 ## Risk Management
 
 ### Risks that Materialized
-#### Risk 1: [Risk Description]
-**Impact:** [Actual impact]
-**How it was Handled:** [Response]
-**Lesson Learned:** [What we learned]
+#### Risk 1: working on a rather unfamiliar operating system
+**Impact:** cost more time
+**How it was Handled:** time spent getting familiar with the operating system
+**Lesson Learned:** there's only one way to gain experience: invest time
 
 ### Risks that Didn't Materialize
-#### Risk 1: [Risk Description]
-**Mitigation Applied:** [Mitigation strategy]
-**Why it was Effective:** [Reason]
+#### Risk 1: application not working
+**Mitigation Applied:** good planning and using the course projects for reference
+**Why it was Effective:** good planning makes the work easier, good references from the course
 
 ### Unexpected Issues
-#### Issue 1: [Issue Description]
-**Impact:** [Impact on project]
-**Response:** [How it was handled]
-**Lesson Learned:** [What we learned]
+#### Issue 1: update of postgres
+**Impact:** it didn't update correctly
+**Response:** research and using terminal commands
+**Lesson Learned:** get more familiar with operating system
 
 ## Process Improvements
 
 ### Agile Practices
 
-#### Practice 1: [Practice Name]
-**Effectiveness:** [Rating 1-5]
-**Lessons Learned:** [What we learned]
-**Adjustments Made:** [Changes made during project]
-**Recommendations:** [Future recommendations]
+#### Practice 1: Sprints
+**Effectiveness:** 5
+**Lessons Learned:** splitting the work up in chunks makes the work a lot easier
+**Adjustments Made:** planning the sprints in planning phase
+**Recommendations:** work in sprints to reach the end goal
 
 ### Development Practices
 
-#### Practice 1: [Practice Name]
-**Effectiveness:** [Rating 1-5]
-**Lessons Learned:** [What we learned]
-**Recommendations:** [Future recommendations]
+#### Practice 1: Github
+**Effectiveness:** 4
+**Lessons Learned:** creating feature branches allows working on new implementations while protecting the main branch
+**Recommendations:** create feature branches and commit regularly
 
 ## Recommendations for Future Projects
 
 ### Do More Of
-1. [Recommendation 1]
-2. [Recommendation 2]
-3. [Recommendation 3]
+1. planning
+2. working in sprints
 
 ### Do Less Of
-1. [Recommendation 1]
-2. [Recommendation 2]
+1. system.out.println...
 
 ### Start Doing
-1. [Recommendation 1]
-2. [Recommendation 2]
+1. trust the process
 
 ### Stop Doing
-1. [Recommendation 1]
-2. [Recommendation 2]
+1. saving intimidating tasks for last
 
 ## Key Takeaways
 
 ### Top 5 Lessons Learned
-1. **[Lesson 1]**
-   - [Detailed description]
-   - [Action for future projects]
+1. **Get more familiar with operating system**
+   - Gain more experience with the linux operating system ubuntu
+   - invest more time beforehand
 
-2. **[Lesson 2]**
-   - [Detailed description]
-   - [Action for future projects]
+2. **work in sprints**
+   - split up the workload in small sprints
+   - split up the project into increments
 
-3. **[Lesson 3]**
-   - [Detailed description]
-   - [Action for future projects]
+3. **Using Github**
+   - using Github allows for an easy way to split the workload into features and 
+      user stories and keep on track with the sprints by sorting the features into iterations
+   - make projects with Github and use the Roadmap feature
 
-4. **[Lesson 4]**
-   - [Detailed description]
-   - [Action for future projects]
+4. **don't save intimidating tasks for last**
+   - plan ahead for intimidating tasks
+   - include a research phase
 
-5. **[Lesson 5]**
-   - [Detailed description]
-   - [Action for future projects]
 
 ## Action Items for Organization
+OUT OF SCOPE
 
 ### Process Changes
 - [ ] [Action item 1] - **Owner:** [Name], **Due:** [Date]
@@ -261,17 +239,16 @@
 - [ ] [Update 2] - **Priority:** [High/Medium/Low]
 
 ## Conclusion
-[Summary of the lessons learned session and final thoughts]
+Even bette planning, especially if aspects of the project or available tools are unfamiliar.
 
 ## Contributors
-**Lessons Learned Session Date:** [YYYY-MM-DD]
-**Facilitator:** [Name]
+**Lessons Learned Session Date:** 2026-04-07
+**Facilitator:** Elisabeth Tulla
 **Participants:**
-- [Name 1]
-- [Name 2]
-- [Name 3]
+- Elisabeth Tulla
 
 ## References and Appendices
+OUT OF SCOPE
 
 ### Related Documents
 - [Document 1]

@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -22,14 +23,16 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * ChallengeController connects the ChallengeView.fxml with the Models (User, Challenge, Achievement, Activity).
+ * It hands over all Challenges and Achievements from the service layer to the GUI
+ * and enables the user to enter Challenges and create Challenges.
+ */
 
-public class ChallengeController {
+public class ChallengeController extends UserController {
 
     ChallengeService challengeService = new ChallengeService();
     AchievementService achievementService = new AchievementService();
-
-
-    private User currentUser;
 
     //ChallengesTable:
     @FXML
@@ -67,9 +70,9 @@ public class ChallengeController {
     private TextField txtGoalKms;
 
     @FXML
-    private Button btnLoadRewardAchievementId;
+    private Button btnCreateChallenge;
     @FXML
-    private TextField txtRewardAchievementId;
+    private Text txtRewardAchievementId;
     @FXML
     private TextField txtChallengeName;
     @FXML
@@ -101,10 +104,10 @@ public class ChallengeController {
     @FXML
     private TableColumn<Achievement, String> achTypeColumn;
 
-
+    @Override
     public void initData(User user) {
 
-        this.currentUser = user;
+        super.initData(user);
 
         //ChallengeTable:
         chaIdColumn.setCellValueFactory(new PropertyValueFactory<Challenge, Integer>("id"));
@@ -117,13 +120,17 @@ public class ChallengeController {
         chaEndColumn.setCellValueFactory(new PropertyValueFactory<Challenge, Timestamp>("endsAt"));
         chaRewardId.setCellValueFactory(new PropertyValueFactory<Challenge, Integer>("rewardAchievementID"));
 
-        List<Challenge> allChallenges = challengeService.showAllChallenges();
+        try {
+            List<Challenge> allChallenges = challengeService.showAllChallenges();
 
-        ObservableList<Challenge> obsActiveChallenges = FXCollections.observableArrayList();
-        obsActiveChallenges.addAll(allChallenges);
+            ObservableList<Challenge> obsActiveChallenges = FXCollections.observableArrayList();
+            obsActiveChallenges.addAll(allChallenges);
 
-        //fill table with active Challenges:
-        allChallengesTable.setItems(obsActiveChallenges);
+            //fill table with active Challenges:
+            allChallengesTable.setItems(obsActiveChallenges);
+        } catch (RuntimeException e) {
+            triggerErrorAlert();
+        }
 
         //AchievementsTable:
         achIdColumn.setCellValueFactory(new PropertyValueFactory<Achievement, Integer>("id"));
@@ -132,13 +139,24 @@ public class ChallengeController {
         achKmsColumn.setCellValueFactory(new PropertyValueFactory<Achievement, Double>("requiredKm"));
         achTypeColumn.setCellValueFactory(new PropertyValueFactory<Achievement, String>("type"));
 
-        List<Achievement> allAchievements = achievementService.showAllAchievements();
+        try {
+            List<Achievement> allAchievements = achievementService.showAllAchievements();
 
-        ObservableList<Achievement> obsAchievements = FXCollections.observableArrayList();
-        obsAchievements.addAll(allAchievements);
+            ObservableList<Achievement> obsAchievements = FXCollections.observableArrayList();
+            obsAchievements.addAll(allAchievements);
 
-        //fill table with all Achievements:
-        achievementTable.setItems(obsAchievements);
+            //fill table with all Achievements:
+            achievementTable.setItems(obsAchievements);
+        } catch (RuntimeException e) {
+            triggerErrorAlert();
+        }
+    }
+
+    private void triggerErrorAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("There was an error fetching your data. Contact tulla.elisabeth@gmx.at.");
+        alert.showAndWait();
     }
 
     public void btnEnterChallengeClicked(ActionEvent actionEvent) throws IOException {
@@ -165,18 +183,19 @@ public class ChallengeController {
 
         if (underMaxParticipants && missingAchievement == null) {
 
-            //enter challenge:
-            boolean entered = challengeService.enterChallenge(currentUser, challengeId);
+            try {
+                challengeService.enterChallenge(currentUser, challengeId);
 
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            if (!entered) {
-                alert.setTitle("Something went wrong");
-                alert.setHeaderText("There was an error entering the challenge. Contact tulla.elisabeth@gmx.at");
-            } else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Challenge entered!");
                 alert.setHeaderText("You successfully entered the challenge!");
+                alert.showAndWait();
+            } catch (RuntimeException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Couldn't enter the challenge. Contact tulla.elisabeth@gmx.at");
+                alert.showAndWait();
             }
-            alert.showAndWait();
 
             backToAccount(actionEvent);
         }
@@ -209,15 +228,21 @@ public class ChallengeController {
         String rewardAchievementName = txtRewardAchievementName.getText();
         String type = txtAchievementType.getText();
         Integer goalSteps = Integer.parseInt(txtGoalSteps.getText());
-        Integer goalKms = Integer.parseInt(txtGoalKms.getText());
+        double goalKms = Double.parseDouble(txtGoalKms.getText());
 
-        this.rewardAchievementId = achievementService.createAchievement
-                (rewardAchievementName, goalSteps, goalKms, 0, type);
-        //txtRewardAchievementId.setText(rewardAchievementId.toString());
-        //todo FRAGE Wie kann ich das Textfeld txtRewardAchievement mit der rewardAchievementId befüllen?
-        // -> ERROR sagt rewardAchievementId is null...
+        try {
+            this.rewardAchievementId = achievementService.createAchievement
+                    (rewardAchievementName, goalSteps, goalKms, 0, type);
 
-        btnLoadRewardAchievementId.setDisable(false);
+            txtRewardAchievementId.setText(this.rewardAchievementId.toString());
+
+            btnCreateChallenge.setDisable(false);
+        } catch (RuntimeException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("There was an error creating the achievement. Contact tulla.elisabeth@gmx.at.");
+            alert.showAndWait();
+        }
     }
 
     public void btnCreateChallengeClicked(ActionEvent actionEvent) throws IOException {
@@ -233,16 +258,20 @@ public class ChallengeController {
         Double reqKms = Double.parseDouble(txtRequiredKms.getText());
         Integer reqAchievementId = Integer.parseInt(txtRequiredAchievementId.getText());
 
-        challengeService.createChallenge(challengeName, reqSteps, reqKms, reqAchievementId,
-                minParticipants, maxParticipants, goalSteps, goalKms, start, lastsFor, rewardAchievementId);
+        try {
+            challengeService.createChallenge(challengeName, reqSteps, reqKms, reqAchievementId,
+                    minParticipants, maxParticipants, goalSteps, goalKms, start, lastsFor, rewardAchievementId);
 
-        //todo handle if createChallenge didn't go threw
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Challenge created!");
-        alert.setHeaderText("You successfully created a new challenge!");
-        alert.showAndWait();
-
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Challenge created!");
+            alert.setHeaderText("You successfully created a new challenge!");
+            alert.showAndWait();
+        } catch (RuntimeException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("There was an error creating the challenge. Contact tulla.elisabeth@gmx.at.");
+            alert.showAndWait();
+        }
         backToAccount(actionEvent);
     }
 }

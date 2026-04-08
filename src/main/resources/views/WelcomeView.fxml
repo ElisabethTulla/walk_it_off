@@ -44,7 +44,7 @@
       </VBox>
    </center>
    <top>
-      <TextArea prefHeight="172.0" prefWidth="600.0" text="Welcome to walk_it_off!" wrapText="true" BorderPane.alignment="CENTER">
+      <TextArea prefHeight="172.0" prefWidth="600.0" text="Welcome to Walk it off!" wrapText="true" BorderPane.alignment="CENTER">
          <font>
             <Font size="29.0" />
          </font>

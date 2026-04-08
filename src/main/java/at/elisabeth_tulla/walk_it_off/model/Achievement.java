@@ -2,6 +2,10 @@ package at.elisabeth_tulla.walk_it_off.model;
 
 import java.sql.Timestamp;
 
+/***
+ * This class serves as a data- and fxml-model for achievements.
+ */
+
 public class Achievement {
 
     private Integer id;
@@ -9,7 +13,7 @@ public class Achievement {
     private Integer requiredSteps;
     private double requiredKm;
     private Integer requiredDaysActive;
-    private String type; //todo challenge OR user      //todo ENUMS:  CHALLENGE, USER
+    private String type;
     private Boolean unlocked = false;
     private Timestamp unlockedAt = null;
 

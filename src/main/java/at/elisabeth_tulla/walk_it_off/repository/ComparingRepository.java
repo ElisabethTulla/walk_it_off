@@ -7,6 +7,10 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+/***
+ * This class is the repository/Data Access Object managing any database operations
+ * concerning Calculations and Comparisons of User Data.
+ */
 
 public class ComparingRepository {
 
@@ -15,12 +19,21 @@ public class ComparingRepository {
     public ComparingRepository() {
     }
 
-    public Integer getStepsSumDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
+    /***
+     * This method summarizes all values from column steps_logged in table activity from the given User Object
+     * between the LocalDateTime startDate and endDate.
+     * @param user User Object
+     * @param startDate LocalDateTime that marks the start of timeframe
+     * @param endDate LocalDateTime that marks the end of timeframe
+     * @return Integer sum of STEPS
+     */
+    public Integer getStepsSumDateToDate
+    (User user, LocalDateTime startDate, LocalDateTime endDate) {
 
-        String sql = "SELECT SUM(steps_logged) FROM activity WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
+        String sql = "SELECT SUM(steps_logged) FROM activity " +
+                "WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)){
-
             ps.setInt(1, user.getId());
             ps.setTimestamp(2, Timestamp.valueOf(startDate));
             ps.setTimestamp(3, Timestamp.valueOf(endDate));
@@ -31,12 +44,16 @@ public class ComparingRepository {
                 }
                 return 0;
             }
-
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /***
+     * This method summarizes all values from column steps_logged in table activity from the given User Object.
+     * @param user User Object
+     * @return Integer sum of all STEPS
+     */
     public Integer getStepsSumAll(User user) {
 
         String sql = "SELECT SUM(steps_logged) FROM activity WHERE user_id = ?";
@@ -55,6 +72,14 @@ public class ComparingRepository {
         }
     }
 
+    /***
+     * This method creates a HashMap with LocalDateTime and Integer of all STEPS (Activity) logged
+     * between LocalDateTime startDate and endDate from the table activity.
+     * @param user User Object
+     * @param startDate LocalDateTime marks start of timeframe
+     * @param endDate LocalDateTime marks end of timeframe
+     * @return HashMap with LocalDateTime and Integer
+     */
     public HashMap<LocalDateTime, Integer> getStepsDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
 
         String sql = "SELECT steps_logged, logged_at FROM activity WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
@@ -82,6 +107,14 @@ public class ComparingRepository {
         }
     }
 
+    /***
+     * This method summarizes all values from column distance_logged_km in table activity from the given User Object
+     * between the LocalDateTime startDate and endDate.
+     * @param user User Object
+     * @param startDate LocalDateTime marks start of timeframe
+     * @param endDate LocalDateTime marks end of timeframe
+     * @return double sum of all logged KILOMETER in timeframe
+     */
     public double getKmSumDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
 
         String sql = "SELECT SUM(distance_logged_km) FROM activity WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
@@ -104,6 +137,11 @@ public class ComparingRepository {
         }
     }
 
+    /***
+     * This method summarizes all values from column distance_logged_km in table activity from the given User Object.
+     * @param user User Object
+     * @return double sum of all logged KILOMETER from user
+     */
     public double getKmSumAll(User user) {
 
         String sql = "SELECT SUM(distance_logged_km) FROM activity WHERE user_id = ?";
@@ -122,7 +160,15 @@ public class ComparingRepository {
         }
     }
 
-    public HashMap<LocalDateTime, Double> getRunsDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
+    /***
+     * This method creates a HashMap with LocalDateTime and Double of all KILOMETER (Activity) logged
+     * between LocalDateTime startDate and endDate from the table activity.
+     * @param user User Object
+     * @param startDate LocalDateTime marks start of timeframe
+     * @param endDate LocalDateTime marks end of timeframe
+     * @return HashMap with LocalDateTime and Double of KILOMETER logged in timeframe
+     */
+    public HashMap<LocalDateTime, Double> getKmsDateToDate(User user, LocalDateTime startDate, LocalDateTime endDate) {
 
         String sql = "SELECT distance_logged_km, logged_at FROM activity WHERE user_id = ? AND logged_at BETWEEN ? AND ?";
 
@@ -149,6 +195,14 @@ public class ComparingRepository {
         }
     }
 
+    /***
+     * This method counts all entries in table activity from user between startDate and endDate.
+     * @param user User Object
+     * @param activity String activity name (walking/running)
+     * @param startDate LocalDateTime marks start of timeframe
+     * @param endDate LocalDateTime marks end of timeframe
+     * @return Integer value of counted entries
+     */
     public Integer getActivityCount(User user, String activity, LocalDateTime startDate, LocalDateTime endDate) {
 
         String sql = "SELECT COUNT(*) FROM activity WHERE user_id =? AND activity_name =? AND logged_at BETWEEN ? AND ?";
@@ -166,29 +220,8 @@ public class ComparingRepository {
                 }
                 return 0;
             }
-
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-

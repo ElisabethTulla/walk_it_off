@@ -1,21 +1,22 @@
 # Project Overview
 
 ## Project Name
-Name of the project.
+Walk it off
 
 ## Author(s)
-Student name(s).
+Elisabeth Tulla
 
 ## Course
-Course / semester.
+Wifi Java Software Developer Diplomlehrgang
 
 ## Short Description
-Brief description of the project and its purpose.
+Walk_it_off is an application that allows users to track their steps/kilometers and earn achievements.
+
 
 ## Objectives
-What the project aims to achieve.
+This project aims to entice users to walk more steps and/or run more kilometers 
+and therefore better their health.
 
 ## Links
-- Jira Board:
-- Git Repository:
-- (Optional) Confluence Space:
+- Github Project: https://github.com/users/ElisabethTulla/projects/3
+- Git Repository: https://github.com/ElisabethTulla/walk_it_off

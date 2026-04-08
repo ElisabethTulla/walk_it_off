@@ -4,65 +4,77 @@
 This document provides a high-level overview of the system architecture.
 
 ## Architecture Goals
-- [Goal 1]
-- [Goal 2]
-- [Goal 3]
+- Simplicity and Maintainability
+- Performance
+- Security
 
 ## Architecture Style
-[Describe the overall architecture style: layered, microservices, event-driven, etc.]
+The overall architecture style is monolithic. 
+The application is self-contained and independent from other applications.
 
 ## High-Level Architecture Diagram
-[Insert architecture diagram here]
+OUT OF SCOPE
 
 ## System Components
 
-### Component 1: [Name]
-**Purpose:** [Description]
+### Component 1: application walk it off
+**Purpose:** runs the implemented features
 **Responsibilities:**
-- [Responsibility 1]
-- [Responsibility 2]
+- starts the Jfx GUI
+- connects to the database
+- reliably executes the implementation
 
 **Technologies:**
-- [Technology 1]
-- [Technology 2]
 
-### Component 2: [Name]
-**Purpose:** [Description]
-**Responsibilities:**
-- [Responsibility 1]
-- [Responsibility 2]
+- libraries used:
+   *      java.sql
+   *      java.time
+   *      java.util
+   *      java.io
+ 
+- dependencies used:
+   *      maven
+   *      javafx
+   *      Junit5
 
-**Technologies:**
-- [Technology 1]
-- [Technology 2]
+- database used:
+    *      postgreSQL
+
 
 ## Key Architectural Decisions
-1. [Decision 1]
-   - **Rationale:** [Why this decision was made]
-   - **Alternatives Considered:** [Other options]
+
+1. Award achievements as soon as the goal is met
+   - **Rationale:** This decision was made because it provides instant gratification within the user, 
+        as soon as activity is being logged and goal is reached. Also, it simplifies the code.
+   - **Alternatives Considered:** Award achievements only when the challenge is officially over.
    
-2. [Decision 2]
-   - **Rationale:** [Why this decision was made]
-   - **Alternatives Considered:** [Other options]
+2. Clear modular structure and separation of concerns (controllers, services, repositories)
+   - **Rationale:** Makes the code easy to understand and modify.
+   - **Alternatives Considered:** package structure divided into "running, walking, comparing,..."
 
 ## Quality Attributes
 
 ### Performance
-[Performance requirements and how the architecture addresses them]
+In order to provide a good performance SQL statements join tables and summ up steps and kilometers in the database.
 
 ### Security
-[Security requirements and how the architecture addresses them]
+Only the repositories have access to the database. In order to show data in the GUI, 
+the controller accesses the service layer, which then accesses the repository.
+When a user tries to log in with a wrong password or e-mail, 
+he/she is not informed whether the e-mail or the password was wrong in order to hinder hackers.
 
 ### Scalability
-[Scalability requirements and how the architecture addresses them]
+PostgreSQL provides upscaling options in order to accommodate a bigger user base.
 
 ### Maintainability
-[Maintainability requirements and how the architecture addresses them]
+The application is kept easily maintainable through its single codebase with clear modular structure.
+The Java Version 25 also provides long term support.
 
 ## Constraints and Limitations
-- [Constraint 1]
-- [Constraint 2]
+- Time
+- Jfx graphical user interface
 
 ## Future Considerations
-- [Future consideration 1]
-- [Future consideration 2]
+- Expanding to comparing services with statistics of age-groups,...
+- Expanding to read and log data from GAMIN and similar services.
+- Launching in Appstore

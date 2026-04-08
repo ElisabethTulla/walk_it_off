@@ -1,4 +1,5 @@
 # ADR 002: Technology Selection
+OUT OF SCOPE
 
 ## Status
 **Status:** [Proposed/Accepted/Rejected/Deprecated/Superseded]

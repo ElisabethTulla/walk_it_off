@@ -7,216 +7,219 @@ import at.elisabeth_tulla.walk_it_off.repository.UserRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Map;
+
+/***
+ * This service performs calculations and comparisons of User Data.
+ */
 
 public class ComparingService {
 
     ComparingRepository compRepo =  new ComparingRepository();
     UserRepository userRepo = new UserRepository();
 
-    public void getActivityCount(User user, String activity, LocalDateTime startDate, LocalDateTime endDate) {
+    /***
+     * This method reformats the LocalDate startdate and enddate to LocalDateTime
+     * and hands them over to the ComparingRepository.
+     * @param user User Object
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return summarized STEPS in specific timeframe as Integer
+     */
+    public Integer sumUpStepsTimeframe
+    (User user, LocalDate startdate, LocalDate enddate) {
+
+        return compRepo.getStepsSumDateToDate
+                (user, startdate.atStartOfDay(),
+                        enddate.atTime(23, 59));
+    }
+
+    /***
+     * This method hands over the user to the ComparingRepository.
+     * @param user User Object
+     * @return summarized STEPS overall as Integer
+     */
+    public Integer sumUpAllSteps(User user){
+        return compRepo.getStepsSumAll(user);
+    }
+
+    /***
+     * This method reformats the LocalDate startdate and enddate to LocalDateTime
+     * and hands them over to the ComparingRepository.
+     * @param user User Object
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return Map of all STEPS in specific timeframe as HashMap with LocalDateTime as key and Integer as value
+     */
+    public HashMap<LocalDateTime, Integer> mapStepsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
+
+        return compRepo.getStepsDateToDate(user, startdate.atStartOfDay(), enddate.atTime(23, 59));
+    }
+
+    /***
+     * This method reformats the LocalDate startdate and enddate to LocalDateTime
+     * and hands them over to the ComparingRepository.
+     * @param user User Object
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return summarized KILOMETER in specific timeframe as double
+     */
+    public double sumUpKmTimeframe(User user, LocalDate startdate, LocalDate enddate) {
+
+        return compRepo.getKmSumDateToDate(user, startdate.atStartOfDay(), enddate.atTime(23, 59));
+    }
+
+    /***
+     * This method hands over the user to the ComparingRepository.
+     * @param user User Object
+     * @return summarized KILOMETER overall as double
+     */
+    public double sumUpAllKm(User user){
+        return compRepo.getKmSumAll(user);
+    }
+
+    /***
+     * This method reformats the LocalDate startdate and enddate to LocalDateTime
+     * and hands them over to the ComparingRepository.
+     * @param user User Object
+     * @param startdate that marks the start of the timeframe
+     * @param enddate that marks the end of the timeframe
+     * @return Map of all KILOMETERS in specific timeframe as HashMap with LocalDateTime as key and Double as value
+     */
+    public HashMap<LocalDateTime, Double> mapKmsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
+
+        return compRepo.getKmsDateToDate(user, startdate.atStartOfDay(), enddate.atTime(23, 59));
+    }
+
+    /*
+     *  LOGGING ACTIVITY: ( -> NICE TO HAVE...) -> not yet connected to the GUI...
+     *
+     *  show how often steps/runs were logged overall ("SELECT COUNT(steps_logged) FROM activity WHERE user_id =?";)
+     *     -> maybe achievement: you have been active 100 times! (...), you have been active 10 days in a row!(...)
+     *
+     *  compare number of runs/walks from timeframe to runs/walks from different timeframe
+     *              (this month you went for a run 10 times!, that's 3 more runs than in ...)
+     */
+
+    /***
+     * This method hands over the parameters to the ComparingRepository to receive the counted Activity.
+     * @param user User Object
+     * @param activity name of the Activity as String
+     * @param startDate LocalDateTime that marks the start of the timeframe
+     * @param endDate LocalDateTime that marks the end of the timeframe
+     * @return counted Activity as Integer
+     */
+    public Integer getActivityCount(User user, String activity, LocalDateTime startDate, LocalDateTime endDate) {
 
         Integer count = compRepo.getActivityCount(user, activity, startDate, endDate);
 
-        if (count == null) {
-            System.out.println("You didn't log any " + activity );
-        } else if (count == 1) {
-            System.out.println("You went " + activity + " once.");
-        } else
-            System.out.println("You went " + activity + " " + count + " times.");
+        return count;
+    }
+
+    /*
+     * COMPARISONS:   -> not yet connected to the GUI...
+     */
+
+    /***
+     * This method compares the summarized STEPS of two different timeframes.
+     * @param user User Object
+     * @param startdate1 LocalDate that marks the start of the first timeframe
+     * @param enddate1 LocalDate that marks the end of the first timeframe
+     * @param startdate2 LocalDate that marks the start of the second timeframe
+     * @param enddate2 LocalDate that marks the end of the second timeframe
+     * @return the difference in STEPS as Integer
+     */
+    public Integer compareStepsSumTimeframes(User user, LocalDate startdate1, LocalDate enddate1,
+                                          LocalDate startdate2, LocalDate enddate2){
+
+        //GUI User input choice: compare day to day / week to week / month to month / year to year
+        // -> make sure the two timeframes match each other (eg. don't compare a week to a month)
+
+        Integer timeframe1 = sumUpStepsTimeframe(user, startdate1, enddate1);
+        Integer timeframe2 = sumUpStepsTimeframe(user, startdate2, enddate2);
+
+        return timeframe2 - timeframe1;
+
+        /*
+        //MOVE TO COMPARING CONTROLLER:
+        if (differenceSteps == 0){
+            *.setText("You have matched your previous results!");
+        } else if (differenceSteps <0) {
+            *setText("Walk some more steps / Run some more kilometers to match your previous results.");
+        } else {
+            *setText("You out-walked / -ran yourself! Great Job!");
+        }
+         */
     }
 
     /***
-     * STEPS:
+     * This method compares the summarized KILOMETERS of two different timeframes.
+     * @param user User Object
+     * @param startdate1 LocalDate that marks the start of the first timeframe
+     * @param enddate1 LocalDate that marks the end of the first timeframe
+     * @param startdate2 LocalDate that marks the start of the second timeframe
+     * @param enddate2 LocalDate that marks the end of the second timeframe
+     * @return the difference in KILOMETER as double
      */
+    public double compareKmsSumTimeframes(User user, LocalDate startdate1, LocalDate enddate1,
+                                          LocalDate startdate2, LocalDate enddate2) {
 
-    //showStepsSummarized in specific timeframe (GUI input!):
-    public Integer sumUpStepsTimeframe(User user, char activityCounter, Integer startYear, Integer startMonth, Integer startDay,
-                                       Integer endYear, Integer endMonth, Integer endDay) {
+        double timeframe1 = sumUpKmTimeframe(user, startdate1, enddate1);
+        double timeframe2 = sumUpKmTimeframe(user, startdate2, enddate2);
 
-        LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
-        LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
-
-        System.out.println("All Steps walked between " + startDate + " and " + endDate + ": "
-                + compRepo.getStepsSumDateToDate(user, startDate, endDate));
-
-        // activityCounter:
-        if (activityCounter == 'y') {
-            getActivityCount(user, "walking", startDate, endDate);
-        }
-
-        return compRepo.getStepsSumDateToDate(user, startDate, endDate);
-    }
-
-    //all Steps Sum overall:
-    public void sumUpAllSteps(User user){
-        System.out.println("Overall walked Steps: " + compRepo.getStepsSumAll(user));
-    }
-
-    //map of all Steps in specific timeframe:
-    public HashMap<LocalDateTime, Integer> mapStepsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
-
-        LocalDateTime startDate = startdate.atStartOfDay();
-        LocalDateTime endDate = enddate.atTime(23, 59);
-
-        return compRepo.getStepsDateToDate(user, startDate, endDate);
-
-/*
-        if (!stepsMap.isEmpty()){
-            for (Map.Entry<LocalDateTime, Integer> entry : stepsMap.entrySet()) {
-                System.out.println(entry.getKey() +  ": " + entry.getValue() + " steps");
-            }
-        } else
-            System.out.println("No steps found");
- */
+        return timeframe2 - timeframe1;
     }
 
     /***
-     *  RUNS:
+     * This method fetches otherUser from UserRepository with the email and creates a User-Object.
+     * It then compares the summarized STEPS of both Users.
+     * @param currentUser User Object
+     * @param email Attribute of User Object from otherUser, to whom the comparison is being made
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return the difference in STEPS as Integer
      */
+    public Integer compareSumUpStepsTimeframeUsers
+    (User currentUser, String email, LocalDate startdate, LocalDate enddate) {
 
-    // ran km in timeframe (GUI input):
-    public double sumUpKmTimeframe(User user, char activityCounter, Integer startYear, Integer startMonth, Integer startDay,
-                                   Integer endYear, Integer endMonth, Integer endDay) {
-
-        LocalDateTime startDate = LocalDate.of(startYear, startMonth, startDay).atStartOfDay();
-        LocalDateTime endDate = LocalDate.of(endYear, endMonth, endDay).atTime(23, 59);
-
-        System.out.println("Kilometers ran between " + startDate + " and " + endDate + ": "
-                + compRepo.getKmSumDateToDate(user, startDate, endDate));
-
-        // activityCounter:
-        if (activityCounter == 'y') {
-            getActivityCount(user, "running", startDate, endDate);
-        }
-
-        return compRepo.getKmSumDateToDate(user, startDate, endDate);
-    }
-
-    //all Km Sum overall:
-    public void sumUpAllKm(User user){
-        System.out.println("Overall ran kilometers: " + compRepo.getKmSumAll(user));
-    }
-
-    //map runs in specific timeframe:
-    public HashMap<LocalDateTime, Double> mapRunsTimeframe(User user, LocalDate startdate, LocalDate enddate) {
-
-        LocalDateTime startDate = startdate.atStartOfDay();
-        LocalDateTime endDate = enddate.atTime(23, 59);
-
-        return compRepo.getRunsDateToDate(user, startDate, endDate);
-/*
-        if (!runsMap.isEmpty()){
-            for (Map.Entry<LocalDateTime, Double> entry : runsMap.entrySet()) {
-                System.out.println(entry.getKey() +  ": " + entry.getValue() + " kilometers ran");
-            }
-        } else
-            System.out.println("No runs found");
- */
-    }
-
-    /***
-     *  LOGGING ACTIVITY: (todo NICE TO HAVE..)
-     */
-
-    //todo show how often steps/runs were logged overall ("SELECT COUNT(steps_logged) FROM activity WHERE user_id =?";)
-    // -> maybe achievement: you have been active 100 times! (...), you have been active 10 days in a row!(...)
-
-    //todo compare number of runs/walks from timeframe to runs/walks from different timeframe
-    //          (this month you went for a run 10 times!, that's 3 more runs than in ...)
-
-    /***
-     * COMPARISONS:
-     */
-
-    //compare allStepsSum from timeframe to allSteps from different timeframe (GUI input):
-    public void compareStepsSumTimeframes(User user, Integer startYear1, Integer startMonth1, Integer startDay1,
-                                          Integer endYear1, Integer endMonth1, Integer endDay1, Integer startYear2, Integer startMonth2, Integer startDay2,
-                                          Integer endYear2, Integer endMonth2, Integer endDay2){
-
-        //todo GUI User input choice: compare day to day / week to week / month to month / year to year
-        // -> CHANGE PARAMETERS from at.elisabeth_tulla.walk_it_off.model.User input ... is there a simpler way?
-        // -> calculate the wright start- and endDates for the selected timeframes (to give to sumUpStepsTimeframe)
-
-        Integer Timeframe1 = sumUpStepsTimeframe(user, 'n', startYear1, startMonth1, startDay1, endYear1, endMonth1, endDay1);
-        Integer Timeframe2 = sumUpStepsTimeframe(user, 'n', startYear2, startMonth2, startDay2, endYear2, endMonth2, endDay2);
-
-        if (Timeframe1 == 0 && Timeframe2 == 0){
-            System.out.println("Go for a walk and change your future!");
-        } else if (Timeframe1.equals(Timeframe2)){
-            System.out.println("You have matched your previous results! Keep it up!");
-        } else if (Timeframe1 > Timeframe2) {
-            System.out.println("Walk some more steps to match your previous results.");
-        } else if (Timeframe2 > Timeframe1) {
-            System.out.println("You out-walked yourself! Great Job!");
-        }
-    }
-
-    public void compareRunsSumTimeframes(User user, Integer startYear1, Integer startMonth1, Integer startDay1,
-                                         Integer endYear1, Integer endMonth1, Integer endDay1, Integer startYear2, Integer startMonth2, Integer startDay2,
-                                         Integer endYear2, Integer endMonth2, Integer endDay2) {
-
-        //todo same as compareStepsSumTimeframes above
-
-        double Timeframe1 = sumUpKmTimeframe(user, 'n', startYear1, startMonth1, startDay1, endYear1, endMonth1, endDay1);
-        double Timeframe2 = sumUpKmTimeframe(user, 'n', startYear2, startMonth2, startDay2, endYear2, endMonth2, endDay2);
-
-        if (Timeframe1 == 0 && Timeframe2 == 0){
-            System.out.println("Start your next run and change your future!");
-        } else if (Timeframe1 == Timeframe2){
-            System.out.println("You have matched your previous results! Keep it up!");
-        } else if (Timeframe1 > Timeframe2) {
-            System.out.println("Run some more kilometers to match your previous results.");
-        } else if (Timeframe2 > Timeframe1) {
-            System.out.println("You out-ran yourself! Great Job!");
-        }
-    }
-
-    public void compareSumUpStepsTimeframeUsers(User currentUser, String email, char activityCounter,
-                                                Integer startYear, Integer startMonth, Integer startDay,
-                                                Integer endYear, Integer endMonth, Integer endDay) {
-
-        //fetch other user from DB:
         User otherUser = userRepo.getUser(email);
 
-        System.out.println("Steps walked by " + currentUser.getFirstName() + ":");
-        Integer currentUserSteps = sumUpStepsTimeframe(currentUser, activityCounter, startYear, startMonth, startDay, endYear, endMonth, endDay);
-        System.out.println("Steps walked by " + otherUser.getFirstName() + ":");
-        Integer otherUserSteps = sumUpStepsTimeframe(otherUser, activityCounter, startYear, startMonth, startDay, endYear, endMonth, endDay);
+        Integer currentUserSteps = sumUpStepsTimeframe
+                (currentUser, startdate, enddate);
+        Integer otherUserSteps = sumUpStepsTimeframe
+                (otherUser, startdate, enddate);
 
-        Integer diffSteps = currentUserSteps - otherUserSteps;
-
-        if (currentUserSteps > otherUserSteps){
-            System.out.println("You walked " + diffSteps + " more steps than " + otherUser.getFirstName());
-        } else if (currentUserSteps == otherUserSteps){
-            System.out.println("You have matched your results perfectly!");
+        return currentUserSteps - otherUserSteps;
+        /*
+        //MOVE TO COMPARING CONTROLLER:
+        if (diffStepsUsers >0){
+            *.setText("You walked/ran " + diffSteps
+            + " more steps than " + otherUser.getFirstName());
+        } else if (diffStepsUsers == 0){
+            *.setText("You have matched your results perfectly!");
         } else {
-            Integer diffStepsPositive = diffSteps * (-1);
-            System.out.println(otherUser.getFirstName() + " walked " + diffStepsPositive + " steps more than you.");
-        }
+            Integer diffStepsPositive = diffStepsUsers * (-1);
+            *.setText(otherUser.getFirstName() + " walked/ran "
+            + diffStepsPositive + " steps/kilometers more than you.");
+        }*/
     }
 
-    public void compareSumUpKmTimeframeUsers(User currentUser, String email, char activityCounter,
-                                             Integer startYear, Integer startMonth, Integer startDay,
-                                             Integer endYear, Integer endMonth, Integer endDay) {
+    /***
+     * This method fetches otherUser from UserRepository with the email and creates a User-Object.
+     * It then compares the summarized KILOMETER of both Users.
+     * @param currentUser User Object
+     * @param email Attribute of User Object from otherUser, to whom the comparison is being made
+     * @param startdate LocalDate that marks the start of the timeframe
+     * @param enddate LocalDate that marks the end of the timeframe
+     * @return difference in KILOMETERS as double
+     */
+    public double compareSumUpKmTimeframeUsers(User currentUser, String email, LocalDate startdate, LocalDate enddate) {
 
-        //fetch other user from DB:
         User otherUser = userRepo.getUser(email);
 
-        System.out.println("Kilometers ran by " + currentUser.getFirstName() + ":");
-        double currentUserKms = sumUpKmTimeframe(currentUser, activityCounter, startYear, startMonth, startDay, endYear, endMonth, endDay);
-        System.out.println("Kilometers ran by " + otherUser.getFirstName() + ":");
-        double otherUserKms = sumUpKmTimeframe(otherUser, activityCounter, startYear, startMonth, startDay, endYear, endMonth, endDay);
+        double currentUserKms = sumUpKmTimeframe(currentUser, startdate, enddate);
+        double otherUserKms = sumUpKmTimeframe(otherUser, startdate, enddate);
 
-        double diffKms = currentUserKms - otherUserKms;
+        return currentUserKms - otherUserKms;
 
-        if (currentUserKms > otherUserKms){
-            System.out.println("You ran " + diffKms + " more kilometers than " + otherUser.getFirstName());
-        } else if (currentUserKms == otherUserKms){
-            System.out.println("You have matched your results perfectly!");
-        } else {
-            double diffKmsPositive = diffKms * (-1);
-            System.out.println(otherUser.getFirstName() + " ran " + diffKmsPositive + " kilometers more than you.");
-        }
     }
 }

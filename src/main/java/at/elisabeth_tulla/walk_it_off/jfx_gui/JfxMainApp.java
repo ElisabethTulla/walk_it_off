@@ -4,21 +4,26 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
+
+/**
+ * JfxMainApp launches the application and starts the graphical user interface
+ * by loading the WelcomeView.fxml into the Scene of the Stage.
+ */
 
 public class JfxMainApp extends Application {
 
+    /**
+     * This method loads the WelcomeView into the Scene of the Stage and starts the GUI.
+     * @param primaryStage Stage
+     */
     @Override
     public void start(Stage primaryStage) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/views/WelcomeView.fxml"));
 
-            // Zeige die Szene an
             Scene scene = new Scene(root, 900, 850);
-
-            // CSS-Datei hinzufügen ODER in der fxml file verknüpfen...:
-            // scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
             primaryStage.setTitle("walk_it_off");
             primaryStage.setScene(scene);
@@ -31,7 +36,7 @@ public class JfxMainApp extends Application {
 
    public static void main(String[] args) {
 
-        launch();
+       launch();
 
     }
 

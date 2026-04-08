@@ -2,18 +2,27 @@ package at.elisabeth_tulla.walk_it_off.repository;
 
 import at.elisabeth_tulla.walk_it_off.config.DatabaseConfig;
 import at.elisabeth_tulla.walk_it_off.model.Activity;
-import at.elisabeth_tulla.walk_it_off.model.Challenge;
 import at.elisabeth_tulla.walk_it_off.model.User;
 
 import java.sql.*;
 
-public class LoggingRepository {
+/***
+ * This class is the repository/Data Access Object managing the database operation
+ * to insert an entry in the table activity.
+ */
+
+public class ActivityRepository {
     public Connection conn = DatabaseConfig.configure();
 
-    public LoggingRepository() {
+    public ActivityRepository() {
     }
 
-    public void loggActivity(User user, Activity activity) {
+    /***
+     * This method inserts an activity into the table activity in the database.
+     * @param user User Object
+     * @param activity Activity Object
+     */
+    public void logActivity(User user, Activity activity) {
 
         String sql = "INSERT INTO activity (user_id, activity_name, steps_logged, distance_logged_km)" +
                 "VALUES (?, ?, ?, ?)";
@@ -34,19 +43,12 @@ public class LoggingRepository {
                     activity.setId(keys.getInt(1));
                 }
             }
-
             conn.commit();
 
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            System.err.println("Error with insertion into the database :" + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
-
-
 }
+

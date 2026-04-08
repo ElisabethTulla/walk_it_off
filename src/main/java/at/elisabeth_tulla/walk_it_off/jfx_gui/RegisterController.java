@@ -17,6 +17,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 
+/**
+ * RegisterController connects the RegisterView.fxml with the Models (User, Challenge, Achievement).
+ * It hands over the user input from the GUI to the service layer in order to register a new User.
+ */
+
 public class RegisterController {
 
     ValidationManager valid = new ValidationManager();
@@ -50,36 +55,38 @@ public class RegisterController {
         LocalDate dateBirthday = birthdayDate.getValue();
         String gender = txtGender.getText();
 
-        //todo check if TextField is !null/empty
-
         //check if email already exists in the DB:
         boolean emailAlreadyExists = valid.checkEmail(email);
 
-        if (emailAlreadyExists){
+        if (emailAlreadyExists) {
             txtEmailMessage.setText("This e-mail is already registered.");
         }
-
-        //todo check it email is valid (has @ in it)
 
         //check if password is valid:
         boolean isValidPassword = valid.validatePassword(password);
 
-        if (!isValidPassword){
+        if (!isValidPassword) {
             txtPasswordMessage.setText("Invalid password.");
         }
 
-        if (isValidPassword && !emailAlreadyExists){
-            boolean registered = userService.registerUser(firstName, lastName, email, password, dateBirthday, gender);
-            if (!registered){
-                txtRegisterMessage.setText("There was an error registering the user. Contact tulla.elisabeth@gmx.at.");
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Successfully registered!");
-                alert.setHeaderText("You are now registered and can log in to your account!");
-                alert.showAndWait();
+        if (isValidPassword && !emailAlreadyExists) {
 
-                backToWelcome(actionEvent);
+            try {
+                userService.registerUser(firstName, lastName, email, password, dateBirthday, gender);
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Successfully registered!");
+                    alert.setHeaderText("You are now registered and can log in to your account!");
+                    alert.showAndWait();
+
+            } catch (RuntimeException e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("There was an error registering the user. Contact tulla.elisabeth@gmx.at.");
+                alert.showAndWait();
             }
+
+            backToWelcome(actionEvent);
         }
     }
 
@@ -88,7 +95,7 @@ public class RegisterController {
         Parent root = loader.load();
         Scene scene = new Scene(root);
 
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
         stage.setScene(scene);
         stage.show();

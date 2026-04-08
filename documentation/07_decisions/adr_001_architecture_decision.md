@@ -1,5 +1,9 @@
 # ADR 001: Architecture Decision
 
+For information concerning architecture decisions see:
+
+04_design/architecture_overview.md(## Key Architectural Decisions)
+
 ## Status
 **Status:** [Proposed/Accepted/Rejected/Deprecated/Superseded]
 **Date:** [YYYY-MM-DD]

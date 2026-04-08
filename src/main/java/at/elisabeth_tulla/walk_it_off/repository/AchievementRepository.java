@@ -8,6 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/***
+ * This class is the repository/Data Access Object managing any database operations concerning Achievements.
+ */
+
 public class AchievementRepository {
 
     public Connection conn = DatabaseConfig.configure();
@@ -15,6 +19,10 @@ public class AchievementRepository {
     public AchievementRepository() {
     }
 
+    /***
+     * This method inserts an Achievement into the table achievement in the database.
+     * @param newAchievement Achievement Object
+     */
     public void createAchievement(Achievement newAchievement) {
 
         String sql = "INSERT INTO achievement (name, required_steps, required_days_active, achievement_type," +
@@ -39,16 +47,16 @@ public class AchievementRepository {
             }
             conn.commit();
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            System.err.println("Error with insertion into database :" + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
+    /***
+     * This method inserts a user and achievementID into the table user_achievement and marks it as unlocked.
+     * @param user User Object
+     * @param achievementID Integer Achievement Object attribute
+     */
     public void unlockAchievement(User user, Integer achievementID) {
 
         String sql = "INSERT INTO user_achievement (user_id, achievement_id, unlocked) VALUES (?, ?, ?)";
@@ -65,16 +73,16 @@ public class AchievementRepository {
             conn.commit();
 
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            throw new RuntimeException(e);
         }
     }
 
+    /***
+     * This method fetches all data from the table user_achievement joined table achievement,
+     * where the user_id matches the user. It creates Achievement Objects and puts them in a List of Achievements.
+     * @param user User Object
+     * @return List of Achievements
+     */
     public List<Achievement> getUserAchievements(User user) {
 
         String sql = "SELECT * FROM user_achievement JOIN achievement " +
@@ -102,7 +110,13 @@ public class AchievementRepository {
         }
     }
 
-    public Achievement extendedMapRows(ResultSet rs) throws SQLException {
+    /***
+     * This method maps the data from the ResultSet to an Achievement Object.
+     * @param rs ResultSet from the database
+     * @return Achievement Object
+     * @throws SQLException
+     */
+    private Achievement extendedMapRows(ResultSet rs) throws SQLException {
 
         Integer id = rs.getInt("achievement_id");
         String name = rs.getString("name");
@@ -116,6 +130,11 @@ public class AchievementRepository {
         return new Achievement(id, name, requiredSteps, requiredKm, requiredDaysActive, type, unlocked, unlockedAt);
     }
 
+    /***
+     * This method fetches all achievements from the table achievement in database
+     * and puts them in a List of all Achievements
+     * @return List of all Achievements
+     */
     public List<Achievement> getAllAchievements() {
 
         String sql = "SELECT * FROM achievement";
@@ -139,7 +158,13 @@ public class AchievementRepository {
         }
     }
 
-    public Achievement mapRows(ResultSet rs) throws SQLException {
+    /***
+     * This method maps the data from the ResultSet to an Achievement Object.
+     * @param rs ResultSet from database
+     * @return Achievement
+     * @throws SQLException
+     */
+    private Achievement mapRows(ResultSet rs) throws SQLException {
 
         Integer id = rs.getInt("id");
         String name = rs.getString("name");
@@ -151,6 +176,11 @@ public class AchievementRepository {
         return new Achievement(id, name, requiredSteps, requiredKm, requiredDaysActive, type);
     }
 
+    /***
+     * This method fetches an Achievement from the table achievement where the id matches the requiredAchievementID.
+     * @param requiredAchievementID Integer Challenge Object attribute
+     * @return Achievement
+     */
     public Achievement getAchievement(Integer requiredAchievementID) {
 
         String sql = "SELECT * FROM achievement WHERE id = ?";

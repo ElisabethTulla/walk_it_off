@@ -4,6 +4,10 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Period;
 
+/***
+ * This class serves as a data- and fxml-model for users.
+ */
+
 public class User {
 
     private Integer id;
@@ -15,7 +19,7 @@ public class User {
     private boolean active;
     private LocalDate birthdayDate;
     private Integer age;
-    private String gender; //todo als enum
+    private String gender;
 
     public User (String firstName, String lastName, String email, String password,
                  LocalDate birthdayDate, String gender){
@@ -71,6 +75,10 @@ public class User {
         this.birthdayDate = birthdayDate;
     }
 
+    /***
+     * Calculates the age of the User.
+     * @return age as Integer
+     */
     public Integer getAge() {
            return age = Period.between(birthdayDate, LocalDate.now()).getYears();
     }
@@ -118,8 +126,6 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    //todo age-up on every birthday
 
     @Override
     public String toString(){

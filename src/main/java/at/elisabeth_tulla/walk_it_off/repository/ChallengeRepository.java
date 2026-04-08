@@ -10,12 +10,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/***
+ * This class is the repository/Data Access Object managing any database operations concerning Challenges.
+ */
+
 public class ChallengeRepository {
 
     public Connection conn = DatabaseConfig.configure();
 
     public ChallengeRepository() {}
 
+    /***
+     * This method inserts a new Challenge into the table challenge in the database.
+     * @param newChallenge Challenge Object
+     */
     public void createChallenge(Challenge newChallenge) {
 
         String sql = "INSERT INTO challenge (name, required_steps, required_achievement_id, min_number_participants, " +
@@ -45,20 +53,20 @@ public class ChallengeRepository {
                     newChallenge.setId(keys.getInt(1));
                 }
             }
-
             conn.commit();
 
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            System.err.println("Error with insertion into database :" + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
+    /***
+     * This method fetches all ongoing Challenges of user and puts them into a HashMap with LocalDateTime (entered_at)
+     * and Integer (challenge_id) if they have not ended yet.
+     * @param user User Object
+     * @return HashMap with LocalDateTime and Integer of all ongoing Challenges of user
+     */
     public HashMap<LocalDateTime, Integer> getOngoingChallenges(User user) {
 
             String sql = "SELECT * FROM user_challenge JOIN challenge " +
@@ -84,6 +92,11 @@ public class ChallengeRepository {
         }
     }
 
+    /***
+     * This method fetches all data from the table challenge from the database, creates Challenges
+     * and puts them into a List of Challenges.
+     * @return List of Challenges
+     */
     public List<Challenge> getAllChallenges() {
 
         String sql = "SELECT * FROM challenge";
@@ -107,7 +120,13 @@ public class ChallengeRepository {
         }
     }
 
-    public Challenge mapRows(ResultSet rs) throws SQLException {
+    /***
+     * This method maps the Data from the database to the Challenge Object attributes using the ResultSet.
+     * @param rs ResultSet from database
+     * @return Challenge Object
+     * @throws SQLException
+     */
+    private Challenge mapRows(ResultSet rs) throws SQLException {
 
         Integer id = rs.getInt("id");
         String name = rs.getString("name");
@@ -126,6 +145,12 @@ public class ChallengeRepository {
                 maxNumberParticipants, goalSteps, goalDistanceKm, startedAt, endsAt, rewardAchievementID, requiredKm);
     }
 
+    /***
+     * This method fetches the data of the entry with the matching challengeID from the table challenge
+     * and creates a Challenge Object.
+     * @param challengeID Integer
+     * @return Challenge Object
+     */
     public Challenge getChallenge(Integer challengeID) {
 
         String sql = "SELECT * FROM challenge WHERE id = ?";
@@ -146,7 +171,12 @@ public class ChallengeRepository {
         }
     }
 
-    public boolean enterChallenge(User user, Challenge currentChallenge) {
+    /***
+     * This method inserts a user_id and challenge_id into the table user_challenge in the database.
+     * @param user User Object
+     * @param currentChallenge Challenge Object
+     */
+    public void enterChallenge(User user, Challenge currentChallenge) {
 
         String sql = "INSERT INTO user_challenge (user_id, challenge_id) VALUES (?, ?)";
 
@@ -157,27 +187,24 @@ public class ChallengeRepository {
             ps.setInt(1, user.getId());
             ps.setInt(2, currentChallenge.getId());
 
-
             ps.executeUpdate();
             conn.commit();
 
-            return true;
-
         } catch (SQLException e) {
-            System.err.println("Fehler beim Einfügen in die Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();
-                return false; //todo return an der richtigen Stelle?
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            System.err.println("Error with insertion into database :" + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
+    /***
+     * This method counts all entries from table user_challenge where the challenge_id matches the currentChallenge
+     * that are still marked as active.
+     * @param currentChallenge Challenge Object
+     * @return Integer value of counted entries(users)
+     */
     public Integer getParticipantsCount(Challenge currentChallenge) {
 
-        String sql = "SELECT count(*) FROM user_challenge WHERE challenge_id = ?";
+        String sql = "SELECT count(*) FROM user_challenge WHERE challenge_id = ? AND active = true";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)){
 
@@ -188,13 +215,17 @@ public class ChallengeRepository {
                 }
                 return 0;
             }
-
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
+    /***
+     * This method changes the status active from true to false where the user_id and challenge_id match
+     * the user and challenge.
+     * @param user User Object
+     * @param challenge Challenge Object
+     */
     public void deactivateChallenge(User user, Challenge challenge) {
 
         String sql = "UPDATE user_challenge SET active = false WHERE user_id = ? AND challenge_id = ?";
@@ -210,17 +241,17 @@ public class ChallengeRepository {
             conn.commit();
 
         } catch (SQLException e) {
-            System.err.println("Fehler beim Updaten der Datenbank :" + e.getMessage());
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-                System.err.println("Fehler beim rollback:" + ex.getMessage());
-                throw new RuntimeException(ex);
-            }
+            System.err.println("Error with update of database :" + e.getMessage());
+            throw new RuntimeException(e);
         }
-
     }
 
+    /***
+     * This method fetches all active Challenges from the table user_challenge with a joined table challenge
+     * where user_id matches the user. It then puts them into a List of Challenges.
+     * @param user User Object
+     * @return List of active Challenges from user
+     */
     public List<Challenge> getActiveChallenges(User user) {
 
         String sql = "SELECT * FROM user_challenge JOIN challenge " +
@@ -238,7 +269,6 @@ public class ChallengeRepository {
                     activeChallenges.add(c);
                 }
                 return activeChallenges;
-
             }
         }catch (SQLException e) {
             throw new RuntimeException(e);

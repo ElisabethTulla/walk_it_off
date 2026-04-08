@@ -3,6 +3,8 @@
 ## Overview
 This document shows the package structure and dependencies between packages.
 
+OUT OF SCOPE
+
 ## Package Diagram
 [Insert package diagram here]
 

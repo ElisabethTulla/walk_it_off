@@ -2,7 +2,7 @@ package at.elisabeth_tulla.walk_it_off.jfx_gui;
 
 import at.elisabeth_tulla.walk_it_off.model.Achievement;
 import at.elisabeth_tulla.walk_it_off.model.User;
-import at.elisabeth_tulla.walk_it_off.service.LoggingService;
+import at.elisabeth_tulla.walk_it_off.service.ActivityService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,11 +19,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-public class LoggingController {
+/**
+ * ActivityController connects the ActivityView.fxml with the Models (User, Challenge, Achievement, Activity).
+ * It hands over the user input from the GUI to the service layer
+ * and therefor enables the logging of Activity.
+ */
 
-    LoggingService loggingService = new LoggingService();
+public class ActivityController extends UserController {
 
-    private User currentUser;
+    ActivityService activityService = new ActivityService();
 
     @FXML
     private RadioButton stepsRadioButton;
@@ -40,9 +44,10 @@ public class LoggingController {
     @FXML
     private TextField kmsTextField;
 
+    @Override
     public void initData(User user) {
 
-        this.currentUser = user;
+        super.initData(user);
         stepsKmToggleGroup = new ToggleGroup();
         this.stepsRadioButton.setToggleGroup(stepsKmToggleGroup);
         this.kmsRadioButton.setToggleGroup(stepsKmToggleGroup);
@@ -62,30 +67,25 @@ public class LoggingController {
 
     public void btnStepsSubmitClicked(ActionEvent event) throws IOException {
 
-        //todo check if textfield is empty
-
         Integer steps = Integer.parseInt(stepsTextField.getText());
-        List<Achievement> achievements = loggingService.loggWalking(currentUser, "walking", steps); //todo is "activity" necessary?
-
-        checkAchievementAlert(achievements);
+        try {
+            List<Achievement> achievements = activityService.logWalking(currentUser, "walking", steps);
+            checkAchievementAlert(achievements);
+        } catch (RuntimeException e) {
+            triggerErrorAlert();
+        }
 
         backToAccount(event);
-/*
-        Parent root = FXMLLoader.load(getClass().getResource("/views/AccountView.fxml"));
-        Scene scene = new Scene(root);
+    }
 
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
-
-
- */
+    private void triggerErrorAlert() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("There was an error logging the activity. Contact tulla.elisabeth@gmx.at.");
+        alert.showAndWait();
     }
 
     private void checkAchievementAlert(List<Achievement> achievements) {
-
-    //todo FRAGE: WIESO funktioniert es nicht?
 
         if (!achievements.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -95,22 +95,30 @@ public class LoggingController {
             } else if (achievements.size() > 1) {
                 alert.setHeaderText("Congratulations! You have unlocked " + achievements.size() + " Achievements!");
             }
+
+            StringBuilder stringBuilder = new StringBuilder();
+
             for (Achievement achievement : achievements) {
-                alert.setContentText(achievement.getName());
-                //todo FRAGE: funktioniert das, oder überschreibt es sich selbst?
+                stringBuilder.append(achievement.getName());
+                stringBuilder.append("\n");
             }
+            alert.setContentText(stringBuilder.toString());
+
             alert.showAndWait();
         }
     }
 
     public void btnKmsSubmitClicked(ActionEvent event) throws IOException {
 
-        //todo check if textfield is empty
-
         Double kms = Double.parseDouble(kmsTextField.getText());
-        List<Achievement> achievements = loggingService.loggRunning(currentUser, "running", kms);
 
-        checkAchievementAlert(achievements);
+        try {
+            List<Achievement> achievements = activityService.logRunning(currentUser, "running", kms);
+
+            checkAchievementAlert(achievements);
+        } catch (RuntimeException e) {
+            triggerErrorAlert();
+        }
 
         backToAccount(event);
     }

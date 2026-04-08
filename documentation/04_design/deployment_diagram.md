@@ -3,6 +3,8 @@
 ## Overview
 This document describes the deployment architecture showing how software components are deployed on hardware nodes.
 
+OUT OF SCOPE
+
 ## Deployment Diagram
 [Insert deployment diagram here]
 

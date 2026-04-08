@@ -1,17 +1,17 @@
 # Acceptance and Demo
 
 ## Demo Information
-**Date:** [YYYY-MM-DD]
-**Time:** [HH:MM - HH:MM]
-**Location:** [Location/Meeting link]
-**Presenter(s):** [Names]
+**Date:** 2026-04-10
+**Time:** [09:00 - 09:30]
+**Location:** Wifi Wien Raum 309
+**Presenter(s):** Elisabeth Tulla
 
 ## Attendees
 
 ### Required Attendees
-- [ ] Product Owner: [Name]
-- [ ] Key Stakeholders: [Names]
-- [ ] Customer Representatives: [Names]
+- [ ] Product Owner: Elisabeth Tulla
+- [ ] Key Stakeholders: Christian Schäfer
+- [ ] Customer Representatives: Elisabeth Tulla
 
 ### Optional Attendees
 - [ ] Development Team: [Names]
@@ -19,72 +19,135 @@
 - [ ] Support Team: [Names]
 
 ### Actual Attendees
-[List of people who actually attended]
+- Elisabeth Tulla
+- Christian Schäfer
+- Herr Taus
 
 ## Demo Agenda
 
-### 1. Introduction (5 minutes)
+### 1. Introduction (2 minutes)
 - Project overview
 - Demo objectives
-- Agenda overview
 
-### 2. Feature Demonstrations (30-45 minutes)
+### 2. Analysis and Design
+- Use Case Diagram
+- Class Diagram
 
-#### Feature 1: [Feature Name]
-**Time Allocated:** [Minutes]
-**Presenter:** [Name]
+### 3. Feature Demonstrations (15 minutes)
+
+#### Feature 1: registration of new user
+**Time Allocated:** 2 minutes
+**Presenter:** Elisabeth Tulla
 **Demo Script:**
-1. [Demo step 1]
-2. [Demo step 2]
-3. [Demo step 3]
+1. click hyperlink
+2. fill out formular
+3. click create user button
 
 **Key Points to Highlight:**
-- [Point 1]
-- [Point 2]
+- password validation
 
-**at.elisabeth_tulla.walk_it_off.model.User Story/Requirement:** [Reference]
+**User Story/Requirement:** FR-002
 
-#### Feature 2: [Feature Name]
-**Time Allocated:** [Minutes]
-**Presenter:** [Name]
+#### Feature 2: Login
+**Time Allocated:** 1 minute
+**Presenter:** Elisabeth Tulla
 **Demo Script:**
-1. [Demo step 1]
-2. [Demo step 2]
+1. fill in email and password
+2. click login button
+
+**User Story/Requirement:** FR-003
+
+#### Feature 3: Your Achievements
+**Time Allocated:** 1 minutes
+**Presenter:** Elisabeth Tulla
+**Demo Script:**
+1. load in your Achievements
 
 **Key Points to Highlight:**
-- [Point 1]
+- first Achievement unlocked
 
-**at.elisabeth_tulla.walk_it_off.model.User Story/Requirement:** [Reference]
+**User Story/Requirement:** FR-006
 
-### 3. Q&A Session (15 minutes)
+#### Feature 4: create new Challenge
+**Time Allocated:** 2 minutes
+**Presenter:** Elisabeth Tulla
+**Demo Script:**
+1. click button enter Challenge
+2. fill out formular
+3. click create Challenge button
+
+**Key Points to Highlight:**
+- Required Achievement Id loads in
+
+**User Story/Requirement:** FR-005
+
+#### Feature 5: enter Challenge
+**Time Allocated:** 2 minutes
+**Presenter:** Elisabeth Tulla
+**Demo Script:**
+1. click button enter Challenge
+2. enter correct Challenge ID
+3. click enter Challenge
+
+**Key Points to Highlight:**
+- alert pop-up
+
+**User Story/Requirement:** FR-005
+
+#### Feature 6: log Activity
+**Time Allocated:** 2 minutes
+**Presenter:** Elisabeth Tulla
+**Demo Script:**
+1. click button log Activity
+2. fill out formular
+3. click submit button
+
+**User Story/Requirement:** FR-004
+
+#### Feature 7: Your Activity timeframe
+**Time Allocated:** 2 minutes
+**Presenter:** Elisabeth Tulla
+**Demo Script:**
+1. pick dates for timeframe
+2. click radiobutton
+
+**Key Points to Highlight:**
+- list in table
+
+**User Story/Requirement:** FR-004
+
+### 3. Q&A Session (10 minutes)
 [Time for questions and answers]
 
 ### 4. Feedback Collection (10 minutes)
+OUT OF SCOPE
 [Collect stakeholder feedback]
 
 ### 5. Acceptance Decision (5 minutes)
+OUT OF SCOPE
 [Decision on acceptance]
 
 ## Demo Preparation
 
 ### Pre-Demo Checklist
-- [ ] Demo environment set up and tested
-- [ ] Test data prepared
-- [ ] Demo scripts reviewed
-- [ ] Presentation materials ready
-- [ ] All demo participants briefed
+- [x] Demo environment set up and tested
+- [x] Test data prepared
+- [x] Demo scripts reviewed
+- [x] Presentation materials ready
+- [x] All demo participants briefed
 - [ ] Recording equipment tested (if applicable)
-- [ ] Backup plan in place
+- [x] Backup plan in place
 
 ### Demo Environment
-**Environment Type:** [Demo/Staging/Production-like]
+**Environment Type:** Demo
 **URL/Access:** [Access information]
-**Test Accounts:** [Test user credentials]
+**Test Accounts:** Elisabeth Tulla, Oliver Tulla, Felix Tulla, Elvis Tulla, Nachi Tulla
 
 ### Demo Data
-[Description of test data used in demo]
+created by Elisabeth Tulla for the project
 
 ### Technical Setup
+OUT OF SCOPE
 - **Screen Resolution:** [Resolution]
 - **Browser:** [Browser and version]
 - **Tools Required:** [List any tools]
@@ -92,6 +155,7 @@
 ## Demo Execution
 
 ### Feature Demonstrations
+see above (3. Feature Demonstrations)
 
 #### Feature 1: [Feature Name]
 **Status:** [Demonstrated Successfully/Issues Encountered]
