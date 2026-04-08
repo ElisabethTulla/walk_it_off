@@ -1,8 +1,5 @@
 # walk_it_off
 
-- list 1
-- list 2
-
 ## Overview
 
 This is a Java training project demonstrating software development best practices, including proper project structure, documentation, and development workflows.
@@ -19,7 +16,7 @@ This is a Java training project demonstrating software development best practice
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/chris-cgsit/walk_it_off.git
+git clone https://github.com/ElisabethTulla/walk_it_off.git
 cd walk_it_off
 ```
 
