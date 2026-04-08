@@ -49,16 +49,73 @@ For detailed documentation, please refer to:
 ## Project Structure
 
 ```
-├── README.md                 # This file
-├── CONTRIBUTING.md           # Development guidelines
-├── LICENSE                   # License information
-├── pom.xml                   # Maven configuration
-├── docs/                     # Technical documentation
+├── README.md                       # This file
+├── CONTRIBUTING.md                 # Development guidelines
+├── LICENSE                         # License information
+├── pom.xml                         # Maven configuration
+├── docs/                           # Technical documentation
 │   ├── setup.md
 │   ├── architecture/
 │   ├── api/
 │   └── user-guide.md
-└── documentation/            # Project management docs
+└── documentation/                  # Project management docs
+|-- src/                            # Source code
+    |-- main
+    |   |-- java
+    |       |-- at.elisabeth_tulla.walk_it_off
+    |       |   |-- config
+    |       |   |   |-- DatabaseConfig.java
+    |       |   |-- jfx_gui
+    |       |   |   |-- AccountController.java
+    |       |   |   |-- ActivityController.java
+    |       |   |   |-- ChallengeController.java
+    |       |   |   |-- JfxMainApp.java
+    |       |   |   |-- ManageAccountController.java
+    |       |   |   |-- RegisterController.java
+    |       |   |   |-- UserController.java
+    |       |   |   |-- WelcomeController.java
+    |       |   |-- model
+    |       |   |   |-- Achievement.java
+    |       |   |   |-- Activity.java
+    |       |   |   |-- Challenge.java
+    |       |   |   |-- User.java
+    |       |   |-- repositroy
+    |       |   |   |-- AchievementRepository.java
+    |       |   |   |-- ActivityRepository.java
+    |       |   |   |-- ChallengeRepository.java
+    |       |   |   |-- ComparingRepository.java
+    |       |   |   |-- ManageAccountRepository.java
+    |       |   |   |-- UserRepository.java
+    |       |   |-- service
+    |       |   |   |-- AchievementService.java
+    |       |   |   |-- ActivityService.java
+    |       |   |   |-- ChallengeService.java
+    |       |   |   |-- ComparingService.java
+    |       |   |   |-- ManageAccountService.java
+    |       |   |   |-- UserService.java
+    |       |   |-- sql
+    |       |   |   |-- create_tables.sql
+    |       |   |   |-- insert_user.sql
+    |       |   |-- util
+    |       |   |   |-- ValidationManager.java
+    |       |   |-- CreateTestUsers.java
+    |   |-- resources
+    |   |   |-- AccountView.fxml
+    |   |   |-- ActivityView.fxml
+    |   |   |-- ChallengeView.fxml
+    |   |   |-- ManageAccountView.fxml
+    |   |   |-- RegisterView.fxml
+    |   |   |-- WelcomeView.fxml
+    |-- test                        # Unit tests
+        |-- java
+            |-- at.elisabeth_tulla.walk_it_off
+                |-- model
+                |   |-- UserTest.java
+                |-- service
+                |   |-- ChallengeServiceTest.java
+                |-- util
+                    |-- ValidationManagerTest.java 
+        
 ```
 
 ## License

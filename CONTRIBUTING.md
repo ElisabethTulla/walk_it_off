@@ -114,7 +114,7 @@ Fixes #456
 - **Indentation:** 4 spaces (no tabs)
 - **Line Length:** Maximum 120 characters
 - **Naming Conventions:**
-  - Classes: `PascalCase` (e.g., `at.elisabeth_tulla.walk_it_off.service.UserService`)
+  - Classes: `PascalCase` (e.g., `UserService`)
   - Methods: `camelCase` (e.g., `getUserById`)
   - Constants: `UPPER_SNAKE_CASE` (e.g., `MAX_RETRY_COUNT`)
   - Variables: `camelCase` (e.g., `userId`)
@@ -143,18 +143,18 @@ import at.elisabeth_tulla.walk_it_off.repository.UserRepository;
 /**
  * Service for managing user operations.
  */
-public class at.elisabeth_tulla.walk_it_off.service.
+public class 
 
 UserService {
 
     private final UserRepository userRepository;
 
     /**
-     * Constructs a new at.elisabeth_tulla.walk_it_off.service.UserService.
+     * Constructs a new UserService.
      *
      * @param userRepository the repository for user data
      */
-    public at.elisabeth_tulla.walk_it_off.service.UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

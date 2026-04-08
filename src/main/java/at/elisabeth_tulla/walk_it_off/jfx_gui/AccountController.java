@@ -119,7 +119,6 @@ public class AccountController extends UserController {
         ObservableList<Challenge> obsActiveChallenges = FXCollections.observableArrayList();
         obsActiveChallenges.addAll(activeChallenges);
 
-        //fill table with active Challenges:
         challengesTable.setItems(obsActiveChallenges);
     }
 
