@@ -38,7 +38,7 @@ Before setting up the project, ensure you have the following installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/chris-cgsit/train_2025_java_aufbau_example_project.git
+git clone https://github.com/ElisabethTulla/walk_it_off.git
 cd walk_it_off
 ```
 
@@ -70,16 +70,16 @@ mvn test
 
 2. **Create Database:**
    ```sql
-   CREATE DATABASE train_project_db;
-   CREATE USER train_user WITH PASSWORD 'your_password';
-   GRANT ALL PRIVILEGES ON DATABASE train_project_db TO train_user;
+   CREATE DATABASE walkitoff;
+   CREATE USER walkitoff_user WITH PASSWORD 'your_password';
+   GRANT ALL PRIVILEGES ON DATABASE walkitoff TO train_user;
    ```
 
 3. **Connection Details:**
    - Host: `localhost`
    - Port: `5432`
-   - Database: `train_project_db`
-   - Username: `train_user`
+   - Database: `walkitoff`
+   - Username: `walkitoff_user`
    - Password: `your_password`
 
 #### MySQL Setup
@@ -90,17 +90,17 @@ mvn test
 
 2. **Create Database:**
    ```sql
-   CREATE DATABASE train_project_db;
-   CREATE USER 'train_user'@'localhost' IDENTIFIED BY 'your_password';
-   GRANT ALL PRIVILEGES ON train_project_db.* TO 'train_user'@'localhost';
+   CREATE DATABASE walkitoff;
+   CREATE USER 'walkitoff_user'@'localhost' IDENTIFIED BY 'your_password';
+   GRANT ALL PRIVILEGES ON walkitoff.* TO 'walkitoff_user'@'localhost';
    FLUSH PRIVILEGES;
    ```
 
 3. **Connection Details:**
    - Host: `localhost`
    - Port: `3306`
-   - Database: `train_project_db`
-   - Username: `train_user`
+   - Database: `walkitoff`
+   - Username: `walkitoff_user`
    - Password: `your_password`
 
 ### Option 2: In-Memory Database (H2)
@@ -120,8 +120,8 @@ Create a `.env` file in the project root (do not commit this file):
 # Database Configuration
 DB_HOST=localhost
 DB_PORT=5432
-DB_NAME=train_project_db
-DB_USERNAME=train_user
+DB_NAME=walkitoff
+DB_USERNAME=walkitoff_user
 DB_PASSWORD=your_password
 
 # Application Configuration

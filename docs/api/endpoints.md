@@ -1,8 +1,8 @@
 # API Documentation
-
+OUT OF SCOPE
 ## Overview
 
-This document provides comprehensive documentation for the API endpoints of the walk_it_off.
+This document provides comprehensive documentation for the API endpoints of walk_it_off.
 
 ## Table of Contents
 

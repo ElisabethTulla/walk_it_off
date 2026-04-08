@@ -30,7 +30,7 @@ The architecture is designed to achieve the following goals:
 
 This project follows a **Layered Architecture** pattern with clear separation between:
 
-- **Presentation Layer:** at.elisabeth_tulla.walk_it_off.model.User interface and API endpoints
+- **Presentation Layer:** User interface and API endpoints
 - **Business Logic Layer:** Core application logic and rules
 - **Data Access Layer:** Database interactions and persistence
 - **Cross-Cutting Concerns:** Logging, security, configuration
@@ -204,7 +204,7 @@ Cross-Cutting Concerns:
 
 **Error Handling:**
 - Global exception handling
-- at.elisabeth_tulla.walk_it_off.model.User-friendly error messages
+- User-friendly error messages
 - Error logging and monitoring
 
 ## Technology Stack
@@ -375,6 +375,6 @@ These records document:
 
 ---
 
-**Last Updated:** January 2026  
+**Last Updated:** April 2026  
 **Version:** 1.0  
-**Maintainers:** Project Team
+**Maintainers:** Elisabeth Tulla

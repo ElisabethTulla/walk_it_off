@@ -15,7 +15,7 @@
 
 ## Introduction
 
-Welcome to the walk_it_off! This guide will help you understand how to use the software effectively.
+Welcome to walk_it_off! This guide will help you understand how to use the software effectively.
 
 ### What is this software?
 
@@ -182,12 +182,12 @@ When you first run the application:
 
 ## Features and Usage
 
-### Feature 1: [at.elisabeth_tulla.walk_it_off.model.User Management]
+### Feature 1: User Management]
 
-#### Creating a at.elisabeth_tulla.walk_it_off.model.User
+#### Creating a User
 
 1. Navigate to the user management section
-2. Click "Create New at.elisabeth_tulla.walk_it_off.model.User"
+2. Click "Create New User"
 3. Fill in the required information:
    - Username
    - Email
@@ -206,7 +206,7 @@ When you first run the application:
    - Filter by role
    - Sort by creation date
 
-#### Updating at.elisabeth_tulla.walk_it_off.model.User Information
+#### Updating User Information
 
 1. Find the user in the list
 2. Click "Edit" button
@@ -214,7 +214,7 @@ When you first run the application:
 4. Click "Save Changes"
 5. Changes will be applied immediately
 
-#### Deleting a at.elisabeth_tulla.walk_it_off.model.User
+#### Deleting a User
 
 1. Find the user in the list
 2. Click "Delete" button
@@ -256,7 +256,7 @@ When you first run the application:
 5. View or download the report
 
 **Available Reports:**
-- at.elisabeth_tulla.walk_it_off.model.User at.elisabeth_tulla.walk_it_off.model.Activity Report
+- User Activity Report
 - Data Summary Report
 - System Statistics
 - Custom Reports
@@ -385,7 +385,7 @@ When you first run the application:
 
 **Solutions:**
 
-1. **Check at.elisabeth_tulla.walk_it_off.model.User Permissions:**
+1. **Check User Permissions:**
    Ensure your user account has necessary permissions.
 
 2. **Verify File Permissions:**
@@ -538,18 +538,19 @@ Complete list of configuration properties:
 
 ```properties
 # Application
-app.name=Application Name
+app.name=walk_it_off
 app.port=8080
 app.environment=development|production
 
 # Database
 db.host=localhost
 db.port=5432
-db.name=database_name
-db.username=user
-db.password=password
+db.name=walkitoff
+db.username=postgres
+db.password=postgres
 
 # Logging
+OUT OF SCOPE...
 logging.level=DEBUG|INFO|WARN|ERROR
 logging.file=logs/app.log
 ```
@@ -564,6 +565,6 @@ logging.file=logs/app.log
 
 ---
 
-**Last Updated:** January 2026  
+**Last Updated:** April 2026  
 **Version:** 1.0  
 **For technical support, please refer to the documentation or contact the project maintainers.**
