@@ -10,7 +10,7 @@ This class diagram represents the monolithic application as a whole, featuring a
 
 ### Diagram
 
-![class diagram.png](class%20diagram.png)
+![ClassDiagrammUpdate.png](ClassDiagrammUpdate.png)
 
 ### Key Classes
 
