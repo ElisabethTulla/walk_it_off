@@ -160,14 +160,14 @@
                   <Insets bottom="15.0" left="20.0" top="15.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" disable="true" prefHeight="33.0" prefWidth="792.0" spacing="20.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="792.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Compare to:" />
                   <Text layoutX="197.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Startdate:" />
-                  <DatePicker promptText="1/1/2026" />
+                  <DatePicker fx:id="startDatePickerCompare" promptText="1/1/2026" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enddate:" />
-                  <DatePicker layoutX="10.0" layoutY="10.0" promptText="1/31/2026" />
-                  <Button mnemonicParsing="false" text="compare" />
+                  <DatePicker fx:id="endDatePickerCompare" layoutX="10.0" layoutY="10.0" promptText="1/31/2026" />
+                  <Button mnemonicParsing="false" onAction="#compareDateBtnClicked" text="compare" />
                </children>
                <padding>
                   <Insets bottom="15.0" left="20.0" top="15.0" />
@@ -178,8 +178,8 @@
             </HBox>
             <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="673.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="***" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="..." />
+                  <Text fx:id="txtComparedDateActivity" strokeType="OUTSIDE" strokeWidth="0.0" text="***" />
+                  <Text fx:id="txtComparedDateResult" strokeType="OUTSIDE" strokeWidth="0.0" text="..." />
                </children>
             </HBox>
             <HBox alignment="CENTER" disable="true" layoutX="10.0" layoutY="706.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0">

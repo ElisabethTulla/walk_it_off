@@ -86,6 +86,16 @@ public class AccountController extends UserController {
     @FXML
     private DatePicker endDatePicker;
 
+    //Compare:
+    @FXML
+    private DatePicker startDatePickerCompare;
+    @FXML
+    private DatePicker endDatePickerCompare;
+    @FXML
+    private Text txtComparedDateActivity;
+    @FXML
+    private Text txtComparedDateResult;
+
     //ActivityTable:
     @FXML
     private TableView<Activity> activityTable;
@@ -217,6 +227,45 @@ public class AccountController extends UserController {
                 activityTable.setItems(obsItems);
             } catch (RuntimeException e) {
                 triggerErrorAlert();
+            }
+        }
+    }
+
+    public void compareDateBtnClicked(ActionEvent actionEvent) throws IOException {
+
+        //GUI User input choice: compare day to day / week to week / month to month / year to year
+        // -> make sure the two timeframes match each other (eg. don't compare a week to a month)
+
+        if (yourStepsRadioButton.isSelected()) {
+
+            txtComparedDateActivity.setText("Compared Steps: ");
+
+            Integer differenceSteps = comparingService.compareStepsSumTimeframes(currentUser,
+                    startDatePicker.getValue(), endDatePicker.getValue(),
+                    startDatePickerCompare.getValue(), endDatePickerCompare.getValue());
+
+            if (differenceSteps == 0) {
+                txtComparedDateResult.setText("You have matched your previous results!");
+            } else if (differenceSteps < 0) {
+                Integer lessSteps = differenceSteps*(-1);
+                txtComparedDateResult.setText(lessSteps + " Steps less. Walk some more steps to match your previous results.");
+            } else {
+                txtComparedDateResult.setText(differenceSteps + " Steps more. You out-walked yourself! Great Job!");
+            }
+        } else if (yourKmsRadioButton.isSelected()) {
+            txtComparedDateActivity.setText("Compared Kms: ");
+
+            double differenceKms = comparingService.compareKmsSumTimeframes(currentUser,
+                    startDatePicker.getValue(), endDatePicker.getValue(),
+                    startDatePickerCompare.getValue(), endDatePickerCompare.getValue());
+
+            if (differenceKms == 0) {
+                txtComparedDateResult.setText("You have matched your previous results!");
+            }  else if (differenceKms < 0) {
+                double lessKms = differenceKms*(-1);
+                txtComparedDateResult.setText(lessKms + "Kms less. Run some more kilometers to match your previous results");
+            } else {
+                txtComparedDateResult.setText(differenceKms + " Kms more. You out-ran yourself! Great Job!");
             }
         }
     }

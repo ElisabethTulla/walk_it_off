@@ -131,16 +131,13 @@ public class ComparingService {
     public Integer compareStepsSumTimeframes(User user, LocalDate startdate1, LocalDate enddate1,
                                           LocalDate startdate2, LocalDate enddate2){
 
-        //GUI User input choice: compare day to day / week to week / month to month / year to year
-        // -> make sure the two timeframes match each other (eg. don't compare a week to a month)
-
         Integer timeframe1 = sumUpStepsTimeframe(user, startdate1, enddate1);
         Integer timeframe2 = sumUpStepsTimeframe(user, startdate2, enddate2);
 
         return timeframe2 - timeframe1;
 
         /*
-        //MOVE TO COMPARING CONTROLLER:
+        //MOVE TO ACCOUNT CONTROLLER:
         if (differenceSteps == 0){
             *.setText("You have matched your previous results!");
         } else if (differenceSteps <0) {
