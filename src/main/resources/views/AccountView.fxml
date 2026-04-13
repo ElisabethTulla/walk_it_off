@@ -9,6 +9,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -150,11 +151,12 @@
                   <Text layoutX="403.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="..." />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" disable="true" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Compare to other user:" />
-                  <TextField promptText="email" />
-                  <Button mnemonicParsing="false" text="compare" />
+                  <TextField fx:id="otherUserEmail" promptText="email" />
+                  <Button mnemonicParsing="false" onAction="#compareUserBtnClicked" text="compare" />
+                  <TextArea fx:id="txtComparedUserResult" prefHeight="42.0" prefWidth="370.0" />
                </children>
                <padding>
                   <Insets bottom="15.0" left="20.0" top="15.0" />

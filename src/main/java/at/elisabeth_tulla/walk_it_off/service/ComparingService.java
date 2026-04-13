@@ -135,17 +135,6 @@ public class ComparingService {
         Integer timeframe2 = sumUpStepsTimeframe(user, startdate2, enddate2);
 
         return timeframe2 - timeframe1;
-
-        /*
-        //MOVE TO ACCOUNT CONTROLLER:
-        if (differenceSteps == 0){
-            *.setText("You have matched your previous results!");
-        } else if (differenceSteps <0) {
-            *setText("Walk some more steps / Run some more kilometers to match your previous results.");
-        } else {
-            *setText("You out-walked / -ran yourself! Great Job!");
-        }
-         */
     }
 
     /***
@@ -186,18 +175,6 @@ public class ComparingService {
                 (otherUser, startdate, enddate);
 
         return currentUserSteps - otherUserSteps;
-        /*
-        //MOVE TO COMPARING CONTROLLER:
-        if (diffStepsUsers >0){
-            *.setText("You walked/ran " + diffSteps
-            + " more steps than " + otherUser.getFirstName());
-        } else if (diffStepsUsers == 0){
-            *.setText("You have matched your results perfectly!");
-        } else {
-            Integer diffStepsPositive = diffStepsUsers * (-1);
-            *.setText(otherUser.getFirstName() + " walked/ran "
-            + diffStepsPositive + " steps/kilometers more than you.");
-        }*/
     }
 
     /***

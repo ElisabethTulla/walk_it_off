@@ -88,6 +88,10 @@ public class AccountController extends UserController {
 
     //Compare:
     @FXML
+    private TextField otherUserEmail;
+    @FXML
+    private TextArea txtComparedUserResult;
+    @FXML
     private DatePicker startDatePickerCompare;
     @FXML
     private DatePicker endDatePickerCompare;
@@ -231,10 +235,45 @@ public class AccountController extends UserController {
         }
     }
 
+    public void compareUserBtnClicked(ActionEvent actionEvent) {
+
+        if (yourStepsRadioButton.isSelected()) {
+
+            Integer diffStepsUsers = comparingService.compareSumUpStepsTimeframeUsers(currentUser,
+                    otherUserEmail.getText(), startDatePicker.getValue(), endDatePicker.getValue());
+
+            if (diffStepsUsers > 0) {
+            txtComparedUserResult.setText("You walked " + diffStepsUsers
+                        + " more steps than " + otherUserEmail.getText());
+            } else if (diffStepsUsers == 0) {
+            txtComparedUserResult.setText("You have matched your results perfectly!");
+            } else {
+                Integer diffStepsPositive = diffStepsUsers * (-1);
+            txtComparedUserResult.setText(otherUserEmail.getText() + " walked "
+                        + diffStepsPositive + " steps more than you.");
+            }
+        } else if (yourKmsRadioButton.isSelected()) {
+
+            double diffKmsUsers = comparingService.compareSumUpKmTimeframeUsers(currentUser,
+                    otherUserEmail.getText(), startDatePicker.getValue(), endDatePicker.getValue());
+            if (diffKmsUsers > 0) {
+                txtComparedUserResult.setText("You ran " + diffKmsUsers
+                        + " kilometers more than " + otherUserEmail.getText());
+            } else if (diffKmsUsers == 0) {
+                txtComparedUserResult.setText("You have matched your results perfectly!");
+            } else {
+                double diffKmsPositive = diffKmsUsers * (-1);
+                txtComparedUserResult.setText(otherUserEmail.getText() + " ran "
+                        + diffKmsPositive + " kilometers more than you.");
+            }
+        }
+    }
+
     public void compareDateBtnClicked(ActionEvent actionEvent) throws IOException {
 
-        //GUI User input choice: compare day to day / week to week / month to month / year to year
         // -> make sure the two timeframes match each other (eg. don't compare a week to a month)
+        // ... leave it up to user...
+        //-> maybe only make user aware by suggesting the timeframes should match
 
         if (yourStepsRadioButton.isSelected()) {
 
@@ -253,6 +292,7 @@ public class AccountController extends UserController {
                 txtComparedDateResult.setText(differenceSteps + " Steps more. You out-walked yourself! Great Job!");
             }
         } else if (yourKmsRadioButton.isSelected()) {
+
             txtComparedDateActivity.setText("Compared Kms: ");
 
             double differenceKms = comparingService.compareKmsSumTimeframes(currentUser,
